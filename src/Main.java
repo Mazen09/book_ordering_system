@@ -17,7 +17,7 @@ public class Main {
         db.createConnection("jdbc:mysql://localhost:3306",
                 "root", "mazen 2017");
 
-        db.createDB("mazen");
+        db.executeDDLStatements();
 
     }
 }
