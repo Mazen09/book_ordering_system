@@ -57,7 +57,7 @@ public class DBController {
             createBookTable(DBName);
             createAuthoredByTable(DBName);
             createOrderTable(DBName);
-//            createTriggers();
+            createTriggers();
 
         }catch(SQLException se){
             //Handle errors for JDBC
@@ -194,8 +194,8 @@ public class DBController {
         try {
             stmt = conn.createStatement();
 
-            // 1. Add new books
-            sql = "CREATE TRIGGER BOOK_INSERT\n" +
+            //1. add new book
+            sql = "CREATE TRIGGER BOOK_BEFORE_INSERT\n" +
                     "BEFORE INSERT ON BOOK\n" +
                     "FOR EACH ROW\n" +
                     "BEGIN\n" +
@@ -203,17 +203,26 @@ public class DBController {
                     "  THEN\n" +
                     "   SIGNAL SQLSTATE '02000' SET MESSAGE_TEXT = 'ERROR: INCOMPATIBLE DOMAIN';\n" +
                     "  END IF;\n" +
-                    "  IF NEW.AMOUNT_IN_STOCK < NEW.THRESHOLD\n" +
-                    "  THEN\n" +
-                    "\tSIGNAL SQLSTATE '02000' SET MESSAGE_TEXT = 'ERROR: AMOUNT IN STOCK MUST BE LARGER THAN THRESHOLD';\n" +
-                    "  END IF;\n" +
                     "END;";
 
             System.out.println("\n\n"+ sql);
             stmt.executeUpdate(sql);
 
-            //  2. Modify existing books
-            sql = "CREATE TRIGGER BOOK_UPDATE\n" +
+            sql = "CREATE TRIGGER BOOK_AFTER_INSERT\n" +
+                    "AFTER INSERT ON BOOK\n" +
+                    "FOR EACH ROW\n" +
+                    "BEGIN\n" +
+                    "  IF NEW.AMOUNT_IN_STOCK < NEW.THRESHOLD\n" +
+                    "   THEN\n" +
+                    "    INSERT INTO ORDERS (ISBN, QUANTITY, ORDER_DATE) VALUES(NEW.ISBN, 200, curdate());\n" +
+                    "   END IF;\n" +
+                    "END;";
+
+            System.out.println("\n\n"+ sql);
+            stmt.executeUpdate(sql);
+
+            // 2. modify existing book
+            sql = "CREATE TRIGGER BOOK_BEFORE_UPDATE\n" +
                     "BEFORE UPDATE ON BOOK\n" +
                     "FOR EACH ROW\n" +
                     "BEGIN\n" +
@@ -230,8 +239,32 @@ public class DBController {
             System.out.println("\n\n"+ sql);
             stmt.executeUpdate(sql);
 
-            //3. Place orders on books
+            // 3. place orders on books
+            sql = "CREATE TRIGGER BOOK_AFTER_UPDATE\n" +
+                    "AFTER UPDATE ON BOOK\n" +
+                    "FOR EACH ROW\n" +
+                    "BEGIN\n" +
+                    "  IF NEW.AMOUNT_IN_STOCK < NEW.THRESHOLD\n" +
+                    "  THEN\n" +
+                    "\tINSERT INTO ORDERS (ISBN, QUANTITY, ORDER_DATE) VALUES(NEW.ISBN, 200, curdate());\n" +
+                    "  END IF;\n" +
+                    "END;";
 
+            System.out.println("\n\n"+ sql);
+            stmt.executeUpdate(sql);
+
+
+            //4. confirm order (recursive trigger :( )
+            sql = "CREATE TRIGGER ORDERS_BEFORE_DELETION\n" +
+                    "BEFORE DELETE ON ORDERS\n" +
+                    "FOR EACH ROW \n" +
+                    "BEGIN\n" +
+                    "    UPDATE BOOK SET BOOK.AMOUNT_IN_STOCK = BOOK.AMOUNT_IN_STOCK + OLD.QUANTITY\n" +
+                    "    WHERE BOOK.ISBN = OLD.ISBN; \n" +
+                    "END;";
+
+            System.out.println("\n\n"+ sql);
+            stmt.executeUpdate(sql);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -241,10 +274,10 @@ public class DBController {
 
 
 
-    public String addBook(String ISBN, String title, List<String> authors,
+    public void addBook(String ISBN, String title, List<String> authors,
                           String publisher, String PublicationYear, String price, String category)
     {
-        return null;
+
     }
 
 
