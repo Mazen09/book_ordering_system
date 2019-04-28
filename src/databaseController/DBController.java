@@ -16,7 +16,7 @@ public class DBController {
     private StringBuilder tmp;
     private BufferedReader bf;
     private File file;
-
+    private static final String path = "DDL_statements.sql";
 
     private static DBController instance;
 
@@ -47,7 +47,7 @@ public class DBController {
     {
         try {
 
-            file = new File("DDL statments.sql");
+            file = new File(path);
             BufferedReader br = new BufferedReader(new FileReader(file));
             String str;
             tmp = new StringBuilder();
@@ -88,7 +88,7 @@ public class DBController {
             {
                 sql = str;
                 stmt.executeUpdate(sql);
-                System.out.println("Database created successfully...");
+                System.out.println("Query done successfully...");
 
             }
 

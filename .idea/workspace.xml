@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="851a7546-c155-48d7-b273-7dd9c0865936" name="Default Changelist" comment="">
+    <list default="true" id="851a7546-c155-48d7-b273-7dd9c0865936" name="Default Changelist" comment="cleaning up the code (separate DDL statments from java code)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/database/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/database/databaseController/DBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/databaseController/DBController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databaseController/DBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databaseController/DBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,10 +22,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
+            <state relative-caret-position="198">
               <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -33,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/databaseController/DBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="93" selection-start-line="93" selection-end-line="93" />
+            <state relative-caret-position="64">
+              <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getInstance#0;class#DBController#0" />
@@ -64,8 +65,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/DBController.java" />
-        <option value="$PROJECT_DIR$/src/databaseController/DBController.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/databaseController/DBController.java" />
       </list>
     </option>
   </component>
@@ -169,7 +170,7 @@
       <workItem from="1556371196219" duration="7032000" />
       <workItem from="1556398494712" duration="12647000" />
       <workItem from="1556471588381" duration="1329000" />
-      <workItem from="1556479266447" duration="5419000" />
+      <workItem from="1556479266447" duration="5970000" />
     </task>
     <task id="LOCAL-00001" summary="pushing triggers and sql test script">
       <created>1556472592039</created>
@@ -178,11 +179,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556472592039</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="cleaning up the code (separate DDL statments from java code)">
+      <created>1556488460171</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1556488460171</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26427000" />
+    <option name="totallyTimeSpent" value="26978000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -195,6 +203,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="28" width="1366" height="740" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49878934" weight="0.25378788" />
       <window_info id="Structure" order="1" sideWeight="0.50121063" side_tool="true" weight="0.25378788" />
@@ -232,7 +241,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pushing triggers and sql test script" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushing triggers and sql test script" />
+    <MESSAGE value="cleaning up the code (separate DDL statments from java code)" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaning up the code (separate DDL statments from java code)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar:///usr/share/java/mysql-connector-java.jar!/com/mysql/jdbc/StatementImpl.class">
@@ -252,25 +262,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/databaseController/DBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="64">
+          <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getInstance#0;class#DBController#0" />
             <element signature="method#createConnection#0;class#DBController#0" />
             <element signature="method#fetchSQLQueries#0;class#DBController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
