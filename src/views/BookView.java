@@ -1,10 +1,16 @@
-package GUI;
+package views;
 
+import FormsComponent.Book;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * Created by first on 5/7/2019.
@@ -18,40 +24,29 @@ public class BookView extends Pane {
     Label availableQuantity;
     Label ISBN;
     Label category;
-    //Button addToCart;
+
     public BookView(){
         initialize();
     }
     private void initialize(){
 
-        /*addToCart = new Button();
-        addToCart.setText("Add");
-        addToCart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-            }
-        });*/
-
-
-        title = new Label("attribute");
-        authors = new Label("attribute");
-        publisher = new Label("attribute");
-        price = new Label("attribute");
-        year = new Label("attribute");
-        availableQuantity = new Label("attribute");
-        ISBN = new Label("attribute");
+        title = new Label("title");
+        authors = new Label("authors");
+        publisher = new Label("publisher");
+        price = new Label("price");
+        year = new Label("year");
+        availableQuantity = new Label("availableQuantity");
+        ISBN = new Label("ISBN");
         category = new Label("category");
 
 
 
         this.setLayoutX(0);
         //this.setLayoutY(0);
-        this.getChildren().addAll(/*addToCart,*/ title, authors, publisher, price, year, availableQuantity, ISBN, category);
+        this.getChildren().addAll(title, authors, publisher, price, year, availableQuantity, ISBN, category);
+        this.setBackground(new Background(new BackgroundFill(new Color(
+                1,1,0.9,1), CornerRadii.EMPTY, Insets.EMPTY)));
 
-       /* addToCart.setLayoutY(0);
-        addToCart.setLayoutX(300);
-*/
         title.setLayoutX(0);
         title.setLayoutY(0);
 
@@ -75,19 +70,6 @@ public class BookView extends Pane {
 
         availableQuantity.setLayoutX(250);
         availableQuantity.setLayoutY(60);
-        /*this.setConstraints(addToCart,4,0);
-        this.setConstraints(title,0,0);
-        this.setConstraints(ISBN,2,0);
-        this.setConstraints(authors,0,1);
-        this.setConstraints(publisher,0,2);
-        this.setConstraints(price,2,1);
-        this.setConstraints(year,2,2);
-        this.setConstraints(category,0,3);
-        this.setConstraints(availableQuantity,2,3);
-
-        this.setPadding(new Insets(10,10,10,10));
-        this.setVgap(10);
-        this.setHgap(10);*/
     }
     public void setTitle(String titleStr){
         title.setText(titleStr);

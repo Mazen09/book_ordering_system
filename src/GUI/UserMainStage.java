@@ -1,7 +1,5 @@
 package GUI;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import views.BookView;
 
 import java.util.ArrayList;
 
@@ -22,13 +21,14 @@ public class UserMainStage extends Stage {
     Button cartBtn;
     Button profileBtn;
     Button searchBtn;
+    Button logOutBtn;
     Label attributeLabel;
-    Pane root = new Pane();
+    Pane rootPane = new Pane();
     GridPane grid ;
     ArrayList<BookView> searchResult;
     ScrollPane scrollPane;
     Pane searchPane;
-    CartStage cartStage = new CartStage();
+    CartStage cartStage;
 
     //MenuButton menuButton;
     ComboBox<String> searchAttributes;
@@ -42,30 +42,31 @@ public class UserMainStage extends Stage {
 
         cartBtn = new Button();
         cartBtn.setText("Cart");
-        cartBtn.setOnAction(new EventHandler<ActionEvent>() {
+        /*cartBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                cartStage = new CartStage(userName);
                 cartStage.show();
                 //block main user window
                 //get from backend the books and Quantity
                 //calculate price for each book and total price
             }
-        });
+        });*/
 
 
         profileBtn = new Button();
         profileBtn.setText("Profile");
-        profileBtn.setOnAction(new EventHandler<ActionEvent>() {
+       /* profileBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 cartBtn.setText(searchAttributes.getValue());
             }
-        });
+        });*/
 
 
         searchBtn = new Button();
         searchBtn.setText("Search");
-        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+        /*searchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //searchAttributes.getItems().remove(2);
@@ -74,6 +75,9 @@ public class UserMainStage extends Stage {
             }
         });
 
+*/
+        logOutBtn = new Button();
+        logOutBtn.setText("Log out");
 
         attributeLabel = new Label("attribute");
 
@@ -84,7 +88,7 @@ public class UserMainStage extends Stage {
         searchAttributes.getItems().add("Author");
         searchAttributes.getItems().add("Publishing Year");
         searchAttributes.getItems().add("Category");
-        searchAttributes.getItems().add("price");
+        searchAttributes.getItems().add("Price");
 
 
         searchValues = new ComboBox<>();
@@ -97,20 +101,23 @@ public class UserMainStage extends Stage {
         grid = new GridPane();
         grid.setLayoutX(0);
         grid.setLayoutY(0);
-        grid.getChildren().addAll(cartBtn,profileBtn,searchAttributes,searchBtn,searchValues);
+        grid.getChildren().addAll(cartBtn,profileBtn,logOutBtn,searchAttributes,searchBtn,searchValues,attributeLabel);
 
 
         grid.setConstraints(cartBtn,0,0);
-        grid.setConstraints(profileBtn,2,0);
-        grid.setConstraints(searchAttributes,0,1);
-        grid.setConstraints(searchValues,1,1);
-        grid.setConstraints(searchBtn,2,1);
+        grid.setConstraints(profileBtn,3,0);
+        grid.setConstraints(logOutBtn,3,1);
+        grid.setConstraints(searchAttributes,1,1);
+        grid.setConstraints(attributeLabel,0,1);
+        grid.setConstraints(searchValues,0,2,3,1);
+        grid.setConstraints(searchBtn,3,2);
+
 
 
         grid.setPadding(new Insets(10,10,10,10));
         grid.setVgap(10);
         grid.setHgap(10);
-        root.getChildren().add(grid);
+        rootPane.getChildren().add(grid);
 
 
 
@@ -121,55 +128,32 @@ public class UserMainStage extends Stage {
         scrollPane.setPrefHeight(200);
         scrollPane.setPrefWidth(300);
 
-        searchPane =new Pane();
-        for (int i = 0; i < 10; i++){
+        searchPane = new Pane();
+        /*for (int i = 0; i < 10; i++){
             BookView bookView = new BookView();
             searchResult.add(bookView);
             bookView.setLayoutY(200 * i);
             searchPane.getChildren().add(bookView);
         }
 
-        scrollPane.setContent(searchPane);
-        root.getChildren().add(scrollPane);
+        UserBookView bookView = new UserBookView();
+        searchResult.add(bookView);
+        bookView.setLayoutY(200 * 10);
+        searchPane.getChildren().add(bookView);
 
 
-
-        /*canvas.setLayoutX(0);
-        canvas.setLayoutY(0);
-        canvas.setPrefHeight(600);
-        canvas.setPrefWidth(800);
-
-        *//*canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(isAddNode){
-                    addNode(event.getX(),event.getY());
-                    isAddNode = false;
-                }else if(isAddEdge){
-                    addEdge(event.getX(),event.getY());
-                    isAddEdge = false;
-                }
-            }
-        });*//*
-
-        canvas.setBackground(new Background(new BackgroundFill(new Color(
-                1,1,0.9,1), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        ScrollPane scrollPane= new ScrollPane();
-        scrollPane.setLayoutY(0);
-        scrollPane.setLayoutX(0);
-        scrollPane.setPrefHeight(600);
-        scrollPane.setPrefWidth(800);
-
-        scrollPane.setContent(canvas);
-        root.getChildren().add(scrollPane);
-
-
+        CartBookView bookView2 = new CartBookView();
+        searchResult.add(bookView2);
+        bookView2.setLayoutY(200 * 11);
+        searchPane.getChildren().add(bookView2);
 
 */
+        scrollPane.setContent(searchPane);
+        rootPane.getChildren().add(scrollPane);
+
 
         this.setTitle("Book Store Main");
-        this.setScene(new Scene(root, 400, 610));
+        this.setScene(new Scene(rootPane, 400, 610));
     }
 
 }

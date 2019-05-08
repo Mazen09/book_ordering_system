@@ -1,5 +1,8 @@
 package GUI;
 
+import FormsComponent.BackEndImplementation;
+import FormsComponent.Book;
+import FormsComponent.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,30 +15,62 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
     Pane root = new Pane();
-    //Stage signUpStage =  new Stage();
-    Stage userMainStage =  new UserMainStage();
-    //AnchorPane canvas = new AnchorPane();
+    GridPane grid ;
     Button logInBtn ;
     Button signUpBtn ;
-    Stage primary;
-
     Label userNameLabel;
     Label passwordLabel;
-
-
     TextField userNameField ;
     TextField passwordField ;
 
-    GridPane grid ;
+    User user;
+    ArrayList<Book> searchBooks;
+
+    Stage primary;
+    UserMainStage userMainStage = new UserMainStage();
+    CartStage cartStage = new CartStage();
+    ConfirmOrderStage confirmOrderStage = new ConfirmOrderStage();
+    CreditCardStage creditCardStage = new CreditCardStage();
+    NewAuthorStage newAuthorStage = new NewAuthorStage();
+    NewBookStage newBookStage = new NewBookStage();
+    NewBookStage updateBookStage = new NewBookStage();
+    NewPublisherStage newPublisherStage = new NewPublisherStage();
+    PlaceOrderStage placeOrderStage = new PlaceOrderStage();
+    SignUpStage profileStage = new SignUpStage();
+    SignUpStage signUpStage = new SignUpStage();
+    UsersPromotionStage usersPromotionStage = new UsersPromotionStage();
+
+    BackEndImplementation backEnd = new BackEndImplementation();
+
+
     private void initialize(){
         logInBtn = new Button();
         logInBtn.setText("Log In");
         logInBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                userMainStage.show();
+                try {
+                    user = backEnd.logIn(userNameField.getText(), passwordField.getText());
+                } catch (Exception e){
+                    //error massage
+                }
+                //userMainStage = new ManagerMainStage();
+                //userMainStage.show();
+
+                //signUpStage.show();
+                //newBookStage.show();
+                //newAuthorStage.show();
+                //newPublisherStage.show();
+                //creditCardStage.show();
+                //cartStage.show();
+                confirmOrderStage.show();
+                //placeOrderStage.show();
+                primary.hide();
+                //usersPromotionStage.show();
             }
         });
 
@@ -45,7 +80,8 @@ public class Main extends Application {
         signUpBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                signUpStage.show();
+                primary.hide();
             }
         });
 
@@ -59,7 +95,7 @@ public class Main extends Application {
         userNameField.setEditable(true);
         userNameField.setPrefWidth(200);
 
-
+        // make it hiden as password
         passwordField = new TextField();
         passwordField.setEditable(true);
         passwordField.setPrefWidth(200);
@@ -89,7 +125,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //Parent rootPane = FXMLLoader.load(getClass().getResource("sample.fxml"));
         initialize();
         primaryStage.setTitle("Book Store");
         primaryStage.setScene(new Scene(root, 280, 110));
@@ -101,4 +137,45 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
+
+    private void setCartStageActions(){
+
+    }
+    private void setConfirmOrderStageActions(){
+
+    }
+    private void setCreditCardStageeActions(){
+
+    }
+    private void setNewAuthorStageActions(){
+
+    }
+    private void setNewBookStageActions(){
+
+    }
+    private void setNewPublisherStageActions(){
+
+    }
+
+    private void setPlaceOrderStageActions(){
+
+    }
+
+    private void setProfileStageActions(){
+
+    }
+    private void setSignUpStageActions(){
+
+    }
+    private void setUsersPromotionStageActions(){
+
+    }
+
+    private void setUserMainStageActions(){
+
+    }
+
+
 }
