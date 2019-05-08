@@ -141,6 +141,11 @@ public interface BackEnd {
         expect well formatted massage to report it to user
      */
 
+    /*
+        return all orders of given book
+    */
+    public ArrayList<Order> getOrders(String ISBN);
+
     public User logIn(String UserName, String password) throws Exception;
     /*
     clear cart
@@ -162,5 +167,8 @@ public interface BackEnd {
        output pdf of the report details in project pdf
      */
     public void reportTopSellingBooks();
+
+
+
 
 }
