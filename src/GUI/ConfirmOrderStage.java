@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import views.CartBookView;
 import views.OrderView;
@@ -64,6 +65,7 @@ public class ConfirmOrderStage extends Stage {
 
         this.setTitle("confirm");
         this.setScene(new Scene(rootPane, 400, 610));
+        this.initModality(Modality.APPLICATION_MODAL);
     }
 
 

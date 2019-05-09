@@ -22,13 +22,17 @@ public class UserMainStage extends Stage {
     Button profileBtn;
     Button searchBtn;
     Button logOutBtn;
+    Button nextBtn;
+    Button previousBtn;
     Label attributeLabel;
     Pane rootPane = new Pane();
     GridPane grid ;
-    ArrayList<BookView> searchResult;
+    //ArrayList<BookView> searchResult;
     ScrollPane scrollPane;
     Pane searchPane;
-    CartStage cartStage;
+    int currentSearchPage = 1;
+    String searchValue;
+    String searchAttribute;
 
     //MenuButton menuButton;
     ComboBox<String> searchAttributes;
@@ -79,6 +83,8 @@ public class UserMainStage extends Stage {
         logOutBtn = new Button();
         logOutBtn.setText("Log out");
 
+        previousBtn = new Button("previous");
+        nextBtn = new Button("next");
         attributeLabel = new Label("attribute");
 
         searchAttributes = new ComboBox<>();
@@ -101,7 +107,8 @@ public class UserMainStage extends Stage {
         grid = new GridPane();
         grid.setLayoutX(0);
         grid.setLayoutY(0);
-        grid.getChildren().addAll(cartBtn,profileBtn,logOutBtn,searchAttributes,searchBtn,searchValues,attributeLabel);
+        grid.getChildren().addAll(cartBtn,profileBtn,logOutBtn,searchAttributes,searchBtn,searchValues,
+                attributeLabel);
 
 
         grid.setConstraints(cartBtn,0,0);
@@ -118,10 +125,18 @@ public class UserMainStage extends Stage {
         grid.setVgap(10);
         grid.setHgap(10);
         rootPane.getChildren().add(grid);
+        rootPane.getChildren().add(previousBtn);
+        rootPane.getChildren().add(nextBtn);
+
+        previousBtn.setLayoutY(420);
+        previousBtn.setLayoutX(0);
+
+        nextBtn.setLayoutY(420);
+        nextBtn.setLayoutX(80);
 
 
 
-        searchResult = new ArrayList<>();
+        //searchResult = new ArrayList<>();
         scrollPane= new ScrollPane();
         scrollPane.setLayoutY(200);
         scrollPane.setLayoutX(0);

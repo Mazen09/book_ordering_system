@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import views.CartBookView;
 
@@ -85,6 +86,7 @@ public class CartStage extends Stage {
         checkOutBtn.setLayoutX(200);
         this.setTitle("Cart");
         this.setScene(new Scene(rootPane, 400, 610));
+        this.initModality(Modality.APPLICATION_MODAL);
     }
 
 

@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -57,5 +58,6 @@ public class PlaceOrderStage extends Stage {
 
         this.setTitle("place order");
         this.setScene(new Scene(rootPane, 400, 300));
+        this.initModality(Modality.APPLICATION_MODAL);
     }
 }

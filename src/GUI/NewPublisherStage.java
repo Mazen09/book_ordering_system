@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -64,5 +65,6 @@ public class NewPublisherStage extends Stage{
 
         this.setTitle("New Publisher");
         this.setScene(new Scene(rootPane, 400, 300));
+        this.initModality(Modality.APPLICATION_MODAL);
     }
 }

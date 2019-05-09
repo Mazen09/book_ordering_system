@@ -8,9 +8,9 @@ import javafx.scene.control.Label;
  * Created by first on 5/7/2019.
  */
 public class CartBookView extends BookView{
-    Button removeBtn;
-    Button increaseBtn;
-    Button decreaseBtn;
+    public Button removeBtn;
+    public Button increaseBtn;
+    public Button decreaseBtn;
     Label totalPriceLabel;
     Label quantityLabel;
     Backend backEnd = new Backend();
@@ -83,7 +83,7 @@ public class CartBookView extends BookView{
         totalPriceLabel.setText(totalPrice + "");
     }
 
-    public void setQuantityLabel(float quantity){
+    public void setQuantityLabel(int quantity){
         quantityLabel.setText(quantity + "");
     }
 
