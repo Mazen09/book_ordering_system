@@ -134,7 +134,7 @@ public interface BackEnd {
     remove the order and increase the book available quantities
      */
 
-    public void confirmOrder(int id);
+    public void confirmOrder(int id,String ISBN);
 
     /*
     check access of user
