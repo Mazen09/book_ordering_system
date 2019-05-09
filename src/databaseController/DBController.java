@@ -14,7 +14,6 @@ public class DBController {
     private String sql;
     private List<String> queries;
     private StringBuilder tmp;
-    private BufferedReader bf;
     private File file;
     private static final String path = "DDL_statements.sql";
 
@@ -22,6 +21,57 @@ public class DBController {
 
     private DBController(){}
 
+    /**
+     * Represents a SQL query parameter for column of type "type".
+     */
+    public static class Parameter {
+      public String type;
+      public Object value;
+
+      public Parameter(final String type, final Object value) {
+        this.type = type;
+        this.value = value;
+      }
+    }
+
+    /**
+     * Prepares a SQL statement with the given parameters.
+     *
+     * @param query SQL query with '?' placeholders for values.
+     * @param params ArrayList of parameters types and values.
+     *
+     * @return Prepared statement.
+     */
+    public PreparedStatement prepareStatement(
+        final String query, final ArrayList<Parameter> params) {
+      try {
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        int i = 1;
+        for (final Parameter param : params) {
+          switch (param.type) {
+            case "Int":
+              pstmt.setInt(i, (Integer) param.value);
+              break;
+            case "String":
+              pstmt.setString(i, (String) param.value);
+              break;
+            case "Float":
+              pstmt.setFloat(i, (Float) param.value);
+              break;
+            case "Date":
+              pstmt.setDate(i, (Date) param.value);
+              break;
+            default:
+              throw new Exception("No such type: " + param.type);
+          }
+          i += 1;
+        }
+        return pstmt;
+      } catch (Exception ex) {
+        ex.printStackTrace();
+        return null;
+      }
+    }
 
     public static synchronized DBController getInstance() {
         if(instance == null) {
@@ -34,7 +84,7 @@ public class DBController {
     public void createConnection (String url, String user, String password)
     {
         try {
-            conn = conn = DriverManager.getConnection(url, user, password);
+            conn = DriverManager.getConnection(url, user, password);
             System.out.println("connected :)");
         }catch(SQLException se){
             //Handle errors for JDBC
@@ -77,6 +127,7 @@ public class DBController {
                 System.out.println(s);
             }
 
+            br.close();
 
         }catch (Exception e){
             throw null;

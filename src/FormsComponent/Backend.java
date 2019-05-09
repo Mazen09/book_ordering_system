@@ -7,12 +7,10 @@ import databaseController.DBController;
 
 
 public class Backend {
-
     private Connection conn;
     private Statement stmt;
     private DBController db;
     private String query;
-
 
     public Backend ()
     {
@@ -178,17 +176,75 @@ public class Backend {
 
     public void insertOrder(String ISBN, int quantity) throws SQLException
     {
-
+      java.sql.Date now = new java.sql.Date(new java.util.Date().getTime());
+      db.prepareStatement(
+          "INSERT INTO `ORDERS` VALUES (?, ?, ?)",
+          new ArrayList<DBController.Parameter>(Arrays.asList(
+              new DBController.Parameter("Int", Integer.parseInt(ISBN)),
+              new DBController.Parameter("Int", quantity),
+              new DBController.Parameter("Date", now)))).execute();
     }
 
-    public void confirmOrder(int id) throws SQLException
+    public void confirmOrder(String ISBN) throws SQLException
     {
+      PreparedStatement pstmtGetOrders =
+        db.prepareStatement(
+            "SELECT `ID`, `QUANTITY` FROM `ORDERS` WHERE `ISBN` = ?",
+            new ArrayList<DBController.Parameter>(Arrays.asList(
+                new DBController.Parameter("Int", Integer.parseInt(ISBN)))));
 
+      PreparedStatement pstmtUpdateBook = conn.prepareStatement(
+          "UPDATE `BOOK` " +
+          "SET `AMOUNT_IN_STOCK` = AMOUNT_IN_STOCK + ? " +
+          "WHERE `ISBN` = ?");
+      pstmtUpdateBook.setInt(2, Integer.parseInt(ISBN));
+
+      PreparedStatement pstmtDeleteOrders =
+        db.prepareStatement(
+            "DELETE FROM `ORDERS` WHERE `ISBN` = ?",
+            new ArrayList<DBController.Parameter>(Arrays.asList(
+                new DBController.Parameter("Int", Integer.parseInt(ISBN)))));
+
+      conn.setAutoCommit(false);
+
+      if (pstmtGetOrders.execute()) {
+        ResultSet rsOrders = pstmtGetOrders.getResultSet();
+        while (rsOrders.next()) {
+          pstmtUpdateBook.setInt(1, rsOrders.getInt("QUANTITY"));
+          pstmtUpdateBook.execute();
+        }
+      }
+      pstmtDeleteOrders.execute();
+
+      conn.commit();
+      conn.setAutoCommit(true);
     }
 
+    // DISCLAIMER: CODE-REVIEWER DISCRETION IS ADVISED. WE ARE ABOUT TO
+    // MUTILATE SOME VERY BASIC PRINCIPLES.
     public User logIn(String UserName, String password) throws Exception
     {
-        return null;
+      User user = null;
+      PreparedStatement pstmtLogin = db.prepareStatement(
+          "SELECT * FROM `USER` WHERE `USER_NAME` = ? AND `PASSWORD` = ?",
+          new ArrayList<DBController.Parameter>(Arrays.asList(
+              new DBController.Parameter("", ""),
+              new DBController.Parameter("", ""))));
+      if (pstmtLogin.execute()) {
+        ResultSet rsLogin = pstmtLogin.getResultSet();
+        if (rsLogin.next()) {
+          user = new User();
+          user.userName = UserName;
+          user.password = password;
+          user.role = rsLogin.getString("ROLE");
+          user.phone = rsLogin.getString("PHONE");
+          user.firstName = rsLogin.getString("FIRST_NAME");
+          user.lastName = rsLogin.getString("LAST_NAME");
+          user.email = rsLogin.getString("EMAIL");
+          user.address = rsLogin.getString("ADDRESS");
+        }
+      }
+      return user;
     }
 
 
