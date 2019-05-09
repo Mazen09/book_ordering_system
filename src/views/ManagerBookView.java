@@ -14,7 +14,7 @@ public class ManagerBookView extends UserBookView {
         modifyBtn.setText("modify");
         modifyBtn.setPrefWidth(60);
 
-        modifyBtn.setLayoutY(30);
+        modifyBtn.setLayoutY(35);
         modifyBtn.setLayoutX(300);
 
         this.getChildren().add(modifyBtn);

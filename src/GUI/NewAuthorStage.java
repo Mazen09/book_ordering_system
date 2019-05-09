@@ -32,7 +32,7 @@ public class NewAuthorStage extends Stage{
 
         nameField = new TextField();
         nameField.setEditable(true);
-        nameField.setPrefWidth(100);
+        nameField.setPrefWidth(200);
 
 
         phoneField = new TextField();
@@ -44,25 +44,26 @@ public class NewAuthorStage extends Stage{
 
         rootPane.getChildren().addAll(nameLabel,nameField,phoneLabel,phoneField,addBtn);
 
-        nameLabel.setLayoutY(0);
-        phoneLabel.setLayoutY(30);
+        nameLabel.setLayoutY(10);
+        phoneLabel.setLayoutY(40);
 
 
-        nameLabel.setLayoutX(0);
-        phoneLabel.setLayoutX(0);
+        nameLabel.setLayoutX(10);
+        phoneLabel.setLayoutX(10);
 
-        nameField.setLayoutY(0);
-        phoneField.setLayoutY(30);
+        nameField.setLayoutY(10);
+        phoneField.setLayoutY(40);
 
-        nameField.setLayoutX(70);
-        phoneField.setLayoutX(70);
+        nameField.setLayoutX(60);
+        phoneField.setLayoutX(60);
 
-        addBtn.setLayoutX(100);
-        addBtn.setLayoutY(60);
+        addBtn.setLayoutX(120);
+        addBtn.setLayoutY(75);
+        addBtn.setPrefWidth(50);
 
 
         this.setTitle("New Author");
-        this.setScene(new Scene(rootPane, 400, 300));
+        this.setScene(new Scene(rootPane, 280, 110));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 }

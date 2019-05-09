@@ -36,7 +36,7 @@ public class NewBookStage extends Stage{
 
         titleField = new TextField();
         titleField.setEditable(true);
-        titleField.setPrefWidth(100);
+        titleField.setPrefWidth(200);
 
 
         authorsField = new TextField();
@@ -79,48 +79,47 @@ public class NewBookStage extends Stage{
                 categoryLabel, yearLabel, titleField, authorsField, publisherField, priceField, ISBNField,
                 thresholdField, yearField, categoryBox, enterBtn);
 
-        titleLabel.setLayoutY(0);
-        authorsLabel.setLayoutY(30);
-        publisherLabel.setLayoutY(60);
-        priceLabel.setLayoutY(90);
-        ISBNLabel.setLayoutY(120);
-        thresholdLabel.setLayoutY(150);
-        categoryLabel.setLayoutY(180);
-        yearLabel.setLayoutY(210);
+        titleLabel.setLayoutY(10);
+        authorsLabel.setLayoutY(40);
+        publisherLabel.setLayoutY(70);
+        priceLabel.setLayoutY(100);
+        ISBNLabel.setLayoutY(130);
+        thresholdLabel.setLayoutY(160);
+        categoryLabel.setLayoutY(190);
+        yearLabel.setLayoutY(220);
 
-        titleLabel.setLayoutX(0);
-        authorsLabel.setLayoutX(0);
-        publisherLabel.setLayoutX(0);
-        priceLabel.setLayoutX(0);
-        ISBNLabel.setLayoutX(0);
-        thresholdLabel.setLayoutX(0);
-        categoryLabel.setLayoutX(0);
-        yearLabel.setLayoutX(0);
+        titleLabel.setLayoutX(10);
+        authorsLabel.setLayoutX(10);
+        publisherLabel.setLayoutX(10);
+        priceLabel.setLayoutX(10);
+        ISBNLabel.setLayoutX(10);
+        thresholdLabel.setLayoutX(10);
+        categoryLabel.setLayoutX(10);
+        yearLabel.setLayoutX(10);
 
-        titleField.setLayoutY(0);
-        authorsField.setLayoutY(30);
-        publisherField.setLayoutY(60);
-        priceField.setLayoutY(90);
-        ISBNField.setLayoutY(120);
-        thresholdField.setLayoutY(150);
-        categoryBox.setLayoutY(180);
-        yearField.setLayoutY(210);
+        titleField.setLayoutY(10);
+        authorsField.setLayoutY(40);
+        publisherField.setLayoutY(70);
+        priceField.setLayoutY(100);
+        ISBNField.setLayoutY(130);
+        thresholdField.setLayoutY(160);
+        categoryBox.setLayoutY(190);
+        yearField.setLayoutY(220);
 
-        titleField.setLayoutX(70);
-        authorsField.setLayoutX(70);
-        publisherField.setLayoutX(70);
-        priceField.setLayoutX(70);
-        ISBNField.setLayoutX(70);
-        thresholdField.setLayoutX(70);
-        categoryBox.setLayoutX(70);
-        yearField.setLayoutX(70);
+        titleField.setLayoutX(80);
+        authorsField.setLayoutX(80);
+        publisherField.setLayoutX(80);
+        priceField.setLayoutX(80);
+        ISBNField.setLayoutX(80);
+        thresholdField.setLayoutX(80);
+        categoryBox.setLayoutX(80);
+        yearField.setLayoutX(80);
 
-        enterBtn.setLayoutX(100);
-        enterBtn.setLayoutY(240);
+        enterBtn.setLayoutX(110);
+        enterBtn.setLayoutY(250);
 
 
-        //this.setISBNLabel("Sign Up");
-        this.setScene(new Scene(rootPane, 400, 610));
+        this.setScene(new Scene(rootPane, 300, 300));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 

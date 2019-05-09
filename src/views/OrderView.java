@@ -21,6 +21,8 @@ public class OrderView extends Pane{
     Label dateLabel;
     public Button confirmBtn;
 
+
+
     public OrderView(){
         initialize();
     }
@@ -35,43 +37,45 @@ public class OrderView extends Pane{
 
 
         this.setLayoutX(0);
+        this.setPrefWidth(440);
+        this.setPrefHeight(40);
         //this.setLayoutY(0);
         this.getChildren().addAll(ISBNLabel, IDLabel, quantityLabel, dateLabel,confirmBtn);
         this.setBackground(new Background(new BackgroundFill(new Color(
                 1,1,0.9,1), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        ISBNLabel.setLayoutX(0);
-        ISBNLabel.setLayoutY(0);
+        ISBNLabel.setLayoutX(60);
+        ISBNLabel.setLayoutY(8);
 
 
-        IDLabel.setLayoutX(0);
-        IDLabel.setLayoutY(20);
+        IDLabel.setLayoutX(10);
+        IDLabel.setLayoutY(8);
 
-        dateLabel.setLayoutX(0);
-        dateLabel.setLayoutY(40);
+        dateLabel.setLayoutX(170);
+        dateLabel.setLayoutY(8);
 
-        quantityLabel.setLayoutX(0);
-        quantityLabel.setLayoutY(60);
+        quantityLabel.setLayoutX(290);
+        quantityLabel.setLayoutY(8);
 
-        confirmBtn.setLayoutX(0);
-        confirmBtn.setLayoutY(80);
+        confirmBtn.setLayoutX(370);
+        confirmBtn.setLayoutY(5);
 
 
     }
-    public void setISBNLabel(String titleStr){
-        ISBNLabel.setText(titleStr);
+    public void setISBNLabel(String ISBNStr){
+        ISBNLabel.setText("ISBN: "+ISBNStr);
     }
 
-    public void setIDLabel(String authorsStr) {
-        IDLabel.setText(authorsStr);
+    public void setIDLabel(String idStr) {
+        IDLabel.setText("ID: "+ idStr);
     }
 
-    public void setDateLabel(String priceStr) {
-        dateLabel.setText(priceStr);
+    public void setDateLabel(String dateStr) {
+        dateLabel.setText("Date: "+dateStr);
     }
 
-    public void setQuantityLabel(String publisherStr) {
-        quantityLabel.setText(publisherStr);
+    public void setQuantityLabel(String quantityStr) {
+        quantityLabel.setText("Quantity"+quantityStr);
     }
 
 }

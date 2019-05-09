@@ -39,32 +39,32 @@ public class ConfirmOrderStage extends Stage {
 
         ISBNField = new TextField();
         ISBNField.setEditable(true);
-        ISBNField.setPrefWidth(100);
+        ISBNField.setPrefWidth(350);
 
         rootPane.getChildren().addAll(findBtn, ISBNLabel, ISBNField);
 
 
         scrollPane= new ScrollPane();
         scrollPane.setLayoutY(40);
-        scrollPane.setLayoutX(0);
-        scrollPane.setPrefHeight(200);
-        scrollPane.setPrefWidth(300);
+        scrollPane.setLayoutX(10);
+        scrollPane.setPrefHeight(500);
+        scrollPane.setPrefWidth(450);
 
         ordersPane = new Pane();
         scrollPane.setContent(ordersPane);
         rootPane.getChildren().add(scrollPane);
 
-        ISBNLabel.setLayoutX(0);
-        ISBNLabel.setLayoutY(0);
+        ISBNLabel.setLayoutX(10);
+        ISBNLabel.setLayoutY(15);
 
         ISBNField.setLayoutX(50);
-        ISBNField.setLayoutY(0);
+        ISBNField.setLayoutY(10);
 
-        findBtn.setLayoutX(250);
-        findBtn.setLayoutY(0);
+        findBtn.setLayoutX(420);
+        findBtn.setLayoutY(10);
 
         this.setTitle("confirm");
-        this.setScene(new Scene(rootPane, 400, 610));
+        this.setScene(new Scene(rootPane, 470, 550));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 
