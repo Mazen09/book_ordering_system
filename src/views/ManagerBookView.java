@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
  * Created by first on 5/7/2019.
  */
 public class ManagerBookView extends UserBookView {
-    Button modifyBtn;
+    public Button modifyBtn;
     public ManagerBookView(){
-        Button addToCartBtn;
+
 
         modifyBtn = new Button();
         modifyBtn.setText("modify");

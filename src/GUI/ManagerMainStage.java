@@ -1,15 +1,8 @@
 package GUI;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
 
 /**
  * Created by first on 5/8/2019.
@@ -17,7 +10,7 @@ import java.util.ArrayList;
 public class ManagerMainStage extends UserMainStage {
     Button newBookBtn;
     Button newAuthorBtn;
-    Button newPublisher;
+    Button newPublisherBtn;
     Button promoteBtn;
     Button placeOrderBtn;
     Button confirmOrderBtn;
@@ -37,8 +30,8 @@ public class ManagerMainStage extends UserMainStage {
         newAuthorBtn = new Button();
         newAuthorBtn.setText("New Author");
 
-        newPublisher = new Button();
-        newPublisher.setText("New Publisher");
+        newPublisherBtn = new Button();
+        newPublisherBtn.setText("New Publisher");
 
         promoteBtn = new Button();
         promoteBtn.setText("Promote");
@@ -63,13 +56,13 @@ public class ManagerMainStage extends UserMainStage {
         managerGrid = new GridPane();
         managerGrid.setLayoutX(0);
         managerGrid.setLayoutY(450);
-        managerGrid.getChildren().addAll(newAuthorBtn,newBookBtn,newPublisher,confirmOrderBtn,placeOrderBtn,
+        managerGrid.getChildren().addAll(newAuthorBtn,newBookBtn, newPublisherBtn,confirmOrderBtn,placeOrderBtn,
                 promoteBtn,topCustomerReportBtn,topSellReportBtn,sellsReportBtn);
 
 
         managerGrid.setConstraints(newBookBtn,0,0);
         managerGrid.setConstraints(newAuthorBtn,1,0);
-        managerGrid.setConstraints(newPublisher,2,0);
+        managerGrid.setConstraints(newPublisherBtn,2,0);
         managerGrid.setConstraints(placeOrderBtn,0,1);
         managerGrid.setConstraints(confirmOrderBtn,1,1);
         managerGrid.setConstraints(promoteBtn,2,1);
@@ -87,7 +80,7 @@ public class ManagerMainStage extends UserMainStage {
 
 
 
-        //this.setTitle("Book Store Main");
+        //this.setISBNLabel("Book Store Main");
         //this.setScene(new Scene(rootPane, 400, 710));
     }
 

@@ -50,7 +50,7 @@ public class CartBookView extends BookView{
 
 
         quantityLabel = new Label("Quantity");
-        totalPriceLabel = new Label("Total price");
+        totalPriceLabel = new Label("Total dateLabel");
 
 
 

@@ -123,7 +123,7 @@ public class SignUpStage extends Stage {
         enterBtn.setLayoutY(240);
 
 
-        //this.setTitle("Sign Up");
+        //this.setISBNLabel("Sign Up");
         this.setScene(new Scene(rootPane, 400, 610));
         this.initModality(Modality.APPLICATION_MODAL);
 
