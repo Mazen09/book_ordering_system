@@ -1,9 +1,6 @@
 package GUI;
 
-import FormsComponent.Backend;
-import FormsComponent.Book;
-import FormsComponent.CartItem;
-import FormsComponent.User;
+import FormsComponent.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,12 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import views.CartBookView;
+import views.ManagerBookView;
+import views.OrderView;
 import views.UserBookView;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 public class Main extends Application {
     Pane root = new Pane();
@@ -168,7 +167,37 @@ public class Main extends Application {
         });
     }
     private void setConfirmOrderStageActions(){
+        confirmOrderStage.findBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                confirmOrderStage.ordersPane.getChildren().clear();
+                if(confirmOrderStage.ISBNField.getText().compareTo("") != 0) {
+                    ArrayList<Order> orders = backEnd.getOrders(confirmOrderStage.ISBNField.getText());
+                    for (int i = 0; i < orders.size(); i++) {
+                        Order order = orders.get(i);
+                        OrderView orderView = new OrderView();
+                        orderView.setQuantityLabel(order.quantity+"");
+                        orderView.setISBNLabel(order.ISBN);
+                        orderView.setIDLabel(order.id+"");
+                        orderView.setDateLabel(order.date);
 
+
+                        confirmOrderStage.ordersPane.getChildren().add(orderView);
+                        orderView.setLayoutY(i * 120);
+                        orderView.setLayoutX(10);
+
+                        orderView.confirmBtn.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                backEnd.confirmOrder(order.id,order.ISBN);
+                                //update positions in orders
+                                confirmOrderStage.ordersPane.getChildren().remove(orderView);
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
     private void setCreditCardStageActions(){
         //check for valid card
@@ -183,17 +212,149 @@ public class Main extends Application {
 
     }
     private void setNewAuthorStageActions(){
-
+        newAuthorStage.addBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Author author = new Author();
+                author.name = newAuthorStage.nameField.getText();
+                //check for phone
+                author.phone = newAuthorStage.phoneField.getText();
+                if(author.name.compareTo("") != 0 && author.phone.compareTo("") != 0){
+                    try {
+                        backEnd.insetAuthor(author);
+                        newPublisherStage.hide();
+                    } catch (Exception e) {
+                        //print error
+                    }
+                }else {
+                    //error empty cell
+                }
+            }
+        });
     }
     private void setNewBookStageActions(){
+        updateBookStage.setTitle("New book");
+        updateBookStage.setEnterBtn("insert");
 
+        updateBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Book newBooK = new Book();
+                newBooK.publishingYear = updateBookStage.yearField.getText();
+                newBooK.title = updateBookStage.titleField.getText();
+                newBooK.ISBN = updateBookStage.ISBNField.getText();
+                newBooK.publisher = updateBookStage.publisherField.getText();
+
+                String authorsString = updateBookStage.authorsField.getText();
+                String [] authors = authorsString.split(",");
+                ArrayList<String> bookAuthors = new ArrayList<>();
+                for (int j = 0; j <authors.length; j++){
+                    bookAuthors.add(authors[j]);
+                }
+                newBooK.authors = bookAuthors;
+                newBooK.price = Float.parseFloat(updateBookStage.priceField.getText());
+                newBooK.category = updateBookStage.categoryBox.getValue();
+                newBooK.threshold  = Integer.parseInt(updateBookStage.thresholdField.getText());
+
+                try {
+                    backEnd.insertBook(newBooK);
+                    newBookStage.hide();
+                } catch (Exception e) {
+                    //error massage
+                }
+            }
+        });
     }
     private void setNewPublisherStageActions(){
+        newPublisherStage.addBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Publisher publisher = new Publisher();
+                publisher.name = newPublisherStage.nameField.getText();
+                //check for phone
+                publisher.phone = newPublisherStage.phoneField.getText();
+                publisher.address = newPublisherStage.addressField.getText();
 
+                if(publisher.name.compareTo("") != 0 && publisher.phone.compareTo("") != 0 &&
+                        publisher.address.compareTo("") != 0){
+                    try {
+                        backEnd.insertPublisher(publisher);
+                        newPublisherStage.hide();
+                    } catch (Exception e) {
+                        //print error
+                    }
+                }else {
+                    //error empty cell
+                }
+            }
+        });
     }
+    private void setUpdateBookStageActions(Book book){
+        updateBookStage.setTitle("update book");
+        updateBookStage.setEnterBtn("update");
+        updateBookStage.yearField.setText(book.publishingYear);
+        updateBookStage.titleField.setText(book.title);
+        updateBookStage.ISBNField.setText(book.ISBN);
+        updateBookStage.publisherField.setText(book.publisher);
 
+        String authors= new String();
+        for (int j = 0; j <book.authors.size()-1; j++){
+            authors += book.authors.get(j) + ",";
+        }
+        authors += book.authors.get(book.authors.size()-1);
+        updateBookStage.authorsField.setText(authors);
+        updateBookStage.priceField.setText(book.price+"");
+        updateBookStage.categoryBox.setValue(book.category);
+        updateBookStage.thresholdField.setText(book.threshold+"");
+
+        updateBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Book newBooK = new Book();
+                newBooK.publishingYear = updateBookStage.yearField.getText();
+                newBooK.title = updateBookStage.titleField.getText();
+                newBooK.ISBN = updateBookStage.ISBNField.getText();
+                newBooK.publisher = updateBookStage.publisherField.getText();
+
+                String authorsString = updateBookStage.authorsField.getText();
+                String [] authors = authorsString.split(",");
+                ArrayList<String> bookAuthors = new ArrayList<>();
+                for (int j = 0; j <authors.length; j++){
+                    bookAuthors.add(authors[j]);
+                }
+                newBooK.authors = bookAuthors;
+                newBooK.price = Float.parseFloat(updateBookStage.priceField.getText());
+                newBooK.category = updateBookStage.categoryBox.getValue();
+                newBooK.threshold  = Integer.parseInt(updateBookStage.thresholdField.getText());
+
+                try {
+                    backEnd.updateBook(book,newBooK);
+                    updateBookStage.hide();
+                } catch (Exception e) {
+                    //error massage
+                }
+            }
+        });
+    }
     private void setPlaceOrderStageActions(){
-
+        placeOrderStage.orderBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(placeOrderStage.ISBNField.getText().compareTo("") != 0 &&
+                        placeOrderStage.quantityField.getText().compareTo("") != 0){
+                    //check integers  quantity
+                    try {
+                        backEnd.insertOrder(placeOrderStage.ISBNField.getText(),
+                                Integer.parseInt(placeOrderStage.quantityField.getText()));
+                        placeOrderStage.hide();
+                    } catch (Exception e) {
+                        //print error
+                    }
+                }else {
+                    //error empty cell
+                }
+            }
+        });
     }
 
     private void setProfileStageActions(){
@@ -248,7 +409,40 @@ public class Main extends Application {
         });
     }
     private void setUsersPromotionStageActions(){
+        usersPromotionStage.findBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                usersPromotionStage.usersPane.getChildren().clear();
+                if(usersPromotionStage.userNameField.getText().compareTo("") != 0) {
+                    ArrayList<User> users = backEnd.getUsers(usersPromotionStage.userNameField.getText());
+                    for (int i = 0; i < users.size(); i++) {
+                        User user = users.get(i);
+                        Pane userView = new Pane();
+                        Label userLabel = new Label(user.userName);
+                        userLabel.setLayoutX(0);
+                        userLabel.setLayoutY(0);
 
+                        Button promoteBtn = new Button("promote");
+                        promoteBtn.setLayoutX(50);
+                        promoteBtn.setLayoutY(0);
+                        promoteBtn.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                backEnd.promoteUser(user);
+                                usersPromotionStage.usersPane.getChildren().remove(userView);
+                                //update view, update positions
+                            }
+                        });
+
+                        userView.getChildren().addAll(promoteBtn,userLabel);
+                        userView.setLayoutY(i * 60);
+                        userView.setLayoutX(10);
+
+                        usersPromotionStage.usersPane.getChildren().add(userView);
+                    }
+                }
+            }
+        });
     }
 
     private void setUserMainStageActions(){
@@ -414,10 +608,15 @@ public class Main extends Application {
                 userMainStage.searchAttribute,
                 userMainStage.searchValue, userMainStage.currentSearchPage
         );
-        userMainStage.searchPane.getChildren().removeAll();
+        userMainStage.searchPane.getChildren().clear();
         for(int i = 0; i < books.size(); i++){
             Book book = books.get(i);
+
             UserBookView bookView = new UserBookView();
+            //System.out.println(userMainStage.getClass().getSimpleName());
+            if(userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
+                bookView = new ManagerBookView();
+            }
             bookView.setTitle(book.title);
             bookView.setPublisher(book.publisher);
             String authors= new String();
@@ -441,6 +640,18 @@ public class Main extends Application {
                     backEnd.addToCart(user.userName, book.ISBN);
                 }
             });
+            if(userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
+                ((ManagerBookView)bookView).modifyBtn.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        setUpdateBookStageActions(book);
+                        updateBookStage.showAndWait();
+                        //update the book view with new edit
+                        //clear search instead
+                        userMainStage.searchPane.getChildren().clear();
+                    }
+                });
+            }
         }
     }
 
@@ -463,6 +674,48 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 backEnd.reportTotalSales();
+            }
+        });
+        mangerStage.newAuthorBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setNewAuthorStageActions();
+                newAuthorStage.show();
+            }
+        });
+        mangerStage.newPublisherBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setNewPublisherStageActions();
+                newPublisherStage.show();
+            }
+        });
+        mangerStage.placeOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setPlaceOrderStageActions();
+                placeOrderStage.show();
+            }
+        });
+        mangerStage.confirmOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setConfirmOrderStageActions();
+                confirmOrderStage.show();
+            }
+        });
+        mangerStage.promoteBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setUsersPromotionStageActions();
+                usersPromotionStage.show();
+            }
+        });
+        mangerStage.newBookBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setNewBookStageActions();
+                newBookStage.show();
             }
         });
 

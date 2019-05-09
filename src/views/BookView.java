@@ -30,10 +30,10 @@ public class BookView extends Pane {
     }
     private void initialize(){
 
-        title = new Label("title");
-        authors = new Label("authors");
-        publisher = new Label("publisher");
-        price = new Label("price");
+        title = new Label("ISBNLabel");
+        authors = new Label("IDLabel");
+        publisher = new Label("quantityLabel");
+        price = new Label("dateLabel");
         year = new Label("year");
         availableQuantity = new Label("availableQuantity");
         ISBN = new Label("ISBN");
