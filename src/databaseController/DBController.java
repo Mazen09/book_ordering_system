@@ -42,6 +42,11 @@ public class DBController {
         }
     }
 
+    public Connection getConnection()
+    {
+        return conn;
+    }
+
 
     private void fetchSQLQueries()
     {
@@ -98,13 +103,14 @@ public class DBController {
         }
     }
 
-
-    public void addBook(String ISBN, String title, List<String> authors,
-                          String publisher, String PublicationYear, String price, String category)
+    public void closeConnection()
     {
-
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
 
 
 

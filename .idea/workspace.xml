@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="851a7546-c155-48d7-b273-7dd9c0865936" name="Default Changelist" comment="cleaning up the code (separate DDL statments from java code)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DDL_statements.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DDL_statements.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/database/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/database/databaseController/DBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/databaseController/DBController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databaseController/DBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databaseController/DBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,10 +25,68 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databaseController/DBController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#fetchSQLQueries#0;class#DBController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormsComponent/Book.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FormsComponent/Backend.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-30">
+              <caret line="87" column="58" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Backend#0;class#Backend#0" />
+                <element signature="method#getBooks#0;class#Backend#0" />
+                <element signature="method#insertBook#0;class#Backend#0" />
+                <element signature="method#insetAuthor#0;class#Backend#0" />
+                <element signature="method#insertPublisher#0;class#Backend#0" />
+                <element signature="method#insertUser#0;class#Backend#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormsComponent/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormsComponent/CartItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="241">
+              <caret line="73" selection-start-line="73" selection-end-line="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -34,17 +94,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/databaseController/DBController.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormsComponent/Author.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getInstance#0;class#DBController#0" />
-                <element signature="method#createConnection#0;class#DBController#0" />
-                <element signature="method#fetchSQLQueries#0;class#DBController#0" />
-              </folding>
+            <state relative-caret-position="60">
+              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FormsComponent/Publisher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -54,6 +117,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
+        <option value="Tag Library Descriptor" />
         <option value="Class" />
       </list>
     </option>
@@ -65,8 +130,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/DBController.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/form.html" />
+        <option value="$PROJECT_DIR$/src/web/form.html" />
+        <option value="$PROJECT_DIR$/src/web/index.jsp" />
+        <option value="$PROJECT_DIR$/src/web/jj.html" />
+        <option value="$PROJECT_DIR$/src/FormsComponent/Book.java" />
+        <option value="$PROJECT_DIR$/src/FormsComponent/User.java" />
         <option value="$PROJECT_DIR$/src/databaseController/DBController.java" />
+        <option value="$PROJECT_DIR$/src/FormsComponent/Publisher.java" />
+        <option value="$PROJECT_DIR$/src/FormsComponent/CartItem.java" />
+        <option value="$PROJECT_DIR$/src/FormsComponent/Author.java" />
+        <option value="$PROJECT_DIR$/src/FormsComponent/Backend.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -81,8 +156,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -93,18 +166,13 @@
             <path>
               <item name="database" type="b2602c69:ProjectViewProjectNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="database" type="b2602c69:ProjectViewProjectNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-              <item name="libraries" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="database" type="b2602c69:ProjectViewProjectNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="FormsComponent" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="database" type="b2602c69:ProjectViewProjectNode" />
@@ -114,13 +182,16 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="/usr/share/java/mysql-connector-java.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -170,7 +241,12 @@
       <workItem from="1556371196219" duration="7032000" />
       <workItem from="1556398494712" duration="12647000" />
       <workItem from="1556471588381" duration="1329000" />
-      <workItem from="1556479266447" duration="5970000" />
+      <workItem from="1556479266447" duration="6608000" />
+      <workItem from="1556868665025" duration="1991000" />
+      <workItem from="1556886942958" duration="39000" />
+      <workItem from="1557348942347" duration="8694000" />
+      <workItem from="1557374216430" duration="1014000" />
+      <workItem from="1557376226774" duration="3339000" />
     </task>
     <task id="LOCAL-00001" summary="pushing triggers and sql test script">
       <created>1556472592039</created>
@@ -190,7 +266,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26978000" />
+    <option name="totallyTimeSpent" value="42693000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -203,9 +279,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="28" width="1366" height="740" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49878934" weight="0.25378788" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49878934" visible="true" weight="0.26136363" />
       <window_info id="Structure" order="1" sideWeight="0.50121063" side_tool="true" weight="0.25378788" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -214,7 +289,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50121063" side_tool="true" weight="0.25378788" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3284553" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3284553" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.398374" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -224,7 +299,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3284553" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3284553" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -262,25 +337,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/form.html" />
+    <entry file="file://$PROJECT_DIR$/src/web/form.html" />
+    <entry file="file://$PROJECT_DIR$/src/web/jj.html" />
+    <entry file="file://$PROJECT_DIR$/src/web/maze.tld" />
+    <entry file="file://$PROJECT_DIR$/src/web/index.jsp" />
+    <entry file="file://$PROJECT_DIR$/src/databaseController/DBController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#fetchSQLQueries#0;class#DBController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormsComponent/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormsComponent/Publisher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormsComponent/CartItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormsComponent/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FormsComponent/Author.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="241">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaseController/DBController.java">
+    <entry file="file://$PROJECT_DIR$/src/FormsComponent/Backend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+        <state relative-caret-position="-30">
+          <caret line="87" column="58" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DBController#0" />
-            <element signature="method#createConnection#0;class#DBController#0" />
-            <element signature="method#fetchSQLQueries#0;class#DBController#0" />
+            <element signature="method#Backend#0;class#Backend#0" />
+            <element signature="method#getBooks#0;class#Backend#0" />
+            <element signature="method#insertBook#0;class#Backend#0" />
+            <element signature="method#insetAuthor#0;class#Backend#0" />
+            <element signature="method#insertPublisher#0;class#Backend#0" />
+            <element signature="method#insertUser#0;class#Backend#0" />
           </folding>
         </state>
       </provider>
