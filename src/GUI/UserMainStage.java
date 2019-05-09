@@ -9,9 +9,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import views.BookView;
-
-import java.util.ArrayList;
 
 
 /**
@@ -26,13 +23,14 @@ public class UserMainStage extends Stage {
     Button previousBtn;
     Label attributeLabel;
     Pane rootPane = new Pane();
-    GridPane grid ;
+    Pane BtnPane;
     //ArrayList<BookView> searchResult;
     ScrollPane scrollPane;
     Pane searchPane;
     int currentSearchPage = 1;
-    String searchValue;
-    String searchAttribute;
+    String searchValue = new String();
+    String searchAttribute =  new String();
+    boolean isSearched = false;
 
     //MenuButton menuButton;
     ComboBox<String> searchAttributes;
@@ -44,47 +42,13 @@ public class UserMainStage extends Stage {
     }
     private void initialize(){
 
-        cartBtn = new Button();
-        cartBtn.setText("Cart");
-        /*cartBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                cartStage = new CartStage(userName);
-                cartStage.show();
-                //block main user window
-                //get from backend the books and Quantity
-                //calculate price for each book and total price
-            }
-        });*/
-
-
-        profileBtn = new Button();
-        profileBtn.setText("Profile");
-       /* profileBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                cartBtn.setText(searchAttributes.getValue());
-            }
-        });*/
-
-
-        searchBtn = new Button();
-        searchBtn.setText("Search");
-        /*searchBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //searchAttributes.getItems().remove(2);
-                String x = searchAttributes.getValue();
-                searchValues.getItems().add(x);
-            }
-        });
-
-*/
-        logOutBtn = new Button();
-        logOutBtn.setText("Log out");
-
+        cartBtn = new Button("Cart");
+        profileBtn = new Button("Profile");
+        searchBtn = new Button("Search");
+        logOutBtn = new Button("Log out");
         previousBtn = new Button("previous");
         nextBtn = new Button("next");
+
         attributeLabel = new Label("attribute");
 
         searchAttributes = new ComboBox<>();
@@ -96,79 +60,61 @@ public class UserMainStage extends Stage {
         searchAttributes.getItems().add("Category");
         searchAttributes.getItems().add("Price");
 
-
         searchValues = new ComboBox<>();
         searchValues.setEditable(true);
 
 
 
+        BtnPane = new Pane();
+        BtnPane.getChildren().addAll(cartBtn,profileBtn,logOutBtn,searchAttributes,searchBtn,searchValues
+                /*, attributeLabel*/);
 
+        scrollPane= new ScrollPane();
+        searchPane = new Pane();
+        scrollPane.setContent(searchPane);
 
-        grid = new GridPane();
-        grid.setLayoutX(0);
-        grid.setLayoutY(0);
-        grid.getChildren().addAll(cartBtn,profileBtn,logOutBtn,searchAttributes,searchBtn,searchValues,
-                attributeLabel);
-
-
-        grid.setConstraints(cartBtn,0,0);
-        grid.setConstraints(profileBtn,3,0);
-        grid.setConstraints(logOutBtn,3,1);
-        grid.setConstraints(searchAttributes,1,1);
-        grid.setConstraints(attributeLabel,0,1);
-        grid.setConstraints(searchValues,0,2,3,1);
-        grid.setConstraints(searchBtn,3,2);
-
-
-
-        grid.setPadding(new Insets(10,10,10,10));
-        grid.setVgap(10);
-        grid.setHgap(10);
-        rootPane.getChildren().add(grid);
+        rootPane.getChildren().add(scrollPane);
+        rootPane.getChildren().add(BtnPane);
         rootPane.getChildren().add(previousBtn);
         rootPane.getChildren().add(nextBtn);
 
-        previousBtn.setLayoutY(420);
-        previousBtn.setLayoutX(0);
 
-        nextBtn.setLayoutY(420);
-        nextBtn.setLayoutX(80);
+        BtnPane.setLayoutX(0);
+        BtnPane.setLayoutY(0);
 
+        cartBtn.setLayoutX(10);
+        cartBtn.setLayoutY(10);
 
+        profileBtn.setLayoutY(10);
+        profileBtn.setLayoutX(272);
 
-        //searchResult = new ArrayList<>();
-        scrollPane= new ScrollPane();
-        scrollPane.setLayoutY(200);
-        scrollPane.setLayoutX(0);
-        scrollPane.setPrefHeight(200);
-        scrollPane.setPrefWidth(300);
+        logOutBtn.setLayoutY(10);
+        logOutBtn.setLayoutX(332);
 
-        searchPane = new Pane();
-        /*for (int i = 0; i < 10; i++){
-            BookView bookView = new BookView();
-            searchResult.add(bookView);
-            bookView.setLayoutY(200 * i);
-            searchPane.getChildren().add(bookView);
-        }
+        searchAttributes.setLayoutX(10);
+        searchAttributes.setLayoutY(40);
 
-        UserBookView bookView = new UserBookView();
-        searchResult.add(bookView);
-        bookView.setLayoutY(200 * 10);
-        searchPane.getChildren().add(bookView);
+        searchValues.setLayoutX(150);
+        searchValues.setLayoutY(40);
 
+        searchBtn.setLayoutX(334);
+        searchBtn.setLayoutY(40);
 
-        CartBookView bookView2 = new CartBookView();
-        searchResult.add(bookView2);
-        bookView2.setLayoutY(200 * 11);
-        searchPane.getChildren().add(bookView2);
+        scrollPane.setLayoutY(80);
+        scrollPane.setLayoutX(10);
+        scrollPane.setPrefHeight(500);
+        scrollPane.setPrefWidth(380);
 
-*/
-        scrollPane.setContent(searchPane);
-        rootPane.getChildren().add(scrollPane);
+        previousBtn.setLayoutY(590);
+        previousBtn.setLayoutX(10);
+
+        nextBtn.setLayoutY(590);
+        nextBtn.setLayoutX(350);
+
 
 
         this.setTitle("Book Store Main");
-        this.setScene(new Scene(rootPane, 400, 610));
+        this.setScene(new Scene(rootPane, 400, 620));
     }
 
 }

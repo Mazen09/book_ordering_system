@@ -69,22 +69,7 @@ public class Main extends Application {
                     userMainStage.show();
                 } catch (Exception e){
                     //error massage
-
                 }
-
-                //userMainStage = new ManagerMainStage();
-                //userMainStage.show();
-
-                //signUpStage.show();
-                //newBookStage.show();
-                //newAuthorStage.show();
-                //newPublisherStage.show();
-                //creditCardStage.show();
-                //cartStage.show();
-                //confirmOrderStage.show();
-                //placeOrderStage.show();
-                //primaryStage.hide();
-                //usersPromotionStage.show();
             }
         });
 
@@ -115,9 +100,6 @@ public class Main extends Application {
         passwordField = new TextField();
         passwordField.setEditable(true);
         passwordField.setPrefWidth(200);
-
-
-
 
 
         grid = new GridPane();
@@ -552,8 +534,9 @@ public class Main extends Application {
         userMainStage.searchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(userMainStage.searchValues.getValue() != null) {
+                if(userMainStage.searchValues.getValue() != null && userMainStage.searchAttributes != null) {
                     if (userMainStage.searchValues.getValue().compareTo("") != 0) {
+                        userMainStage.isSearched = true;
                         userMainStage.currentSearchPage = 1;
                         userMainStage.searchValue = userMainStage.searchValues.getValue();
                         userMainStage.searchAttribute = userMainStage.searchAttributes.getValue();
@@ -582,23 +565,19 @@ public class Main extends Application {
         userMainStage.nextBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(userMainStage.searchValues.getValue() != null) {
-                    if (userMainStage.searchValue.compareTo("") != 0) {
-                        userMainStage.currentSearchPage++;
-                        setBookSearchResult();
-                    }
+                if (userMainStage.isSearched) {
+                    //check last offset
+                    userMainStage.currentSearchPage++;
+                    setBookSearchResult();
                 }
             }
         });
         userMainStage.previousBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(userMainStage.searchValues.getValue() != null) {
-                    if (userMainStage.currentSearchPage > 1 &&
-                            userMainStage.searchValue.compareTo("") != 0) {
-                        userMainStage.currentSearchPage--;
-                        setBookSearchResult();
-                    }
+                if (userMainStage.currentSearchPage > 1 && userMainStage.isSearched) {
+                    userMainStage.currentSearchPage--;
+                    setBookSearchResult();
                 }
             }
         });

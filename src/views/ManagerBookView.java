@@ -12,15 +12,10 @@ public class ManagerBookView extends UserBookView {
 
         modifyBtn = new Button();
         modifyBtn.setText("modify");
-    /*modifyBtn.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-
-        }
-    });*/
+        modifyBtn.setPrefWidth(60);
 
         modifyBtn.setLayoutY(30);
-        modifyBtn.setLayoutX(350);
+        modifyBtn.setLayoutX(300);
 
         this.getChildren().add(modifyBtn);
     }

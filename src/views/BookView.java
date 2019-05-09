@@ -50,25 +50,25 @@ public class BookView extends Pane {
         title.setLayoutX(0);
         title.setLayoutY(0);
 
-        ISBN.setLayoutX(250);
+        ISBN.setLayoutX(200);
         ISBN.setLayoutY(0);
 
         authors.setLayoutX(0);
         authors.setLayoutY(20);
 
-        price.setLayoutX(250);
+        price.setLayoutX(200);
         price.setLayoutY(20);
 
         publisher.setLayoutX(0);
         publisher.setLayoutY(40);
 
-        year.setLayoutX(250);
+        year.setLayoutX(200);
         year.setLayoutY(40);
 
         category.setLayoutX(0);
         category.setLayoutY(60);
 
-        availableQuantity.setLayoutX(250);
+        availableQuantity.setLayoutX(200);
         availableQuantity.setLayoutY(60);
     }
     public void setTitle(String titleStr){

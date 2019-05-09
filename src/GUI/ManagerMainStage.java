@@ -2,7 +2,7 @@ package GUI;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 /**
  * Created by first on 5/8/2019.
@@ -18,70 +18,75 @@ public class ManagerMainStage extends UserMainStage {
     Button topSellReportBtn;
     Button sellsReportBtn;
 
-    GridPane managerGrid;
+    Pane managerPane;
     public ManagerMainStage(){
         initialize();
     }
     private void initialize(){
 
-        newBookBtn = new Button();
-        newBookBtn.setText("New Book");
-
-        newAuthorBtn = new Button();
-        newAuthorBtn.setText("New Author");
-
-        newPublisherBtn = new Button();
-        newPublisherBtn.setText("New Publisher");
-
-        promoteBtn = new Button();
-        promoteBtn.setText("Promote");
-
-        placeOrderBtn = new Button();
-        placeOrderBtn.setText("Place Order");
-
-        confirmOrderBtn = new Button();
-        confirmOrderBtn.setText("Confirm Order");
-
-        topCustomerReportBtn = new Button();
-        topCustomerReportBtn.setText("top customer");
-
-        topSellReportBtn = new Button();
-        topSellReportBtn.setText("top sells");
-
-        sellsReportBtn = new Button();
-        sellsReportBtn.setText("sells");
+        newBookBtn = new Button("New Book");
+        newAuthorBtn = new Button("New Author");
+        newPublisherBtn = new Button("New Publisher");
+        promoteBtn = new Button("Promote");
+        placeOrderBtn = new Button("Place Order");
+        confirmOrderBtn = new Button("Confirm Order");
+        topCustomerReportBtn = new Button("top customer");
+        topSellReportBtn = new Button("top sells");
+        sellsReportBtn = new Button("sells");
 
 
 
-        managerGrid = new GridPane();
-        managerGrid.setLayoutX(0);
-        managerGrid.setLayoutY(450);
-        managerGrid.getChildren().addAll(newAuthorBtn,newBookBtn, newPublisherBtn,confirmOrderBtn,placeOrderBtn,
+        managerPane = new Pane();
+        managerPane.setLayoutX(0);
+        managerPane.setLayoutY(520);
+        managerPane.getChildren().addAll(newAuthorBtn,newBookBtn, newPublisherBtn,confirmOrderBtn,placeOrderBtn,
                 promoteBtn,topCustomerReportBtn,topSellReportBtn,sellsReportBtn);
 
 
-        managerGrid.setConstraints(newBookBtn,0,0);
-        managerGrid.setConstraints(newAuthorBtn,1,0);
-        managerGrid.setConstraints(newPublisherBtn,2,0);
-        managerGrid.setConstraints(placeOrderBtn,0,1);
-        managerGrid.setConstraints(confirmOrderBtn,1,1);
-        managerGrid.setConstraints(promoteBtn,2,1);
-        managerGrid.setConstraints(topCustomerReportBtn,0,2);
-        managerGrid.setConstraints(topSellReportBtn,1,2);
-        managerGrid.setConstraints(sellsReportBtn,2,2);
+        newBookBtn.setPrefWidth(120);
+        newAuthorBtn.setPrefWidth(120);
+        newPublisherBtn.setPrefWidth(120);
+        confirmOrderBtn.setPrefWidth(120);
+        placeOrderBtn.setPrefWidth(120);
+        promoteBtn.setPrefWidth(120);
+        topCustomerReportBtn.setPrefWidth(120);
+        topSellReportBtn.setPrefWidth(120);
+        sellsReportBtn.setPrefWidth(120);
+
+        newBookBtn.setLayoutX(10);
+        newBookBtn.setLayoutY(10);
+
+        newAuthorBtn.setLayoutX(140);
+        newAuthorBtn.setLayoutY(10);
+
+        newPublisherBtn.setLayoutX(270);
+        newPublisherBtn.setLayoutY(10);
 
 
+        confirmOrderBtn.setLayoutX(10);
+        confirmOrderBtn.setLayoutY(40);
 
-        managerGrid.setPadding(new Insets(10,10,10,10));
-        managerGrid.setVgap(10);
-        managerGrid.setHgap(10);
-        rootPane.getChildren().add(managerGrid);
+        placeOrderBtn.setLayoutX(140);
+        placeOrderBtn.setLayoutY(40);
 
+        promoteBtn.setLayoutX(270);
+        promoteBtn.setLayoutY(40);
 
+        topCustomerReportBtn.setLayoutX(10);
+        topCustomerReportBtn.setLayoutY(70);
 
+        topSellReportBtn.setLayoutX(140);
+        topSellReportBtn.setLayoutY(70);
 
-        //this.setISBNLabel("Book Store Main");
-        //this.setScene(new Scene(rootPane, 400, 710));
+        sellsReportBtn.setLayoutX(270);
+        sellsReportBtn.setLayoutY(70);
+
+        scrollPane.setPrefHeight(400);
+
+        previousBtn.setLayoutY(490);
+
+        nextBtn.setLayoutY(490);
+        rootPane.getChildren().add(managerPane);
     }
 
 }
