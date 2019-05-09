@@ -10,6 +10,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -124,6 +125,7 @@ public class SignUpStage extends Stage {
 
         //this.setTitle("Sign Up");
         this.setScene(new Scene(rootPane, 400, 610));
+        this.initModality(Modality.APPLICATION_MODAL);
 
     }
     public void setEnterBtn(String text){

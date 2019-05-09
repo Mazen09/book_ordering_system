@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
  * Created by first on 5/7/2019.
  */
 public class UserBookView extends BookView {
-    Button addToCartBtn;
+    public Button addToCartBtn;
     public UserBookView(){
         addToCartBtn = new Button();
         addToCartBtn.setText("Add");
