@@ -28,7 +28,7 @@ public class Backend {
         }
     }
 
-    public ArrayList<Book> getBooks(String searchAttribute, String searchKey) {
+    public ArrayList<Book> getBooks(String searchAttribute, String searchKey) throws SQLException {
 
         ArrayList<Book> books = new ArrayList<Book>();
         try {
@@ -100,48 +100,88 @@ public class Backend {
 
     }
 
-    public void promoteUser(User user)
+    public void promoteUser(User user) throws SQLException
 
     {
 
     }
 
-    public ArrayList<User> getUsers(String userName)
-    {
-        return null;
-    }
-
-    public void addToCart(String userName, String ISBN)
-    {
-
-    }
-
-    public ArrayList<CartItem> getCartContent(String userName)
+    public ArrayList<User> getUsers(String userName) throws SQLException
     {
         return null;
     }
 
-    public void updateCartItem(String userName, String ISBN,int newQuantity)
+    public void addToCart(String userName, String ISBN) throws SQLException
     {
 
     }
 
-    public void removeCartItem(String userName, String ISBN)
+    public ArrayList<CartItem> getCartContent(String userName) throws SQLException
+    {
+      stmt = conn.createStatement();
+      ResultSet rs =
+        stmt.executeQuery("SELECT * FROM `CART` " +
+                          "WHERE `USER_NAME` = " + userName);
+      ArrayList<CartItem> rsArrayList = new ArrayList<CartItem>();
+      while (rs.next()) {
+        CartItem citem = new CartItem();
+        citem.quantity = rs.getInt("QUANTITY");
+        String isbnString = Integer.toString(rs.getInt("ISBN"));
+        citem.book = getBooks("ISBN", isbnString).get(0);
+        rsArrayList.add(citem);
+      }
+      return rsArrayList;
+    }
+
+    public void updateCartItem(String userName, String ISBN,int newQuantity) throws SQLException
+    {
+      stmt = conn.createStatement();
+      stmt.executeUpdate("UPDATE `CART` " +
+                         "SET `QUANTITY` = '" + newQuantity + "' " +
+                         "WHERE `USER_NAME` = '" + userName + "' AND " +
+                         "`ISBN` = '" + ISBN + "'");
+    }
+
+    public void removeCartItem(String userName, String ISBN) throws SQLException
+    {
+      stmt = conn.createStatement();
+      stmt.executeUpdate("DELETE FROM `CART` " +
+                         "WHERE `USER_NAME` = '" + userName + "' AND " +
+                         "`ISBN` = '" + ISBN + "'");
+    }
+
+    public void addSale(String userName) throws SQLException
+    {
+      conn.setAutoCommit(false);
+      ArrayList<CartItem> cart = getCartContent(userName);
+      for (CartItem citem : cart) {
+        stmt.executeUpdate(
+            "UPDATE `BOOK` " +
+            "SET `QUANTITY` = QUANTITY - " + citem.quantity + " " +
+            "WHERE `ISBN` = " + citem.book.ISBN);
+        PreparedStatement pstmt =conn.prepareStatement(
+            "INSERT INTO `CONFIRMED_OPERATION` VALUES(?, ?, ?, ?, ?)");
+        pstmt.setString(1, userName);
+        pstmt.setInt(2, Integer.parseInt(citem.book.ISBN));
+        pstmt.setInt(3, citem.quantity);
+        pstmt.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
+        pstmt.setInt(5, Math.round(citem.book.price * citem.quantity));
+        pstmt.execute();
+        stmt.executeUpdate(
+            "DELETE FROM `CART` " +
+            "WHERE `USER_NAME` = '" + userName + "' AND " +
+            "`ISBN` = '" + citem.book.ISBN + "'");
+      }
+      conn.commit();
+      conn.setAutoCommit(true);
+    }
+
+    public void insertOrder(String ISBN, int quantity) throws SQLException
     {
 
     }
 
-    public void addSale(String userName)
-    {
-
-    }
-
-    public void insertOrder(String ISBN, int quantity)
-    {
-
-    }
-
-    public void confirmOrder(int id)
+    public void confirmOrder(int id) throws SQLException
     {
 
     }
@@ -152,22 +192,21 @@ public class Backend {
     }
 
 
-    public void logOut(String UserName)
+    public void logOut(String UserName) throws SQLException
+    {
+    }
+
+    public void reportTotalSales() throws SQLException
     {
 
     }
 
-    public void reportTotalSales()
+    public void reportTopCustomers() throws SQLException
     {
 
     }
 
-    public void reportTopCustomers()
-    {
-
-    }
-
-    public void reportTopSellingBooks()
+    public void reportTopSellingBooks() throws SQLException
     {
 
     }

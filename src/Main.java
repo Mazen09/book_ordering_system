@@ -18,7 +18,7 @@ public class Main {
         DBController db = DBController.getInstance();
 
         db.createConnection("jdbc:mysql://localhost:3306",
-                "SAMPLE", "mazen 2017");
+                "SAMPLE", "");
 
 //        db.executeDDLStatements();
 

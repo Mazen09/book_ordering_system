@@ -1,6 +1,6 @@
 package GUI;
 
-import FormsComponent.BackEndImplementation;
+import FormsComponent.Backend;
 import FormsComponent.Book;
 import FormsComponent.User;
 import javafx.application.Application;
@@ -44,7 +44,7 @@ public class Main extends Application {
     SignUpStage signUpStage = new SignUpStage();
     UsersPromotionStage usersPromotionStage = new UsersPromotionStage();
 
-    BackEndImplementation backEnd = new BackEndImplementation();
+    Backend backEnd = new Backend();
 
 
     private void initialize(){

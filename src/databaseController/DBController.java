@@ -44,6 +44,10 @@ public class DBController {
 
     public Connection getConnection()
     {
+        if (conn == null) {
+            createConnection("jdbc:mysql://localhost:3306",
+                    "SAMPLE", "");
+        }
         return conn;
     }
 
