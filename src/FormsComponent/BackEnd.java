@@ -18,8 +18,12 @@ public interface BackEnd {
 
             the main reason for that to minimize response time and do lazy load
             if anyOne have idea for better implementation tell mohamed ismail
+
+            //add offset of search
+            if 1 then return first ten
+            if 2 the second ten and so on
      */
-    public ArrayList<Book> getBooks(String searchAttribute, String searchKey);
+    public ArrayList<Book> getBooks(String searchAttribute, String searchKey, int offset);
 
     //public int getNumberOfResult(String SearchAttribute, String searchKey);
 
