@@ -38,15 +38,15 @@ public class UsersPromotionStage extends Stage{
 
         userNameField = new TextField();
         userNameField.setEditable(true);
-        userNameField.setPrefWidth(200);
+        userNameField.setPrefWidth(250);
 
         rootPane.getChildren().addAll(findBtn, userNameField);
 
 
         scrollPane= new ScrollPane();
-        scrollPane.setLayoutY(40);
-        scrollPane.setLayoutX(0);
-        scrollPane.setPrefHeight(200);
+        scrollPane.setLayoutY(50);
+        scrollPane.setLayoutX(10);
+        scrollPane.setPrefHeight(240);
         scrollPane.setPrefWidth(300);
 
         usersPane = new Pane();
@@ -55,14 +55,14 @@ public class UsersPromotionStage extends Stage{
 
 
 
-        userNameField.setLayoutX(0);
-        userNameField.setLayoutY(0);
+        userNameField.setLayoutX(10);
+        userNameField.setLayoutY(10);
 
-        findBtn.setLayoutX(220);
-        findBtn.setLayoutY(0);
+        findBtn.setLayoutX(270);
+        findBtn.setLayoutY(10);
 
         this.setTitle("user promotion");
-        this.setScene(new Scene(rootPane, 400, 610));
+        this.setScene(new Scene(rootPane, 320, 300));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 

@@ -28,7 +28,7 @@ public class NewPublisherStage extends Stage{
 
         nameField = new TextField();
         nameField.setEditable(true);
-        nameField.setPrefWidth(100);
+        nameField.setPrefWidth(200);
 
 
         phoneField = new TextField();
@@ -43,28 +43,29 @@ public class NewPublisherStage extends Stage{
 
         rootPane.getChildren().addAll(nameLabel,nameField,phoneLabel,phoneField,addBtn,addressField,addressLabel);
 
-        nameLabel.setLayoutY(0);
-        phoneLabel.setLayoutY(30);
-        addressLabel.setLayoutY(60);
+        nameLabel.setLayoutY(10);
+        phoneLabel.setLayoutY(40);
+        addressLabel.setLayoutY(70);
 
-        nameLabel.setLayoutX(0);
-        phoneLabel.setLayoutX(0);
-        addressLabel.setLayoutX(0);
+        nameLabel.setLayoutX(10);
+        phoneLabel.setLayoutX(10);
+        addressLabel.setLayoutX(10);
 
-        nameField.setLayoutY(0);
-        phoneField.setLayoutY(30);
-        addressField.setLayoutY(60);
+        nameField.setLayoutY(10);
+        phoneField.setLayoutY(40);
+        addressField.setLayoutY(70);
 
-        nameField.setLayoutX(70);
-        phoneField.setLayoutX(70);
-        addressField.setLayoutX(70);
+        nameField.setLayoutX(80);
+        phoneField.setLayoutX(80);
+        addressField.setLayoutX(80);
 
-        addBtn.setLayoutX(100);
-        addBtn.setLayoutY(90);
+        addBtn.setLayoutX(120);
+        addBtn.setLayoutY(105);
+        addBtn.setPrefWidth(50);
 
 
         this.setTitle("New Publisher");
-        this.setScene(new Scene(rootPane, 400, 300));
+        this.setScene(new Scene(rootPane, 300, 140));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 }

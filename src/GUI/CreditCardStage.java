@@ -27,7 +27,7 @@ public class CreditCardStage extends Stage {
 
         cardNumField = new TextField();
         cardNumField.setEditable(true);
-        cardNumField.setPrefWidth(100);
+        cardNumField.setPrefWidth(200);
 
 
         expiryDateField = new TextField();
@@ -39,25 +39,26 @@ public class CreditCardStage extends Stage {
 
         rootPane.getChildren().addAll(cardNumLabel,cardNumField,expiryDateLabel,expiryDateField,okBtn);
 
-        cardNumLabel.setLayoutY(0);
-        expiryDateLabel.setLayoutY(30);
+        cardNumLabel.setLayoutY(10);
+        expiryDateLabel.setLayoutY(40);
 
 
-        cardNumLabel.setLayoutX(0);
-        expiryDateLabel.setLayoutX(0);
+        cardNumLabel.setLayoutX(10);
+        expiryDateLabel.setLayoutX(10);
 
-        cardNumField.setLayoutY(0);
-        expiryDateField.setLayoutY(30);
+        cardNumField.setLayoutY(10);
+        expiryDateField.setLayoutY(40);
 
-        cardNumField.setLayoutX(70);
-        expiryDateField.setLayoutX(70);
+        cardNumField.setLayoutX(85);
+        expiryDateField.setLayoutX(85);
 
-        okBtn.setLayoutX(100);
-        okBtn.setLayoutY(60);
+        okBtn.setLayoutX(120);
+        okBtn.setLayoutY(75);
+        okBtn.setPrefWidth(50);
 
 
         this.setTitle("check out");
-        this.setScene(new Scene(rootPane, 400, 300));
+        this.setScene(new Scene(rootPane, 300, 110));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 

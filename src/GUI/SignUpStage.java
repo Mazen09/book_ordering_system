@@ -44,12 +44,12 @@ public class SignUpStage extends Stage {
 
         firstNameField = new TextField();
         firstNameField.setEditable(true);
-        firstNameField.setPrefWidth(100);
+        firstNameField.setPrefWidth(200);
 
 
         lastNameField = new TextField();
         lastNameField.setEditable(true);
-        lastNameField.setPrefWidth(100);
+        lastNameField.setPrefWidth(200);
 
         emailField = new TextField();
         emailField.setEditable(true);
@@ -83,48 +83,48 @@ public class SignUpStage extends Stage {
                 userNameLabel, passwordLabel, repeatPasswordLabel,firstNameField, lastNameField, emailField,
                 phoneField, addressField, userNameField, passwordField, repeatPasswordField,enterBtn);
 
-        firstNameLabel.setLayoutY(0);
-        lastNameLabel.setLayoutY(30);
-        emailLabel.setLayoutY(60);
-        phoneLabel.setLayoutY(90);
-        addressLabel.setLayoutY(120);
-        userNameLabel.setLayoutY(150);
-        passwordLabel.setLayoutY(180);
-        repeatPasswordLabel.setLayoutY(210);
+        firstNameLabel.setLayoutY(10);
+        lastNameLabel.setLayoutY(40);
+        emailLabel.setLayoutY(70);
+        phoneLabel.setLayoutY(100);
+        addressLabel.setLayoutY(130);
+        userNameLabel.setLayoutY(160);
+        passwordLabel.setLayoutY(190);
+        repeatPasswordLabel.setLayoutY(220);
 
-        firstNameLabel.setLayoutX(0);
-        lastNameLabel.setLayoutX(0);
-        emailLabel.setLayoutX(0);
-        phoneLabel.setLayoutX(0);
-        addressLabel.setLayoutX(0);
-        userNameLabel.setLayoutX(0);
-        passwordLabel.setLayoutX(0);
-        repeatPasswordLabel.setLayoutX(0);
+        firstNameLabel.setLayoutX(10);
+        lastNameLabel.setLayoutX(10);
+        emailLabel.setLayoutX(10);
+        phoneLabel.setLayoutX(10);
+        addressLabel.setLayoutX(10);
+        userNameLabel.setLayoutX(10);
+        passwordLabel.setLayoutX(10);
+        repeatPasswordLabel.setLayoutX(10);
 
-        firstNameField.setLayoutY(0);
-        lastNameField.setLayoutY(30);
-        emailField.setLayoutY(60);
-        phoneField.setLayoutY(90);
-        addressField.setLayoutY(120);
-        userNameField.setLayoutY(150);
-        passwordField.setLayoutY(180);
-        repeatPasswordField.setLayoutY(210);
+        firstNameField.setLayoutY(10);
+        lastNameField.setLayoutY(40);
+        emailField.setLayoutY(70);
+        phoneField.setLayoutY(100);
+        addressField.setLayoutY(130);
+        userNameField.setLayoutY(160);
+        passwordField.setLayoutY(190);
+        repeatPasswordField.setLayoutY(220);
 
-        firstNameField.setLayoutX(70);
-        lastNameField.setLayoutX(70);
-        emailField.setLayoutX(70);
-        phoneField.setLayoutX(70);
-        addressField.setLayoutX(70);
-        userNameField.setLayoutX(70);
-        passwordField.setLayoutX(70);
-        repeatPasswordField.setLayoutX(70);
+        firstNameField.setLayoutX(100);
+        lastNameField.setLayoutX(100);
+        emailField.setLayoutX(100);
+        phoneField.setLayoutX(100);
+        addressField.setLayoutX(100);
+        userNameField.setLayoutX(100);
+        passwordField.setLayoutX(100);
+        repeatPasswordField.setLayoutX(100);
 
-        enterBtn.setLayoutX(100);
-        enterBtn.setLayoutY(240);
+        enterBtn.setLayoutX(130);
+        enterBtn.setLayoutY(260);
 
 
         //this.setISBNLabel("Sign Up");
-        this.setScene(new Scene(rootPane, 400, 610));
+        this.setScene(new Scene(rootPane, 320, 300));
         this.initModality(Modality.APPLICATION_MODAL);
 
     }

@@ -27,7 +27,7 @@ public class PlaceOrderStage extends Stage {
 
         ISBNField = new TextField();
         ISBNField.setEditable(true);
-        ISBNField.setPrefWidth(100);
+        ISBNField.setPrefWidth(200);
 
 
         quantityField = new TextField();
@@ -39,25 +39,26 @@ public class PlaceOrderStage extends Stage {
 
         rootPane.getChildren().addAll(ISBNLabel,ISBNField,quantityLabel,quantityField,orderBtn);
 
-        ISBNLabel.setLayoutY(0);
-        quantityLabel.setLayoutY(30);
+        ISBNLabel.setLayoutY(10);
+        quantityLabel.setLayoutY(40);
 
 
-        ISBNLabel.setLayoutX(0);
-        quantityLabel.setLayoutX(0);
+        ISBNLabel.setLayoutX(10);
+        quantityLabel.setLayoutX(10);
 
-        ISBNField.setLayoutY(0);
-        quantityField.setLayoutY(30);
+        ISBNField.setLayoutY(10);
+        quantityField.setLayoutY(40);
 
         ISBNField.setLayoutX(70);
         quantityField.setLayoutX(70);
 
-        orderBtn.setLayoutX(100);
-        orderBtn.setLayoutY(60);
+        orderBtn.setLayoutX(120);
+        orderBtn.setLayoutY(75);
+
 
 
         this.setTitle("place order");
-        this.setScene(new Scene(rootPane, 400, 300));
+        this.setScene(new Scene(rootPane, 280, 110));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class CartStage extends Stage {
     Button checkOutBtn;
     Label totalPriceLabel;
+    Label totalLabel;
     ArrayList<CartBookView> cartBookViews;
     Pane rootPane;
     ScrollPane scrollPane;
@@ -31,69 +32,37 @@ public class CartStage extends Stage {
     private void initialize(){
         rootPane = new Pane();
 
-        checkOutBtn = new Button();
-        checkOutBtn.setText("Check out");
-
+        checkOutBtn = new Button("Check out");
         totalPriceLabel = new Label("Total price: ");
+        totalLabel = new Label("Total Price: ");
 
-
-
-        /*checkOutBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                creditCardStage.show();
-                //block main user window
-                //addSale in creditCardStage
-            }
-        });*/
-
-        //ArrayList<CartItem> cartItems = backEnd.getCartContent(userName);
-
-        //add list of cartView
-        /*float totalPrice = 0;
-        for(int i = 0; i < cartItems.size(); i++){
-
-        }*/
-
-
-
-
-
-
-
-
-
-
-        rootPane.getChildren().addAll(checkOutBtn, totalPriceLabel);
-
-
-
+        rootPane.getChildren().addAll(checkOutBtn, totalPriceLabel, totalLabel);
 
         scrollPane= new ScrollPane();
         scrollPane.setLayoutY(40);
-        scrollPane.setLayoutX(0);
-        scrollPane.setPrefHeight(200);
-        scrollPane.setPrefWidth(300);
+        scrollPane.setLayoutX(10);
+        scrollPane.setPrefHeight(400);
+        scrollPane.setPrefWidth(385);
 
         itemsPane = new Pane();
         scrollPane.setContent(itemsPane);
         rootPane.getChildren().add(scrollPane);
 
-        totalPriceLabel.setLayoutX(0);
-        totalPriceLabel.setLayoutY(0);
+        totalPriceLabel.setLayoutX(70);
+        totalPriceLabel.setLayoutY(10);
 
-        checkOutBtn.setLayoutY(300);
-        checkOutBtn.setLayoutX(200);
+        totalLabel.setLayoutX(10);
+        totalLabel.setLayoutY(10);
+
+        checkOutBtn.setLayoutY(450);
+        checkOutBtn.setLayoutX(320);
         this.setTitle("Cart");
-        this.setScene(new Scene(rootPane, 400, 610));
+        this.setScene(new Scene(rootPane, 405, 480));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 
 
 
-    public void addItem(String text){
-
-    }
 
 
 

@@ -10,15 +10,9 @@ public class UserBookView extends BookView {
     public UserBookView(){
         addToCartBtn = new Button();
         addToCartBtn.setText("Add");
-        /*addToCartBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-            }
-        });*/
-
-        addToCartBtn.setLayoutY(0);
-        addToCartBtn.setLayoutX(350);
+        addToCartBtn.setPrefWidth(60);
+        addToCartBtn.setLayoutY(5);
+        addToCartBtn.setLayoutX(300);
 
         this.getChildren().add(addToCartBtn);
     }

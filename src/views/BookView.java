@@ -42,34 +42,36 @@ public class BookView extends Pane {
 
 
         this.setLayoutX(0);
+        this.setPrefWidth(370);
+        this.setPrefHeight(85);
         //this.setLayoutY(0);
         this.getChildren().addAll(title, authors, publisher, price, year, availableQuantity, ISBN, category);
         this.setBackground(new Background(new BackgroundFill(new Color(
                 1,1,0.9,1), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        title.setLayoutX(0);
-        title.setLayoutY(0);
+        title.setLayoutX(10);
+        title.setLayoutY(5);
 
-        ISBN.setLayoutX(250);
-        ISBN.setLayoutY(0);
+        ISBN.setLayoutX(200);
+        ISBN.setLayoutY(5);
 
-        authors.setLayoutX(0);
-        authors.setLayoutY(20);
+        authors.setLayoutX(10);
+        authors.setLayoutY(25);
 
-        price.setLayoutX(250);
-        price.setLayoutY(20);
+        price.setLayoutX(200);
+        price.setLayoutY(25);
 
-        publisher.setLayoutX(0);
-        publisher.setLayoutY(40);
+        publisher.setLayoutX(10);
+        publisher.setLayoutY(45);
 
-        year.setLayoutX(250);
-        year.setLayoutY(40);
+        year.setLayoutX(200);
+        year.setLayoutY(45);
 
-        category.setLayoutX(0);
-        category.setLayoutY(60);
+        category.setLayoutX(10);
+        category.setLayoutY(65);
 
-        availableQuantity.setLayoutX(250);
-        availableQuantity.setLayoutY(60);
+        availableQuantity.setLayoutX(200);
+        availableQuantity.setLayoutY(65);
     }
     public void setTitle(String titleStr){
         title.setText(titleStr);

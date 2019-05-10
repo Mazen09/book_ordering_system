@@ -1,6 +1,6 @@
 package views;
 
-import FormsComponent.Backend;
+import FormsComponent.BackEndImplementation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -13,49 +13,56 @@ public class CartBookView extends BookView{
     public Button decreaseBtn;
     Label totalPriceLabel;
     Label quantityLabel;
-    Backend backEnd = new Backend();
+    Label totalPriceTextLabel;
+    Label quantityTextLabel;
+    BackEndImplementation backEnd = new BackEndImplementation();
     public CartBookView(){
         initialize();
     }
     private void initialize(){
 
 
-        removeBtn = new Button();
-        removeBtn.setText("remove");
-        /*removeBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                backEnd.removeCartItem(user.userName, book.ISBN);
-                //remove it from cart
-            }
-        });*/
+        removeBtn = new Button("remove");
+        increaseBtn = new Button("increase");
+        decreaseBtn = new Button("decrease");
 
-        increaseBtn = new Button();
-        increaseBtn.setText("increase");
-        /*increaseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                backEnd.updateBook();
-            }
-        });
-*/
-        decreaseBtn = new Button();
-        decreaseBtn.setText("decrease");
-        /*decreaseBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //when zero take care
-            }
-        });*/
+
+        removeBtn.setPrefWidth(65);
+        removeBtn.setLayoutY(5);
+        removeBtn.setLayoutX(300);
+
+
+        increaseBtn.setPrefWidth(65);
+        increaseBtn.setLayoutY(35);
+        increaseBtn.setLayoutX(300);
+
+
+        decreaseBtn.setPrefWidth(65);
+        decreaseBtn.setLayoutY(65);
+        decreaseBtn.setLayoutX(300);
+
 
 
         quantityLabel = new Label("Quantity");
-        totalPriceLabel = new Label("Total dateLabel");
+        totalPriceLabel = new Label("Total Price");
+        quantityTextLabel = new Label("Quantity:");
+        totalPriceTextLabel = new Label("Total:");
 
+        quantityTextLabel.setLayoutX(10);
+        totalPriceTextLabel.setLayoutX(200);
 
+        quantityTextLabel.setLayoutY(85);
+        totalPriceTextLabel.setLayoutY(85);
 
+        quantityLabel.setLayoutX(70);
+        totalPriceLabel.setLayoutX(230);
 
-        this.setLayoutX(0);
+        quantityLabel.setLayoutY(85);
+        totalPriceLabel.setLayoutY(85);
+
+        this.setLayoutX(5);
+        this.setPrefWidth(370);
+        this.setPrefHeight(105);
         //this.setLayoutY(0);
         //this.getChildren().addAll(removeBtn, increaseBtn, decreaseBtn, quantityLabel, totalPriceLabel);
         this.getChildren().add(removeBtn);
@@ -63,28 +70,20 @@ public class CartBookView extends BookView{
         this.getChildren().add(decreaseBtn);
         this.getChildren().add(quantityLabel);
         this.getChildren().add(totalPriceLabel);
-        removeBtn.setLayoutX(300);
-        increaseBtn.setLayoutX(300);
-        decreaseBtn.setLayoutX(300);
-        quantityLabel.setLayoutX(300);
-        totalPriceLabel.setLayoutX(300);
+        this.getChildren().add(quantityTextLabel);
+        this.getChildren().add(totalPriceTextLabel);
 
 
-        removeBtn.setLayoutY(0);
-        increaseBtn.setLayoutY(20);
-        decreaseBtn.setLayoutY(40);
-        quantityLabel.setLayoutY(60);
-        totalPriceLabel.setLayoutY(100);
 
 
     }
 
     public void setTotalPriceLabel(float totalPrice){
-        totalPriceLabel.setText(totalPrice + "");
+        totalPriceLabel.setText(totalPrice+"");
     }
 
     public void setQuantityLabel(int quantity){
-        quantityLabel.setText(quantity + "");
+        quantityLabel.setText(quantity+"");
     }
 
 }

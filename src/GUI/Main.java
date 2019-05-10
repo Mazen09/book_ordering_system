@@ -9,8 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import views.CartBookView;
 import views.ManagerBookView;
@@ -47,7 +47,7 @@ public class Main extends Application {
     SignUpStage signUpStage = new SignUpStage();
     UsersPromotionStage usersPromotionStage = new UsersPromotionStage();
 
-    Backend backEnd = new Backend();
+    BackEndImplementation backEnd = new BackEndImplementation();
 
 
     private void initialize(){
@@ -57,34 +57,22 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    user = backEnd.logIn(userNameField.getText(), passwordField.getText());
-                    primaryStage.hide();
-                    if(user.role == "customer"){
-                        userMainStage = new UserMainStage();
-                        setUserMainStageActions();
-                    } else {
-                        userMainStage = new ManagerMainStage();
-                        setManagerMainStageActions();
+                    if(userNameField.getText().compareTo("") != 0 &&
+                            passwordField.getText().compareTo("") != 0) {
+                        user = backEnd.logIn(userNameField.getText(), passwordField.getText());
+                        primaryStage.hide();
+                        if (user.role == "user") {
+                            userMainStage = new UserMainStage();
+                            setUserMainStageActions();
+                        } else {
+                            userMainStage = new ManagerMainStage();
+                            setManagerMainStageActions();
+                        }
+                        userMainStage.show();
                     }
-                    userMainStage.show();
                 } catch (Exception e){
                     //error massage
-
                 }
-
-                //userMainStage = new ManagerMainStage();
-                //userMainStage.show();
-
-                //signUpStage.show();
-                //newBookStage.show();
-                //newAuthorStage.show();
-                //newPublisherStage.show();
-                //creditCardStage.show();
-                //cartStage.show();
-                //confirmOrderStage.show();
-                //placeOrderStage.show();
-                //primaryStage.hide();
-                //usersPromotionStage.show();
             }
         });
 
@@ -115,9 +103,6 @@ public class Main extends Application {
         passwordField = new TextField();
         passwordField.setEditable(true);
         passwordField.setPrefWidth(200);
-
-
-
 
 
         grid = new GridPane();
@@ -183,8 +168,8 @@ public class Main extends Application {
 
 
                         confirmOrderStage.ordersPane.getChildren().add(orderView);
-                        orderView.setLayoutY(i * 120);
-                        orderView.setLayoutX(10);
+                        orderView.setLayoutY(i * 45+5);
+                        orderView.setLayoutX(5);
 
                         orderView.confirmBtn.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
@@ -233,28 +218,28 @@ public class Main extends Application {
         });
     }
     private void setNewBookStageActions(){
-        updateBookStage.setTitle("New book");
-        updateBookStage.setEnterBtn("insert");
+        newBookStage.setTitle("New book");
+        newBookStage.setEnterBtn("insert");
 
-        updateBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
+        newBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Book newBooK = new Book();
-                newBooK.publishingYear = updateBookStage.yearField.getText();
-                newBooK.title = updateBookStage.titleField.getText();
-                newBooK.ISBN = updateBookStage.ISBNField.getText();
-                newBooK.publisher = updateBookStage.publisherField.getText();
+                newBooK.publishingYear = newBookStage.yearField.getText();
+                newBooK.title = newBookStage.titleField.getText();
+                newBooK.ISBN = newBookStage.ISBNField.getText();
+                newBooK.publisher = newBookStage.publisherField.getText();
 
-                String authorsString = updateBookStage.authorsField.getText();
+                String authorsString = newBookStage.authorsField.getText();
                 String [] authors = authorsString.split(",");
                 ArrayList<String> bookAuthors = new ArrayList<>();
                 for (int j = 0; j <authors.length; j++){
                     bookAuthors.add(authors[j]);
                 }
                 newBooK.authors = bookAuthors;
-                newBooK.price = Float.parseFloat(updateBookStage.priceField.getText());
-                newBooK.category = updateBookStage.categoryBox.getValue();
-                newBooK.threshold  = Integer.parseInt(updateBookStage.thresholdField.getText());
+                newBooK.price = Float.parseFloat(newBookStage.priceField.getText());
+                newBooK.category = newBookStage.categoryBox.getValue();
+                newBooK.threshold  = Integer.parseInt(newBookStage.thresholdField.getText());
 
                 try {
                     backEnd.insertBook(newBooK);
@@ -370,7 +355,7 @@ public class Main extends Application {
                 newUser.phone = signUpStage.phoneField.getText();
                 newUser.password = signUpStage.passwordField.getText();
                 //check repeatedPassword
-                newUser.role = "customer";
+                newUser.role = "user";
                 try {
                     backEnd.updateUser(user,newUser);
                     user = newUser;
@@ -394,7 +379,7 @@ public class Main extends Application {
                  user.phone = signUpStage.phoneField.getText();
                  user.password = signUpStage.passwordField.getText();
                 //check repeatedPassword
-                 user.role = "customer";
+                 user.role = "user";
                  try {
                      backEnd.insertUser(user);
                      userMainStage = new UserMainStage();
@@ -416,27 +401,32 @@ public class Main extends Application {
                 if(usersPromotionStage.userNameField.getText().compareTo("") != 0) {
                     ArrayList<User> users = backEnd.getUsers(usersPromotionStage.userNameField.getText());
                     for (int i = 0; i < users.size(); i++) {
-                        User user = users.get(i);
+                        User searchUser = users.get(i);
                         Pane userView = new Pane();
-                        Label userLabel = new Label(user.userName);
-                        userLabel.setLayoutX(0);
-                        userLabel.setLayoutY(0);
+                        Label userLabel = new Label(searchUser.userName);
+                        userLabel.setLayoutX(10);
+                        userLabel.setLayoutY(5);
 
                         Button promoteBtn = new Button("promote");
-                        promoteBtn.setLayoutX(50);
-                        promoteBtn.setLayoutY(0);
+                        promoteBtn.setLayoutX(220);
+                        promoteBtn.setLayoutY(5);
                         promoteBtn.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                backEnd.promoteUser(user);
+                                backEnd.promoteUser(searchUser);
                                 usersPromotionStage.usersPane.getChildren().remove(userView);
                                 //update view, update positions
                             }
                         });
 
                         userView.getChildren().addAll(promoteBtn,userLabel);
-                        userView.setLayoutY(i * 60);
-                        userView.setLayoutX(10);
+                        userView.setLayoutY(i * 45 +5);
+                        userView.setLayoutX(5);
+
+                        userView.setPrefWidth(290);
+                        userView.setPrefHeight(40);
+                        userView.setBackground(new Background(new BackgroundFill(new Color(
+                                1,1,0.9,1), CornerRadii.EMPTY, Insets.EMPTY)));
 
                         usersPromotionStage.usersPane.getChildren().add(userView);
                     }
@@ -474,8 +464,8 @@ public class Main extends Application {
                     itemView.setAvailableQuantity(book.currentAmount+"");
 
                     cartStage.itemsPane.getChildren().add(itemView);
-                    itemView.setLayoutY(i*100);
-                    itemView.setLayoutX(10);
+                    itemView.setLayoutY(i*110 + 5);
+                    itemView.setLayoutX(5);
 
                     itemView.removeBtn.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -520,7 +510,7 @@ public class Main extends Application {
 
                     totalPrice += book.price * cartItem.quantity;
                 }
-                cartStage.totalPriceLabel.setText(totalPrice+"");
+                cartStage.totalPriceLabel.setText(totalPrice + "");
                 cartStage.showAndWait();
             }
         });
@@ -552,8 +542,9 @@ public class Main extends Application {
         userMainStage.searchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(userMainStage.searchValues.getValue() != null) {
+                if(userMainStage.searchValues.getValue() != null && userMainStage.searchAttributes != null) {
                     if (userMainStage.searchValues.getValue().compareTo("") != 0) {
+                        userMainStage.isSearched = true;
                         userMainStage.currentSearchPage = 1;
                         userMainStage.searchValue = userMainStage.searchValues.getValue();
                         userMainStage.searchAttribute = userMainStage.searchAttributes.getValue();
@@ -582,23 +573,19 @@ public class Main extends Application {
         userMainStage.nextBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(userMainStage.searchValues.getValue() != null) {
-                    if (userMainStage.searchValue.compareTo("") != 0) {
-                        userMainStage.currentSearchPage++;
-                        setBookSearchResult();
-                    }
+                if (userMainStage.isSearched) {
+                    //check last offset
+                    userMainStage.currentSearchPage++;
+                    setBookSearchResult();
                 }
             }
         });
         userMainStage.previousBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(userMainStage.searchValues.getValue() != null) {
-                    if (userMainStage.currentSearchPage > 1 &&
-                            userMainStage.searchValue.compareTo("") != 0) {
-                        userMainStage.currentSearchPage--;
-                        setBookSearchResult();
-                    }
+                if (userMainStage.currentSearchPage > 1 && userMainStage.isSearched) {
+                    userMainStage.currentSearchPage--;
+                    setBookSearchResult();
                 }
             }
         });
@@ -631,8 +618,8 @@ public class Main extends Application {
             bookView.setAvailableQuantity(book.currentAmount+"");
 
             userMainStage.searchPane.getChildren().add(bookView);
-            bookView.setLayoutY(i*100);
-            bookView.setLayoutX(10);
+            bookView.setLayoutY(i*90+5);
+            bookView.setLayoutX(5);
 
             bookView.addToCartBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
