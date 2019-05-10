@@ -378,7 +378,7 @@ public class Backend {
         for (CartItem citem : cart) {
           stmt.executeUpdate(
               "UPDATE `BOOK` " +
-              "SET `QUANTITY` = QUANTITY - " + citem.quantity + " " +
+              "SET `AMOUNT_IN_STOCK` = AMOUNT_IN_STOCK - " + citem.quantity + " " +
               "WHERE `ISBN` = '" + citem.book.ISBN + "'");
           PreparedStatement pstmt =conn.prepareStatement(
               "INSERT INTO `CONFIRMED_OPERATION` VALUES(?, ?, ?, ?, ?)");
