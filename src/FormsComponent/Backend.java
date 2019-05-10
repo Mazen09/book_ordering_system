@@ -334,7 +334,7 @@ public class Backend {
         while (rs.next()) {
           CartItem citem = new CartItem();
           citem.quantity = rs.getInt("QUANTITY");
-          String isbnString = Integer.toString(rs.getInt("ISBN"));
+          String isbnString = rs.getString("ISBN");
           citem.book = getBooks("ISBN", isbnString, 0).get(0);
           rsArrayList.add(citem);
         }
@@ -383,7 +383,7 @@ public class Backend {
           PreparedStatement pstmt =conn.prepareStatement(
               "INSERT INTO `CONFIRMED_OPERATION` VALUES(?, ?, ?, ?, ?)");
           pstmt.setString(1, userName);
-          pstmt.setInt(2, Integer.parseInt(citem.book.ISBN));
+          pstmt.setString(2, citem.book.ISBN);
           pstmt.setInt(3, citem.quantity);
           pstmt.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
           pstmt.setInt(5, Math.round(citem.book.price * citem.quantity));
@@ -407,7 +407,7 @@ public class Backend {
         db.prepareStatement(
             "INSERT INTO `ORDERS` VALUES (?, ?, ?)",
             new ArrayList<DBController.Parameter>(Arrays.asList(
-                new DBController.Parameter("Int", Integer.parseInt(ISBN)),
+                new DBController.Parameter("String", ISBN),
                 new DBController.Parameter("Int", quantity),
                 new DBController.Parameter("Date", now)))).execute();
       } catch (Exception ex) {
@@ -428,7 +428,7 @@ public class Backend {
             "UPDATE `BOOK` " +
             "SET `AMOUNT_IN_STOCK` = AMOUNT_IN_STOCK + ? " +
             "WHERE `ISBN` = ?");
-        pstmtUpdateBook.setInt(2, Integer.parseInt(ISBN));
+        pstmtUpdateBook.setString(2, ISBN);
 
         PreparedStatement pstmtDeleteOrders =
           db.prepareStatement(
