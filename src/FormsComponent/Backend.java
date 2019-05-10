@@ -379,7 +379,7 @@ public class Backend {
           stmt.executeUpdate(
               "UPDATE `BOOK` " +
               "SET `QUANTITY` = QUANTITY - " + citem.quantity + " " +
-              "WHERE `ISBN` = " + citem.book.ISBN);
+              "WHERE `ISBN` = '" + citem.book.ISBN + "'");
           PreparedStatement pstmt =conn.prepareStatement(
               "INSERT INTO `CONFIRMED_OPERATION` VALUES(?, ?, ?, ?, ?)");
           pstmt.setString(1, userName);
