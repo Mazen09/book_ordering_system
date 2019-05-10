@@ -47,7 +47,7 @@ public class Main extends Application {
     SignUpStage signUpStage = new SignUpStage();
     UsersPromotionStage usersPromotionStage = new UsersPromotionStage();
 
-    BackEndImplementation backEnd = new BackEndImplementation();
+    Backend backEnd = new Backend();
 
 
     private void initialize(){

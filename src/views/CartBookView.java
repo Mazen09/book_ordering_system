@@ -1,6 +1,5 @@
 package views;
 
-import FormsComponent.BackEndImplementation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -15,7 +14,6 @@ public class CartBookView extends BookView{
     Label quantityLabel;
     Label totalPriceTextLabel;
     Label quantityTextLabel;
-    BackEndImplementation backEnd = new BackEndImplementation();
     public CartBookView(){
         initialize();
     }
