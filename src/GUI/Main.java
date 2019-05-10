@@ -355,7 +355,7 @@ public class Main extends Application {
                 newUser.phone = signUpStage.phoneField.getText();
                 newUser.password = signUpStage.passwordField.getText();
                 //check repeatedPassword
-                newUser.role = "user";
+                newUser.role = "customer";
                 try {
                     backEnd.updateUser(user,newUser);
                     user = newUser;
@@ -379,7 +379,7 @@ public class Main extends Application {
                  user.phone = signUpStage.phoneField.getText();
                  user.password = signUpStage.passwordField.getText();
                 //check repeatedPassword
-                 user.role = "user";
+                 user.role = "customer";
                  try {
                      backEnd.insertUser(user);
                      userMainStage = new UserMainStage();
