@@ -6,10 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -30,7 +27,7 @@ public class Main extends Application {
     Label userNameLabel;
     Label passwordLabel;
     TextField userNameField ;
-    TextField passwordField ;
+    PasswordField passwordField ;
 
     User user;
     ArrayList<Book> searchBooks;
@@ -112,7 +109,7 @@ public class Main extends Application {
         userNameField.setPrefWidth(200);
 
         // make it hiden as password
-        passwordField = new TextField();
+        passwordField = new PasswordField();
         passwordField.setEditable(true);
         passwordField.setPrefWidth(200);
 

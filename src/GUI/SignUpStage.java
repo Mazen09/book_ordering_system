@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -21,8 +22,8 @@ public class SignUpStage extends Stage {
     Label firstNameLabel, lastNameLabel, emailLabel, phoneLabel, addressLabel, userNameLabel, passwordLabel;
     Label repeatPasswordLabel;
 
-    TextField firstNameField, lastNameField, emailField, phoneField, addressField, userNameField, passwordField;
-    TextField repeatPasswordField;
+    TextField firstNameField, lastNameField, emailField, phoneField, addressField, userNameField;
+    PasswordField repeatPasswordField,passwordField;
 
     Button enterBtn;
 
@@ -67,11 +68,11 @@ public class SignUpStage extends Stage {
         userNameField.setEditable(true);
         userNameField.setPrefWidth(200);
 
-        passwordField = new TextField();
+        passwordField = new PasswordField();
         passwordField.setEditable(true);
         passwordField.setPrefWidth(200);
 
-        repeatPasswordField = new TextField();
+        repeatPasswordField = new PasswordField();
         repeatPasswordField.setEditable(true);
         repeatPasswordField.setPrefWidth(200);
 
