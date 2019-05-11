@@ -247,7 +247,7 @@ public class Backend {
         ArrayList<User> users = new ArrayList<>();
         User user = new User();
         ResultSet rset;
-        query = "select * from USER where USER_NAME like '%"+userName+"%';";
+        query = "select * from USER where USER_TYPE = 'customer' AND USER_NAME like '%"+userName+"%';";
         stmt = conn.createStatement();
         rset = stmt.executeQuery(query);
 
