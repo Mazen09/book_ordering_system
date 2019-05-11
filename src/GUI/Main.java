@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,6 +18,7 @@ import views.ManagerBookView;
 import views.OrderView;
 import views.UserBookView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
@@ -61,7 +63,7 @@ public class Main extends Application {
                             passwordField.getText().compareTo("") != 0) {
                         user = backEnd.logIn(userNameField.getText(), passwordField.getText());
                         primaryStage.hide();
-                        if (user.role == "user") {
+                        if (user.role == "customer") {
                             userMainStage = new UserMainStage();
                             setUserMainStageActions();
                         } else {
@@ -69,9 +71,18 @@ public class Main extends Application {
                             setManagerMainStageActions();
                         }
                         userMainStage.show();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("empty cell");
                     }
                 } catch (Exception e){
                     //error massage
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("invalid user or password");
                 }
             }
         });
@@ -157,7 +168,15 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 confirmOrderStage.ordersPane.getChildren().clear();
                 if(confirmOrderStage.ISBNField.getText().compareTo("") != 0) {
-                    ArrayList<Order> orders = backEnd.getOrders(confirmOrderStage.ISBNField.getText());
+                    ArrayList<Order> orders = null;
+                    try {
+                        orders = backEnd.getOrders(confirmOrderStage.ISBNField.getText());
+                    } catch (SQLException e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("get order");
+                    }
                     for (int i = 0; i < orders.size(); i++) {
                         Order order = orders.get(i);
                         OrderView orderView = new OrderView();
@@ -174,7 +193,14 @@ public class Main extends Application {
                         orderView.confirmBtn.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                backEnd.confirmOrder(order.id,order.ISBN);
+                                try {
+                                    backEnd.confirmOrder(order.id,order.ISBN);
+                                } catch (SQLException e) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("error");
+                                    alert.setHeaderText(null);
+                                    alert.setContentText("confirm order");
+                                }
                                 //update positions in orders
                                 confirmOrderStage.ordersPane.getChildren().remove(orderView);
                             }
@@ -189,7 +215,14 @@ public class Main extends Application {
         creditCardStage.okBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                backEnd.addSale(user.userName);
+                try {
+                    backEnd.addSale(user.userName);
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("add sale");
+                }
                 cartStage.hide();
                 creditCardStage.hide();
             }
@@ -209,10 +242,16 @@ public class Main extends Application {
                         backEnd.insetAuthor(author);
                         newPublisherStage.hide();
                     } catch (Exception e) {
-                        //print error
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("repeated author");
                     }
                 }else {
-                    //error empty cell
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("empty cell");
                 }
             }
         });
@@ -245,7 +284,10 @@ public class Main extends Application {
                     backEnd.insertBook(newBooK);
                     newBookStage.hide();
                 } catch (Exception e) {
-                    //error massage
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("repeated ISBN or not exist author or publisher ");
                 }
             }
         });
@@ -266,10 +308,15 @@ public class Main extends Application {
                         backEnd.insertPublisher(publisher);
                         newPublisherStage.hide();
                     } catch (Exception e) {
-                        //print error
-                    }
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("repeated publisher");                    }
                 }else {
-                    //error empty cell
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("empty cell");
                 }
             }
         });
@@ -316,7 +363,10 @@ public class Main extends Application {
                     backEnd.updateBook(book,newBooK);
                     updateBookStage.hide();
                 } catch (Exception e) {
-                    //error massage
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("repeated ISBN or not exist author or publisher ");
                 }
             }
         });
@@ -333,10 +383,16 @@ public class Main extends Application {
                                 Integer.parseInt(placeOrderStage.quantityField.getText()));
                         placeOrderStage.hide();
                     } catch (Exception e) {
-                        //print error
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("not exist ISBN");
                     }
                 }else {
-                    //error empty cell
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("empty cell");
                 }
             }
         });
@@ -361,7 +417,10 @@ public class Main extends Application {
                     user = newUser;
                     profileStage.hide();
                 } catch (Exception e) {
-                    //error  message
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("repeated userName");
                 }
             }
         });
@@ -388,7 +447,10 @@ public class Main extends Application {
                      signUpStage.hide();
                      primaryStage.hide();
                  } catch (Exception e) {
-                     //error  message
+                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                     alert.setTitle("error");
+                     alert.setHeaderText(null);
+                     alert.setContentText("repeated userName");
                  }
             }
         });
@@ -399,7 +461,15 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 usersPromotionStage.usersPane.getChildren().clear();
                 if(usersPromotionStage.userNameField.getText().compareTo("") != 0) {
-                    ArrayList<User> users = backEnd.getUsers(usersPromotionStage.userNameField.getText());
+                    ArrayList<User> users = null;
+                    try {
+                        users = backEnd.getUsers(usersPromotionStage.userNameField.getText());
+                    } catch (SQLException e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("get user");
+                    }
                     for (int i = 0; i < users.size(); i++) {
                         User searchUser = users.get(i);
                         Pane userView = new Pane();
@@ -413,7 +483,14 @@ public class Main extends Application {
                         promoteBtn.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                backEnd.promoteUser(searchUser);
+                                try {
+                                    backEnd.promoteUser(searchUser);
+                                } catch (SQLException e) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("error");
+                                    alert.setHeaderText(null);
+                                    alert.setContentText("promote user");
+                                }
                                 usersPromotionStage.usersPane.getChildren().remove(userView);
                                 //update view, update positions
                             }
@@ -441,7 +518,15 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 setCartStageActions();
 
-                ArrayList<CartItem> cartItems = backEnd.getCartContent(user.userName);
+                ArrayList<CartItem> cartItems = null;
+                try {
+                    cartItems = backEnd.getCartContent(user.userName);
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("get Cart");
+                }
                 //add all items view and set their actions (inc dec remove ...)
                 float totalPrice = 0;
                 for(int i = 0; i < cartItems.size(); i++){
@@ -470,7 +555,14 @@ public class Main extends Application {
                     itemView.removeBtn.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            backEnd.removeCartItem(user.userName, book.ISBN);
+                            try {
+                                backEnd.removeCartItem(user.userName, book.ISBN);
+                            } catch (SQLException e) {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("error");
+                                alert.setHeaderText(null);
+                                alert.setContentText("remove cart");
+                            }
                             cartStage.itemsPane.getChildren().remove(itemView);
                             float price = Float.parseFloat(cartStage.totalPriceLabel .getText());
                             price -= book.price * cartItem.quantity;
@@ -483,7 +575,14 @@ public class Main extends Application {
                         public void handle(ActionEvent event) {
                             if(book.currentAmount >= cartItem.quantity + 1){
                                 cartItem.quantity++;
-                                backEnd.updateCartItem(user.userName, book.ISBN, cartItem.quantity);
+                                try {
+                                    backEnd.updateCartItem(user.userName, book.ISBN, cartItem.quantity);
+                                } catch (SQLException e) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("error");
+                                    alert.setHeaderText(null);
+                                    alert.setContentText("update cart");
+                                }
                                 itemView.setQuantityLabel(cartItem.quantity);
                                 itemView.setTotalPriceLabel(book.price * cartItem.quantity);
                                 float price = Float.parseFloat(cartStage.totalPriceLabel .getText());
@@ -498,7 +597,14 @@ public class Main extends Application {
                         public void handle(ActionEvent event) {
                             if(cartItem.quantity - 1 > 0){
                                 cartItem.quantity--;
-                                backEnd.updateCartItem(user.userName, book.ISBN, cartItem.quantity);
+                                try {
+                                    backEnd.updateCartItem(user.userName, book.ISBN, cartItem.quantity);
+                                } catch (SQLException e) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("error");
+                                    alert.setHeaderText(null);
+                                    alert.setContentText("update cart");
+                                }
                                 itemView.setQuantityLabel(cartItem.quantity);
                                 itemView.setTotalPriceLabel(book.price * cartItem.quantity);
                                 float price = Float.parseFloat(cartStage.totalPriceLabel .getText());
@@ -517,7 +623,14 @@ public class Main extends Application {
         userMainStage.logOutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                backEnd.logOut(user.userName);
+                try {
+                    backEnd.logOut(user.userName);
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("log out");
+                }
                 primaryStage.show();
                 userMainStage.hide();
             }
@@ -591,10 +704,18 @@ public class Main extends Application {
         });
     }
     private void setBookSearchResult(){
-        ArrayList<Book> books = backEnd.getBooks(
-                userMainStage.searchAttribute,
-                userMainStage.searchValue, userMainStage.currentSearchPage
-        );
+        ArrayList<Book> books = null;
+        try {
+            books = backEnd.getBooks(
+                    userMainStage.searchAttribute,
+                    userMainStage.searchValue, userMainStage.currentSearchPage
+            );
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("error");
+            alert.setHeaderText(null);
+            alert.setContentText("get book ");
+        }
         userMainStage.searchPane.getChildren().clear();
         for(int i = 0; i < books.size(); i++){
             Book book = books.get(i);
@@ -624,7 +745,14 @@ public class Main extends Application {
             bookView.addToCartBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    backEnd.addToCart(user.userName, book.ISBN);
+                    try {
+                        backEnd.addToCart(user.userName, book.ISBN);
+                    } catch (SQLException e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("add to cart");
+                    }
                 }
             });
             if(userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
@@ -648,19 +776,40 @@ public class Main extends Application {
         mangerStage.topSellReportBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                backEnd.reportTopSellingBooks();
+                try {
+                    backEnd.reportTopSellingBooks();
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("report top sell ");
+                }
             }
         });
         mangerStage.topCustomerReportBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                backEnd.reportTopCustomers();
+                try {
+                    backEnd.reportTopCustomers();
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("report top customer ");
+                }
             }
         });
         mangerStage.sellsReportBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                backEnd.reportTotalSales();
+                try {
+                    backEnd.reportTotalSales();
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("report sell ");
+                }
             }
         });
         mangerStage.newAuthorBtn.setOnAction(new EventHandler<ActionEvent>() {

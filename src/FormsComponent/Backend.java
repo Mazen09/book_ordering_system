@@ -50,8 +50,8 @@ public class Backend {
         }
     }
 
-    public ArrayList<Book> getBooks(String searchAttribute, String searchKey, int offset) {
-      try {
+    public ArrayList<Book> getBooks(String searchAttribute, String searchKey, int offset) throws SQLException {
+      ////try {
         ArrayList<Book> books = new ArrayList<Book>();
         Book book = new Book();
         ArrayList<String> authors = new ArrayList<>();
@@ -126,14 +126,14 @@ public class Backend {
             }
         }
         return books;
-      } catch (Exception ex) {
-        ex.printStackTrace();
-        return null;
-      }
+      //} catch (Exception ex) {
+      //  ex.printStackTrace();
+      //  return null;
+      //}
     } // checked
 
-    public void insertBook(Book book) {
-      try {
+    public void insertBook(Book book) throws SQLException {
+      ////try {
             int countInserted;
             stmt = conn.createStatement();
             query = "INSERT INTO BOOK VALUES ( '" + book.ISBN + "', '" + book.title + "', '" + book.category + "', " +
@@ -150,13 +150,13 @@ public class Backend {
                 countInserted = stmt.executeUpdate(query);
                 System.out.println(countInserted + " records inserted.\n");
             }
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      //} catch (Exception ex) {
+        // ex.printStackTrace();
+      //}
     } // checked
 
-    public void updateBook(Book oldBook, Book newBook) { // why old book ?!
-      try {
+    public void updateBook(Book oldBook, Book newBook) throws SQLException { // why old book ?!
+      ////try {
         int countUpdated;
         stmt = conn.createStatement();
         query = "UPDATE BOOK SET ISBN = '"+ newBook.ISBN +"' , TITLE = '"+newBook.title+"'," +
@@ -167,39 +167,39 @@ public class Backend {
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
         System.out.println(countUpdated + " records updated.\n");
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      //} catch (Exception ex) {
+      //  ex.printStackTrace();
+      //}
     } // checked
 
-    public void insetAuthor(Author author) {
-      try {
+    public void insetAuthor(Author author) throws SQLException {
+      ////try {
             int countInserted;
             stmt = conn.createStatement();
             query = "INSERT INTO AUTHOR VALUES ( '" + author.name + "', '" + author.phone + "' );";
             System.out.println(query);
             countInserted = stmt.executeUpdate(query);
             System.out.println(countInserted + " records inserted.\n");
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      //} catch (Exception ex) {
+       // ex.printStackTrace();
+      //}
     } // checked
 
-    public void insertPublisher(Publisher publisher) {
-      try {
+    public void insertPublisher(Publisher publisher) throws SQLException {
+      ////try {
         int countInserted;
         stmt = conn.createStatement();
         query = "INSERT INTO PUBLISHER VALUES ( '"+ publisher.name +"', '"+publisher.address+"', '"+publisher.phone+"' );";
         System.out.println(query);
         countInserted = stmt.executeUpdate(query);
         System.out.println(countInserted + " records inserted.\n");
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      //} catch (Exception ex) {
+      //  ex.printStackTrace();
+      //}
     }// checked
 
-    public void insertUser(User user) {
-      try {
+    public void insertUser(User user) throws SQLException {
+      //try {
         int countInserted;
         stmt = conn.createStatement();
         query = "INSERT INTO USER VALUES ( '"+ user.userName +"', '"+user.firstName+"', '"+user.lastName+
@@ -208,13 +208,13 @@ public class Backend {
         System.out.println(query);
         countInserted = stmt.executeUpdate(query);
         System.out.println(countInserted + " records inserted.\n");
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }// checked
 
-    public void updateUser(User oldUser, User newUser) {
-      try {
+    public void updateUser(User oldUser, User newUser) throws SQLException {
+      //try {
         int countUpdated;
         stmt = conn.createStatement();
         query = "UPDATE USER SET USER_NAME = '"+newUser.userName+"', FIRST_NAME = '"+newUser.firstName+"'," +
@@ -224,26 +224,26 @@ public class Backend {
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
         System.out.println(countUpdated + " records updated.\n");
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     } //checked
 
-    public void promoteUser(User user) {
-      try {
+    public void promoteUser(User user) throws SQLException {
+      //try {
         int countUpdated;
         stmt = conn.createStatement();
         query = "UPDATE USER SET USER_TYPE = 'Manager' WHERE USER_NAME = '"+user.userName+"';";
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
         System.out.println(countUpdated + " records updated.\n");
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     } // checked
 
-    public ArrayList<User> getUsers(String userName) {
-      try {
+    public ArrayList<User> getUsers(String userName) throws SQLException {
+      //try {
         ArrayList<User> users = new ArrayList<>();
         User user = new User();
         ResultSet rset;
@@ -267,14 +267,14 @@ public class Backend {
         }
 
         return users;
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
         return null;
-      }
+      }*/
     } // checked
 
-    public ArrayList<Order> getOrders(String ISBN) {
-      try {
+    public ArrayList<Order> getOrders(String ISBN) throws SQLException {
+      //try {
         ArrayList<Order> orders = new ArrayList<>();
         Order order = new Order();
         ResultSet rset;
@@ -291,14 +291,14 @@ public class Backend {
             orders.add(order);
         }
         return orders;
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
         return null;
-      }
+      }*/
     } // checked
 
-    public void addToCart(String userName, String ISBN) {
-      try {
+    public void addToCart(String userName, String ISBN) throws SQLException {
+      //try {
         int countInserted;
         ResultSet rset;
         // get the price of the book
@@ -318,14 +318,13 @@ public class Backend {
         stmt = conn.createStatement();
         countInserted = stmt.executeUpdate(query);
         System.out.println(countInserted + " records inserted.\n");
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     } // checked
 
-    public ArrayList<CartItem> getCartContent(String userName)
-    {
-      try {
+    public ArrayList<CartItem> getCartContent(String userName) throws SQLException {
+      //try {
         stmt = conn.createStatement();
         ResultSet rs =
           stmt.executeQuery("SELECT * FROM `CART` " +
@@ -339,40 +338,37 @@ public class Backend {
           rsArrayList.add(citem);
         }
         return rsArrayList;
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
         return null;
-      }
+      }*/
     }
 
-    public void updateCartItem(String userName, String ISBN,int newQuantity)
-    {
-      try {
+    public void updateCartItem(String userName, String ISBN,int newQuantity) throws SQLException {
+      //try {
         stmt = conn.createStatement();
         stmt.executeUpdate("UPDATE `CART` " +
                            "SET `QUANTITY` = '" + newQuantity + "' " +
                            "WHERE `USER_NAME` = '" + userName + "' AND " +
                            "`ISBN` = '" + ISBN + "'");
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
-    public void removeCartItem(String userName, String ISBN)
-    {
-      try {
+    public void removeCartItem(String userName, String ISBN) throws SQLException {
+      //try {
         stmt = conn.createStatement();
         stmt.executeUpdate("DELETE FROM `CART` " +
                            "WHERE `USER_NAME` = '" + userName + "' AND " +
                            "`ISBN` = '" + ISBN + "'");
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
-    public void addSale(String userName)
-    {
-      try {
+    public void addSale(String userName) throws SQLException {
+      //try {
         conn.setAutoCommit(false);
         ArrayList<CartItem> cart = getCartContent(userName);
         for (CartItem citem : cart) {
@@ -395,14 +391,13 @@ public class Backend {
         }
         conn.commit();
         conn.setAutoCommit(true);
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
-    public void insertOrder(String ISBN, int quantity)
-    {
-      try {
+    public void insertOrder(String ISBN, int quantity) throws SQLException {
+      //try {
         java.sql.Date now = new java.sql.Date(new java.util.Date().getTime());
         db.prepareStatement(
             "INSERT INTO `ORDERS` VALUES (?, ?, ?)",
@@ -410,14 +405,13 @@ public class Backend {
                 new DBController.Parameter("String", ISBN),
                 new DBController.Parameter("Int", quantity),
                 new DBController.Parameter("Date", now)))).execute();
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
-    public void confirmOrder(int id, String ISBN)
-    {
-      try {
+    public void confirmOrder(int id, String ISBN) throws SQLException {
+      //try {
         PreparedStatement pstmtGetOrders =
           db.prepareStatement(
               "SELECT `ID`, `QUANTITY` FROM `ORDERS` WHERE `ID` = ?",
@@ -449,16 +443,15 @@ public class Backend {
 
         conn.commit();
         conn.setAutoCommit(true);
-      } catch (Exception ex) {
+      /*} catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
     // DISCLAIMER: CODE-REVIEWER DISCRETION IS ADVISED. WE ARE ABOUT TO
     // MUTILATE SOME VERY BASIC PRINCIPLES.
-    public User logIn(String UserName, String password)
-    {
-      try {
+    public User logIn(String UserName, String password) throws SQLException {
+      //try {
         User user = null;
         PreparedStatement pstmtLogin = db.prepareStatement(
             "SELECT * FROM `USER` WHERE `USER_NAME` = ? AND `PASSWORD` = ?",
@@ -480,29 +473,25 @@ public class Backend {
           }
         }
         return user;
-      } catch (Exception ex) {
+     /* } catch (Exception ex) {
         ex.printStackTrace();
         return null;
-      }
+      }*/
     }
 
 
-    public void logOut(String UserName)
-    {
+    public void logOut(String UserName) throws SQLException {
     }
 
-    public void reportTotalSales()
-    {
-
-    }
-
-    public void reportTopCustomers()
-    {
+    public void reportTotalSales() throws SQLException {
 
     }
 
-    public void reportTopSellingBooks()
-    {
+    public void reportTopCustomers() throws SQLException {
+
+    }
+
+    public void reportTopSellingBooks() throws SQLException {
 
     }
 }
