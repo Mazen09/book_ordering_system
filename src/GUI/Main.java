@@ -17,7 +17,6 @@ import views.UserBookView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
 public class Main extends Application {
     Pane root = new Pane();
@@ -215,22 +214,36 @@ public class Main extends Application {
         creditCardStage.okBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    backEnd.addSale(user.userName);
-                } catch (SQLException e) {
+                if(isCreditValid(creditCardStage.cardNumField.getText(),
+                        creditCardStage.expiryDateField.getText())) {
+                    try {
+                        backEnd.addSale(user.userName);
+                    } catch (SQLException e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("add sale");
+                        alert.showAndWait();
+                    }
+                    userMainStage.searchPane.getChildren().clear();
+                    cartStage.hide();
+                    creditCardStage.hide();
+                } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("add sale");
+                    alert.setContentText("invalid credit card");
                     alert.showAndWait();
                 }
-                userMainStage.searchPane.getChildren().clear();
-                cartStage.hide();
-                creditCardStage.hide();
             }
         });
 
     }
+
+    private boolean isCreditValid(String text, String text1) {
+        return true;
+    }
+
     private void setNewAuthorStageActions(){
         newAuthorStage.addBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
