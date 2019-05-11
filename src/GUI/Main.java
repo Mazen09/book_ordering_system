@@ -285,6 +285,7 @@ public class Main extends Application {
                 newBooK.price = Float.parseFloat(newBookStage.priceField.getText());
                 newBooK.category = newBookStage.categoryBox.getValue();
                 newBooK.threshold  = Integer.parseInt(newBookStage.thresholdField.getText());
+                newBooK.currentAmount = Integer.parseInt(newBookStage.quantityField.getText());
 
                 try {
                     backEnd.insertBook(newBooK);
@@ -333,6 +334,9 @@ public class Main extends Application {
     private void setUpdateBookStageActions(Book book){
         updateBookStage.setTitle("update book");
         updateBookStage.setEnterBtn("update");
+        updateBookStage.quantityField.setVisible(false);
+        updateBookStage.quantityLabel.setVisible(false);
+
         updateBookStage.yearField.setText(book.publishingYear);
         updateBookStage.titleField.setText(book.title);
         updateBookStage.ISBNField.setText(book.ISBN);

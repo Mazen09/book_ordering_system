@@ -19,6 +19,9 @@ public class NewBookStage extends Stage{
     Button enterBtn;
     Pane rootPane;
 
+    Label quantityLabel;
+    TextField quantityField;
+
     public NewBookStage(){
         initialize();
     }
@@ -32,7 +35,11 @@ public class NewBookStage extends Stage{
         thresholdLabel = new Label("threshold");
         categoryLabel = new Label("category");
         yearLabel = new Label("year");
+        quantityLabel = new Label("quantity");
 
+        quantityField = new TextField();
+        quantityField.setEditable(true);
+        quantityField.setPrefWidth(200);
 
         titleField = new TextField();
         titleField.setEditable(true);
@@ -78,6 +85,8 @@ public class NewBookStage extends Stage{
         rootPane.getChildren().addAll(titleLabel, authorsLabel, publisherLabel, priceLabel, ISBNLabel, thresholdLabel,
                 categoryLabel, yearLabel, titleField, authorsField, publisherField, priceField, ISBNField,
                 thresholdField, yearField, categoryBox, enterBtn);
+        rootPane.getChildren().addAll(quantityField,quantityLabel);
+
 
         titleLabel.setLayoutY(10);
         authorsLabel.setLayoutY(40);
@@ -87,6 +96,7 @@ public class NewBookStage extends Stage{
         thresholdLabel.setLayoutY(160);
         categoryLabel.setLayoutY(190);
         yearLabel.setLayoutY(220);
+        quantityLabel.setLayoutY(250);
 
         titleLabel.setLayoutX(10);
         authorsLabel.setLayoutX(10);
@@ -96,6 +106,7 @@ public class NewBookStage extends Stage{
         thresholdLabel.setLayoutX(10);
         categoryLabel.setLayoutX(10);
         yearLabel.setLayoutX(10);
+        quantityLabel.setLayoutX(10);
 
         titleField.setLayoutY(10);
         authorsField.setLayoutY(40);
@@ -105,6 +116,7 @@ public class NewBookStage extends Stage{
         thresholdField.setLayoutY(160);
         categoryBox.setLayoutY(190);
         yearField.setLayoutY(220);
+        quantityField.setLayoutY(250);
 
         titleField.setLayoutX(80);
         authorsField.setLayoutX(80);
@@ -114,12 +126,13 @@ public class NewBookStage extends Stage{
         thresholdField.setLayoutX(80);
         categoryBox.setLayoutX(80);
         yearField.setLayoutX(80);
+        quantityField.setLayoutX(80);
 
         enterBtn.setLayoutX(110);
-        enterBtn.setLayoutY(250);
+        enterBtn.setLayoutY(280);
 
 
-        this.setScene(new Scene(rootPane, 300, 300));
+        this.setScene(new Scene(rootPane, 300, 320));
         this.initModality(Modality.APPLICATION_MODAL);
     }
 
