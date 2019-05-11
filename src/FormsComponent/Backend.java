@@ -133,20 +133,15 @@ public class Backend {
     } // checked
 
     public void updateBook(Book oldBook, Book newBook) throws SQLException { // why old book ?!
-      ////try {
-        int countUpdated;
+      int countUpdated;
         stmt = conn.createStatement();
         query = "UPDATE BOOK SET ISBN = '"+ newBook.ISBN +"' , TITLE = '"+newBook.title+"'," +
-                " CATEGORY = '"+newBook.category+"', PRICE = '"+newBook.price+"'," +
-                " PUBLISHER_NAME = '"+newBook.publisher+"', PUBLICATION_YEAR = "+newBook.publishingYear+
+                " CATEGORY = '"+newBook.category+"', PRICE = '"+newBook.price+"',"+" PUBLICATION_YEAR = "+newBook.publishingYear+
                 ", AMOUNT_IN_STOCK = "+newBook.currentAmount+", THRESHOLD = "+newBook.threshold+
                 " WHERE ISBN = '"+oldBook.ISBN+"' ;";
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
         System.out.println(countUpdated + " records updated.\n");
-      //} catch (Exception ex) {
-      //  ex.printStackTrace();
-      //}
     } // checked
 
     public void insetAuthor(Author author) throws SQLException {
