@@ -159,7 +159,7 @@ public class Backend {
         stmt = conn.createStatement();
         query = "UPDATE BOOK SET ISBN = '"+ newBook.ISBN +"' , TITLE = '"+newBook.title+"'," +
                 " CATEGORY = '"+newBook.category+"', PRICE = '"+newBook.price+"',"+" PUBLICATION_YEAR = "+newBook.publishingYear+
-                ", AMOUNT_IN_STOCK = "+newBook.currentAmount+", THRESHOLD = "+newBook.threshold+
+                ", THRESHOLD = "+newBook.threshold+
                 " WHERE ISBN = '"+oldBook.ISBN+"' ;";
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
