@@ -538,7 +538,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 setCartStageActions();
-
+                cartStage.itemsPane.getChildren().clear();
                 ArrayList<CartItem> cartItems = null;
                 try {
                     cartItems = backEnd.getCartContent(user.userName);
