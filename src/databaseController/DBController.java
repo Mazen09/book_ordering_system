@@ -96,7 +96,7 @@ public class DBController {
     {
         if (conn == null) {
             createConnection("jdbc:mysql://localhost:3306",
-                    "root", "12345MySQL");
+                    "SAMPLE", "");
         }
         return conn;
     }
