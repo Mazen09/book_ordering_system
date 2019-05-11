@@ -292,29 +292,15 @@ public class Backend {
     } // checked
 
     public void addToCart(String userName, String ISBN) throws SQLException {
-      //try {
-        int countInserted;
+      int countInserted;
         ResultSet rset;
-        // get the price of the book
-        query = "select PRICE from BOOK where ISBN = '"+ISBN+"';";
-        stmt = conn.createStatement();
-        rset = stmt.executeQuery(query);
-        int totalPrice = 0;
-        while (rset.next())
-        {
-            totalPrice = Integer.parseInt(rset.getString("PRICE"));
-        }
 
-        // insert to cart
-        query = "insert into CART (USER_NAME, ISBN, QUANTITY, ORDER_DATE, TOTAL_PRICE) values" +
-                " ('"+userName+"', '"+ISBN+"', 1, curdate(), "+totalPrice+");";
+        query = "insert into CART (USER_NAME, ISBN, QUANTITY) values" +
+                " ('"+userName+"', '"+ISBN+"', 1);";
         System.out.println(query);
         stmt = conn.createStatement();
         countInserted = stmt.executeUpdate(query);
         System.out.println(countInserted + " records inserted.\n");
-      /*} catch (Exception ex) {
-        ex.printStackTrace();
-      }*/
     } // checked
 
     public ArrayList<CartItem> getCartContent(String userName) throws SQLException {
