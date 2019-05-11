@@ -131,6 +131,28 @@ public class Backend {
         }
         return books;
     } // checked
+    public void insertBook(Book book) throws SQLException {
+        ////try {
+        int countInserted;
+        stmt = conn.createStatement();
+        query = "INSERT INTO BOOK VALUES ( '" + book.ISBN + "', '" + book.title + "', '" + book.category + "', " +
+                book.price + ", '" + book.publisher + "', " + book.publishingYear + ", " + book.currentAmount + ", " +
+                book.threshold + " );";
+        System.out.println(query);
+        countInserted = stmt.executeUpdate(query);
+        System.out.println(countInserted + " records inserted.\n");
+
+        for(String a : book.authors)
+        {
+            query = "INSERT INTO AUTHORED_BY VALUES ( '"+ book.ISBN + "', '" + a +"' )";
+            System.out.println(query);
+            countInserted = stmt.executeUpdate(query);
+            System.out.println(countInserted + " records inserted.\n");
+        }
+        //} catch (Exception ex) {
+        // ex.printStackTrace();
+        //}
+    } // checked
 
     public void updateBook(Book oldBook, Book newBook) throws SQLException { // why old book ?!
       int countUpdated;
