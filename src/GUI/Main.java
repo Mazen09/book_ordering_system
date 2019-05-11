@@ -738,57 +738,61 @@ public class Main extends Application {
             alert.setContentText("get book ");
             alert.showAndWait();
         }
-        userMainStage.searchPane.getChildren().clear();
-        for(int i = 0; i < books.size(); i++){
-            Book book = books.get(i);
+        if(books.isEmpty()){
+            userMainStage.currentSearchPage--;
+        }else {
+            userMainStage.searchPane.getChildren().clear();
+            for (int i = 0; i < books.size(); i++) {
+                Book book = books.get(i);
 
-            UserBookView bookView = new UserBookView();
-            //System.out.println(userMainStage.getClass().getSimpleName());
-            if(userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
-                bookView = new ManagerBookView();
-            }
-            bookView.setTitle(book.title);
-            bookView.setPublisher(book.publisher);
-            String authors= new String();
-            for (int j = 0; j <book.authors.size()-1; j++){
-                authors += book.authors.get(j) + ",";
-            }
-            authors += book.authors.get(book.authors.size()-1);
-            bookView.setAuthors(authors);
-            bookView.setPrice(book.price+"");
-            bookView.setYear(book.publishingYear);
-            bookView.setCategory(book.category);
-            bookView.setAvailableQuantity(book.currentAmount+"");
-
-            userMainStage.searchPane.getChildren().add(bookView);
-            bookView.setLayoutY(i*90+5);
-            bookView.setLayoutX(5);
-
-            bookView.addToCartBtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-                        backEnd.addToCart(user.userName, book.ISBN);
-                    } catch (SQLException e) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("error");
-                        alert.setHeaderText(null);
-                        alert.setContentText("add to cart");
-                        alert.showAndWait();
-                    }
+                UserBookView bookView = new UserBookView();
+                //System.out.println(userMainStage.getClass().getSimpleName());
+                if (userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
+                    bookView = new ManagerBookView();
                 }
-            });
-            if(userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
-                ((ManagerBookView)bookView).modifyBtn.setOnAction(new EventHandler<ActionEvent>() {
+                bookView.setTitle(book.title);
+                bookView.setPublisher(book.publisher);
+                String authors = new String();
+                for (int j = 0; j < book.authors.size() - 1; j++) {
+                    authors += book.authors.get(j) + ",";
+                }
+                authors += book.authors.get(book.authors.size() - 1);
+                bookView.setAuthors(authors);
+                bookView.setPrice(book.price + "");
+                bookView.setYear(book.publishingYear);
+                bookView.setCategory(book.category);
+                bookView.setAvailableQuantity(book.currentAmount + "");
+
+                userMainStage.searchPane.getChildren().add(bookView);
+                bookView.setLayoutY(i * 90 + 5);
+                bookView.setLayoutX(5);
+
+                bookView.addToCartBtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        setUpdateBookStageActions(book);
-                        updateBookStage.showAndWait();
-                        //update the book view with new edit
-                        //clear search instead
-                        userMainStage.searchPane.getChildren().clear();
+                        try {
+                            backEnd.addToCart(user.userName, book.ISBN);
+                        } catch (SQLException e) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("error");
+                            alert.setHeaderText(null);
+                            alert.setContentText("add to cart");
+                            alert.showAndWait();
+                        }
                     }
                 });
+                if (userMainStage.getClass().getSimpleName().compareTo("ManagerMainStage") == 0) {
+                    ((ManagerBookView) bookView).modifyBtn.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            setUpdateBookStageActions(book);
+                            updateBookStage.showAndWait();
+                            //update the book view with new edit
+                            //clear search instead
+                            userMainStage.searchPane.getChildren().clear();
+                        }
+                    });
+                }
             }
         }
     }
