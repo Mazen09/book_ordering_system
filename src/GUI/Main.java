@@ -570,6 +570,7 @@ public class Main extends Application {
                     itemView.setYear(book.publishingYear);
                     itemView.setCategory(book.category);
                     itemView.setAvailableQuantity(book.currentAmount+"");
+                    itemView.setISBN(book.ISBN);
 
                     cartStage.itemsPane.getChildren().add(itemView);
                     itemView.setLayoutY(i*110 + 5);
@@ -770,6 +771,7 @@ public class Main extends Application {
                 bookView.setYear(book.publishingYear);
                 bookView.setCategory(book.category);
                 bookView.setAvailableQuantity(book.currentAmount + "");
+                bookView.setISBN(book.ISBN);
 
                 userMainStage.searchPane.getChildren().add(bookView);
                 bookView.setLayoutY(i * 90 + 5);

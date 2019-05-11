@@ -44,7 +44,7 @@ public class OrderView extends Pane{
         this.setBackground(new Background(new BackgroundFill(new Color(
                 1,1,0.9,1), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        ISBNLabel.setLayoutX(60);
+        ISBNLabel.setLayoutX(45);
         ISBNLabel.setLayoutY(8);
 
 
@@ -75,7 +75,7 @@ public class OrderView extends Pane{
     }
 
     public void setQuantityLabel(String quantityStr) {
-        quantityLabel.setText("Quantity"+quantityStr);
+        quantityLabel.setText("Quantity: "+quantityStr);
     }
 
 }
