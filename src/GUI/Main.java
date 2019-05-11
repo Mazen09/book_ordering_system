@@ -159,7 +159,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 setCreditCardStageActions();
-                creditCardStage.show();
+                creditCardStage.showAndWait();
             }
         });
     }
@@ -227,6 +227,7 @@ public class Main extends Application {
                     alert.setContentText("add sale");
                     alert.showAndWait();
                 }
+                userMainStage.searchPane.getChildren().clear();
                 cartStage.hide();
                 creditCardStage.hide();
             }
@@ -684,7 +685,7 @@ public class Main extends Application {
                 if(userMainStage.searchValues.getValue() != null && userMainStage.searchAttributes != null) {
                     if (userMainStage.searchValues.getValue().compareTo("") != 0) {
                         userMainStage.isSearched = true;
-                        userMainStage.currentSearchPage = 1;
+                        userMainStage.currentSearchPage = 0;
                         userMainStage.searchValue = userMainStage.searchValues.getValue();
                         userMainStage.searchAttribute = userMainStage.searchAttributes.getValue();
                         setBookSearchResult();
@@ -723,7 +724,7 @@ public class Main extends Application {
         userMainStage.previousBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (userMainStage.currentSearchPage > 1 && userMainStage.isSearched) {
+                if (userMainStage.currentSearchPage > 0 && userMainStage.isSearched) {
                     userMainStage.currentSearchPage--;
                     setBookSearchResult();
                 }
