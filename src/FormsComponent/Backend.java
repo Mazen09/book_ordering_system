@@ -51,20 +51,24 @@ public class Backend {
     }
 
     public ArrayList<Book> getBooks(String searchAttribute, String searchKey, int offset) throws SQLException {
-      ////try {
-        ArrayList<Book> books = new ArrayList<Book>();
+      ArrayList<Book> books = new ArrayList<Book>();
         Book book = new Book();
         ArrayList<String> authors = new ArrayList<>();
         String attr = attrConverter(searchAttribute);
         ResultSet rset;
 
-        if(attr == "AUTHOR")
+        if(attr.equals("AUTHOR"))
         {
             query = "SELECT * FROM BOOK " +
                     "natural JOIN " +
                     "(select * FROM AUTHORED_BY WHERE AUTHORED_BY.NAME LIKE '%"+searchKey+"%')" +
                     " AS A order by ISBN ;";
-        }else {
+        }else if (attr.equals("PRICE") || attr.equals("PUBLICATION_YEAR")){
+            query = "SELECT * FROM AUTHORED_BY " +
+                    " natural JOIN (select * from BOOK where "+attr+" = "+searchKey+
+                    " ORDER BY ISBN LIMIT 10 OFFSET "+ offset*10 +")" +
+                    " AS A ;";
+        } else {
             query = "SELECT * FROM AUTHORED_BY " +
                     " natural JOIN (select * from BOOK where "+attr+" like '%"+searchKey+"%'" +
                     " ORDER BY ISBN LIMIT 10 OFFSET "+ offset*10 +")" +
@@ -126,50 +130,18 @@ public class Backend {
             }
         }
         return books;
-      //} catch (Exception ex) {
-      //  ex.printStackTrace();
-      //  return null;
-      //}
-    } // checked
-
-    public void insertBook(Book book) throws SQLException {
-      ////try {
-            int countInserted;
-            stmt = conn.createStatement();
-            query = "INSERT INTO BOOK VALUES ( '" + book.ISBN + "', '" + book.title + "', '" + book.category + "', " +
-                    book.price + ", '" + book.publisher + "', " + book.publishingYear + ", " + book.currentAmount + ", " +
-                    book.threshold + " );";
-            System.out.println(query);
-            countInserted = stmt.executeUpdate(query);
-            System.out.println(countInserted + " records inserted.\n");
-
-            for(String a : book.authors)
-            {
-                query = "INSERT INTO AUTHORED_BY VALUES ( '"+ book.ISBN + "', '" + a +"' )";
-                System.out.println(query);
-                countInserted = stmt.executeUpdate(query);
-                System.out.println(countInserted + " records inserted.\n");
-            }
-      //} catch (Exception ex) {
-        // ex.printStackTrace();
-      //}
     } // checked
 
     public void updateBook(Book oldBook, Book newBook) throws SQLException { // why old book ?!
-      ////try {
-        int countUpdated;
+      int countUpdated;
         stmt = conn.createStatement();
         query = "UPDATE BOOK SET ISBN = '"+ newBook.ISBN +"' , TITLE = '"+newBook.title+"'," +
-                " CATEGORY = '"+newBook.category+"', PRICE = '"+newBook.price+"'," +
-                " PUBLISHER_NAME = '"+newBook.publisher+"', PUBLICATION_YEAR = "+newBook.publishingYear+
+                " CATEGORY = '"+newBook.category+"', PRICE = '"+newBook.price+"',"+" PUBLICATION_YEAR = "+newBook.publishingYear+
                 ", AMOUNT_IN_STOCK = "+newBook.currentAmount+", THRESHOLD = "+newBook.threshold+
                 " WHERE ISBN = '"+oldBook.ISBN+"' ;";
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
         System.out.println(countUpdated + " records updated.\n");
-      //} catch (Exception ex) {
-      //  ex.printStackTrace();
-      //}
     } // checked
 
     public void insetAuthor(Author author) throws SQLException {
