@@ -244,7 +244,7 @@ public class Main extends Application {
                 if(author.name.compareTo("") != 0 && author.phone.compareTo("") != 0){
                     try {
                         backEnd.insetAuthor(author);
-                        newPublisherStage.hide();
+                        newAuthorStage.hide();
                     } catch (Exception e) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
