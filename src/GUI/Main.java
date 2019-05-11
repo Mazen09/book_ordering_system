@@ -63,7 +63,7 @@ public class Main extends Application {
                             passwordField.getText().compareTo("") != 0) {
                         user = backEnd.logIn(userNameField.getText(), passwordField.getText());
                         primaryStage.hide();
-                        if (user.role == "customer") {
+                        if (user.role.compareTo("customer") == 0) {
                             userMainStage = new UserMainStage();
                             setUserMainStageActions();
                         } else {
@@ -76,13 +76,14 @@ public class Main extends Application {
                         alert.setTitle("error");
                         alert.setHeaderText(null);
                         alert.setContentText("empty cell");
+                        alert.showAndWait();
                     }
                 } catch (Exception e){
-                    //error massage
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("invalid user or password");
+                    alert.showAndWait();
                 }
             }
         });
@@ -176,6 +177,7 @@ public class Main extends Application {
                         alert.setTitle("error");
                         alert.setHeaderText(null);
                         alert.setContentText("get order");
+                        alert.showAndWait();
                     }
                     for (int i = 0; i < orders.size(); i++) {
                         Order order = orders.get(i);
@@ -200,6 +202,7 @@ public class Main extends Application {
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
                                     alert.setContentText("confirm order");
+                                    alert.showAndWait();
                                 }
                                 //update positions in orders
                                 confirmOrderStage.ordersPane.getChildren().remove(orderView);
@@ -222,6 +225,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("add sale");
+                    alert.showAndWait();
                 }
                 cartStage.hide();
                 creditCardStage.hide();
@@ -246,12 +250,14 @@ public class Main extends Application {
                         alert.setTitle("error");
                         alert.setHeaderText(null);
                         alert.setContentText("repeated author");
+                        alert.showAndWait();
                     }
                 }else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("empty cell");
+                    alert.showAndWait();
                 }
             }
         });
@@ -288,6 +294,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("repeated ISBN or not exist author or publisher ");
+                    alert.showAndWait();
                 }
             }
         });
@@ -311,12 +318,14 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("repeated publisher");                    }
+                        alert.setContentText("repeated publisher");
+                        alert.showAndWait();}
                 }else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("empty cell");
+                    alert.showAndWait();
                 }
             }
         });
@@ -367,6 +376,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("repeated ISBN or not exist author or publisher ");
+                    alert.showAndWait();
                 }
             }
         });
@@ -387,12 +397,14 @@ public class Main extends Application {
                         alert.setTitle("error");
                         alert.setHeaderText(null);
                         alert.setContentText("not exist ISBN");
+                        alert.showAndWait();
                     }
                 }else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("empty cell");
+                    alert.showAndWait();
                 }
             }
         });
@@ -403,13 +415,13 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 User newUser = new User();
-                newUser.address = signUpStage.addressField.getText();
-                newUser.email = signUpStage.emailField.getText();
-                newUser.firstName = signUpStage.firstNameField.getText();
-                newUser.lastName = signUpStage.lastNameField.getText();
-                newUser.userName = signUpStage.userNameField.getText();
-                newUser.phone = signUpStage.phoneField.getText();
-                newUser.password = signUpStage.passwordField.getText();
+                newUser.address = profileStage.addressField.getText();
+                newUser.email = profileStage.emailField.getText();
+                newUser.firstName = profileStage.firstNameField.getText();
+                newUser.lastName = profileStage.lastNameField.getText();
+                newUser.userName = profileStage.userNameField.getText();
+                newUser.phone = profileStage.phoneField.getText();
+                newUser.password = profileStage.passwordField.getText();
                 //check repeatedPassword
                 newUser.role = "customer";
                 try {
@@ -421,6 +433,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("repeated userName");
+                    alert.showAndWait();
                 }
             }
         });
@@ -451,6 +464,7 @@ public class Main extends Application {
                      alert.setTitle("error");
                      alert.setHeaderText(null);
                      alert.setContentText("repeated userName");
+                     alert.showAndWait();
                  }
             }
         });
@@ -469,6 +483,7 @@ public class Main extends Application {
                         alert.setTitle("error");
                         alert.setHeaderText(null);
                         alert.setContentText("get user");
+                        alert.showAndWait();
                     }
                     for (int i = 0; i < users.size(); i++) {
                         User searchUser = users.get(i);
@@ -490,6 +505,7 @@ public class Main extends Application {
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
                                     alert.setContentText("promote user");
+                                    alert.showAndWait();
                                 }
                                 usersPromotionStage.usersPane.getChildren().remove(userView);
                                 //update view, update positions
@@ -526,6 +542,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("get Cart");
+                    alert.showAndWait();
                 }
                 //add all items view and set their actions (inc dec remove ...)
                 float totalPrice = 0;
@@ -562,6 +579,7 @@ public class Main extends Application {
                                 alert.setTitle("error");
                                 alert.setHeaderText(null);
                                 alert.setContentText("remove cart");
+                                alert.showAndWait();
                             }
                             cartStage.itemsPane.getChildren().remove(itemView);
                             float price = Float.parseFloat(cartStage.totalPriceLabel .getText());
@@ -582,6 +600,7 @@ public class Main extends Application {
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
                                     alert.setContentText("update cart");
+                                    alert.showAndWait();
                                 }
                                 itemView.setQuantityLabel(cartItem.quantity);
                                 itemView.setTotalPriceLabel(book.price * cartItem.quantity);
@@ -604,6 +623,7 @@ public class Main extends Application {
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
                                     alert.setContentText("update cart");
+                                    alert.showAndWait();
                                 }
                                 itemView.setQuantityLabel(cartItem.quantity);
                                 itemView.setTotalPriceLabel(book.price * cartItem.quantity);
@@ -630,6 +650,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("log out");
+                    alert.showAndWait();
                 }
                 primaryStage.show();
                 userMainStage.hide();
@@ -715,6 +736,7 @@ public class Main extends Application {
             alert.setTitle("error");
             alert.setHeaderText(null);
             alert.setContentText("get book ");
+            alert.showAndWait();
         }
         userMainStage.searchPane.getChildren().clear();
         for(int i = 0; i < books.size(); i++){
@@ -752,6 +774,7 @@ public class Main extends Application {
                         alert.setTitle("error");
                         alert.setHeaderText(null);
                         alert.setContentText("add to cart");
+                        alert.showAndWait();
                     }
                 }
             });
@@ -783,6 +806,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("report top sell ");
+                    alert.showAndWait();
                 }
             }
         });
@@ -796,6 +820,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("report top customer ");
+                    alert.showAndWait();
                 }
             }
         });
@@ -809,6 +834,7 @@ public class Main extends Application {
                     alert.setTitle("error");
                     alert.setHeaderText(null);
                     alert.setContentText("report sell ");
+                    alert.showAndWait();
                 }
             }
         });
