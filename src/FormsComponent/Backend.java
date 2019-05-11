@@ -470,9 +470,10 @@ public class Backend {
             user.lastName = rsLogin.getString("LAST_NAME");
             user.email = rsLogin.getString("EMAIL");
             user.address = rsLogin.getString("SHIPPING_ADDRESS");
+            return user;
           }
         }
-        return user;
+        throw new IllegalArgumentException("Invalid login credentials");
      /* } catch (Exception ex) {
         ex.printStackTrace();
         return null;
@@ -481,6 +482,11 @@ public class Backend {
 
 
     public void logOut(String UserName) throws SQLException {
+      db.prepareStatement(
+          "DELETE FROM `CART` WHERE `USER_NAME` = ?",
+          new ArrayList<DBController.Parameter>(
+            Arrays.asList(new DBController.Parameter("String", UserName))))
+        .execute();
     }
 
     public void reportTotalSales() throws SQLException {
