@@ -265,6 +265,7 @@ public class Main extends Application {
     private void setNewBookStageActions(){
         newBookStage.setTitle("New book");
         newBookStage.setEnterBtn("insert");
+        newBookStage.categoryBox.setValue("Art");
 
         newBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -713,6 +714,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 if (userMainStage.isSearched) {
                     //check last offset
+                    userMainStage.isIncrease = true;
                     userMainStage.currentSearchPage++;
                     setBookSearchResult();
                 }
@@ -742,8 +744,9 @@ public class Main extends Application {
             alert.setContentText("get book ");
             alert.showAndWait();
         }
-        if(books.isEmpty()){
+        if(books.isEmpty() &&userMainStage.isIncrease){
             userMainStage.currentSearchPage--;
+            userMainStage.isIncrease =false;
         }else {
             userMainStage.searchPane.getChildren().clear();
             for (int i = 0; i < books.size(); i++) {

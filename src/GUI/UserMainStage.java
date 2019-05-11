@@ -31,6 +31,7 @@ public class UserMainStage extends Stage {
     String searchValue = new String();
     String searchAttribute =  new String();
     boolean isSearched = false;
+    boolean isIncrease = false;
 
     //MenuButton menuButton;
     ComboBox<String> searchAttributes;
