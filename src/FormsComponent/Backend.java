@@ -5,9 +5,9 @@ import java.sql.*;
 import java.io.InputStream;
 
 import databaseController.DBController;
-import net.sf.jasperreports.engine.JasperFillManager;
+/*import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.view.JasperViewer;*/
 
 public class Backend {
     private Connection conn;
@@ -274,7 +274,7 @@ public class Backend {
         stmt = conn.createStatement();
         query = "UPDATE USER SET USER_NAME = '"+newUser.userName+"', FIRST_NAME = '"+newUser.firstName+"'," +
             " LAST_NAME = '"+newUser.lastName+"', EMAIL = '"+newUser.email+"', PASSWORD = '"+newUser.password+"'," +
-                " PHONE = '"+newUser.phone+"', SHIPPING_ADDRESS = '"+newUser.address+"', USER_TYPE = '"+newUser.role+
+                " PHONE = '"+newUser.phone+"', SHIPPING_ADDRESS = '"+newUser.address+
                 "' WHERE USER_NAME = '"+oldUser.userName+"';";
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
@@ -531,7 +531,7 @@ public class Backend {
     }
 
     public void reportTotalSales() throws SQLException {
-      try {
+      /*try {
         InputStream monthlySalesJasper =
           this.getClass().getResourceAsStream("/jasper/MONTHLY_SALES.jasper");
         JasperPrint report =
@@ -541,11 +541,11 @@ public class Backend {
         view.setVisible(true);
       } catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
     public void reportTopCustomers() throws SQLException {
-      try {
+     /* try {
         InputStream topCustomersJasper =
           this.getClass().getResourceAsStream("/jasper/TOP_CUSTOMERS.jasper");
         JasperPrint report =
@@ -555,11 +555,11 @@ public class Backend {
         view.setVisible(true);
       } catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 
     public void reportTopSellingBooks() throws SQLException {
-      try {
+      /*try {
         InputStream topSellingJasper =
           this.getClass().getResourceAsStream("/jasper/TOP_SELLING.jasper");
         JasperPrint report =
@@ -569,6 +569,6 @@ public class Backend {
         view.setVisible(true);
       } catch (Exception ex) {
         ex.printStackTrace();
-      }
+      }*/
     }
 }
