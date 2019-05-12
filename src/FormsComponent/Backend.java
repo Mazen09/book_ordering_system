@@ -1,11 +1,13 @@
 package FormsComponent;
 
-import java.time.OffsetDateTime;
 import java.util.*;
 import java.sql.*;
+import java.io.InputStream;
 
 import databaseController.DBController;
-
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Backend {
     private Connection conn;
@@ -516,14 +518,44 @@ public class Backend {
     }
 
     public void reportTotalSales() throws SQLException {
-
+      try {
+        InputStream monthlySalesJasper =
+          this.getClass().getResourceAsStream("/jasper/MONTHLY_SALES.jasper");
+        JasperPrint report =
+          JasperFillManager.fillReport(monthlySalesJasper,
+                                       new HashMap(), conn);
+        JasperViewer view = new JasperViewer(report, false);
+        view.setVisible(true);
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
     }
 
     public void reportTopCustomers() throws SQLException {
-
+      try {
+        InputStream topCustomersJasper =
+          this.getClass().getResourceAsStream("/jasper/TOP_CUSTOMERS.jasper");
+        JasperPrint report =
+          JasperFillManager.fillReport(topCustomersJasper,
+                                       new HashMap(), conn);
+        JasperViewer view = new JasperViewer(report, false);
+        view.setVisible(true);
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
     }
 
     public void reportTopSellingBooks() throws SQLException {
-
+      try {
+        InputStream topSellingJasper =
+          this.getClass().getResourceAsStream("/jasper/TOP_SELLING.jasper");
+        JasperPrint report =
+          JasperFillManager.fillReport(topSellingJasper,
+                                       new HashMap(), conn);
+        JasperViewer view = new JasperViewer(report, false);
+        view.setVisible(true);
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
     }
 }
