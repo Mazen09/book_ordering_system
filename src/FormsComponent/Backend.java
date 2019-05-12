@@ -131,32 +131,74 @@ public class Backend {
         }
         return books;
     } // checked
-    public void insertBook(Book book) throws SQLException {
-        ////try {
-        int countInserted;
-        stmt = conn.createStatement();
-        query = "INSERT INTO BOOK VALUES ( '" + book.ISBN + "', '" + book.title + "', '" + book.category + "', " +
-                book.price + ", '" + book.publisher + "', " + book.publishingYear + ", " + book.currentAmount + ", " +
-                book.threshold + " );";
-        System.out.println(query);
-        countInserted = stmt.executeUpdate(query);
-        System.out.println(countInserted + " records inserted.\n");
 
-        for(String a : book.authors)
+    private boolean [] checkAuthors(ArrayList<String> authors) throws SQLException
+    {
+        boolean [] tmp = new boolean[authors.size()];
+        stmt = conn.createStatement();
+        ResultSet rset;
+
+        for(int i = 0; i < authors.size(); i++)
         {
-            query = "INSERT INTO AUTHORED_BY VALUES ( '"+ book.ISBN + "', '" + a +"' )";
+            query = "SELECT NAME FROM AUTHOR WHERE NAME = '"+authors.get(i)+"';";
+            rset = stmt.executeQuery(query);
+
+            int count = 0;
+            while (rset.next()) count++;
+
+            if(count > 0) tmp[i] = true;
+
+        }
+
+        return  tmp;
+    }
+
+    private boolean authorsExist (boolean [] authors)
+    {
+        for(boolean b : authors)
+        {
+            if(!b)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void insertBook(Book book) throws SQLException {
+            int countInserted;
+            stmt = conn.createStatement();
+            ResultSet rset;
+            boolean [] authorBooleans = checkAuthors(book.authors);
+
+            if(!authorsExist(authorBooleans)) throw new SQLException("SOME AUTHORS NOT FOUND !!!");
+
+            query = "INSERT INTO BOOK VALUES ( '" + book.ISBN + "', '" + book.title + "', '" + book.category + "', " +
+                    book.price + ", '" + book.publisher + "', " + book.publishingYear + ", " + book.currentAmount + ", " +
+                    book.threshold + " );";
             System.out.println(query);
             countInserted = stmt.executeUpdate(query);
             System.out.println(countInserted + " records inserted.\n");
-        }
-        //} catch (Exception ex) {
-        // ex.printStackTrace();
-        //}
+
+            for(String a : book.authors)
+            {
+                query = "INSERT INTO AUTHORED_BY VALUES ( '"+ book.ISBN + "', '" + a +"' )";
+                System.out.println(query);
+                countInserted = stmt.executeUpdate(query);
+                System.out.println(countInserted + " records inserted.\n");
+            }
+
     } // checked
 
     public void updateBook(Book oldBook, Book newBook) throws SQLException { // why old book ?!
-      int countUpdated;
+        int countUpdated;
         stmt = conn.createStatement();
+        ResultSet rset;
+        boolean [] authorBooleans = checkAuthors(newBook.authors);
+
+        if(!authorsExist(authorBooleans)) throw new SQLException("SOME AUTHORS NOT FOUND !!!");
+
+
         query = "UPDATE BOOK SET ISBN = '"+ newBook.ISBN +"' , TITLE = '"+newBook.title+"'," +
                 " CATEGORY = '"+newBook.category+"', PRICE = '"+newBook.price+"',"+" PUBLICATION_YEAR = "+newBook.publishingYear+
                 ", THRESHOLD = "+newBook.threshold+
@@ -164,19 +206,23 @@ public class Backend {
         System.out.println(query);
         countUpdated = stmt.executeUpdate(query);
         System.out.println(countUpdated + " records updated.\n");
-    } // checked
 
-    public void insetAuthor(Author author) throws SQLException {
-      ////try {
-            int countInserted;
-            stmt = conn.createStatement();
-            query = "INSERT INTO AUTHOR VALUES ( '" + author.name + "', '" + author.phone + "' );";
+        // DELETE OLD AUTHORED_BY
+        query = "DELETE FROM AUTHORED_BY WHERE ISBN = "+ newBook.ISBN +" ;";
+        System.out.println(query);
+        countUpdated = stmt.executeUpdate(query);
+        System.out.println(countUpdated + " records updated.\n");
+
+        // INSERT NEW AUTHORED_BY
+        int countInserted;
+        for(String a : newBook.authors)
+        {
+            query = "INSERT INTO AUTHORED_BY VALUES ( '"+ newBook.ISBN + "', '" + a +"' )";
             System.out.println(query);
             countInserted = stmt.executeUpdate(query);
             System.out.println(countInserted + " records inserted.\n");
-      //} catch (Exception ex) {
-       // ex.printStackTrace();
-      //}
+        }
+
     } // checked
 
     public void insertPublisher(Publisher publisher) throws SQLException {
