@@ -58,6 +58,8 @@ public class Main extends Application {
                     if(userNameField.getText().compareTo("") != 0 &&
                             passwordField.getText().compareTo("") != 0) {
                         user = backEnd.logIn(userNameField.getText(), passwordField.getText());
+                        passwordField.setText("");
+                        userNameField.setText("");
                         primaryStage.hide();
                         if (user.role.compareTo("customer") == 0) {
                             userMainStage = new UserMainStage();
