@@ -10,38 +10,40 @@ dependencies {
   implementation 'jasperreports:jasperreports:+'
 }
 
-def resdir = 'resources'
-
 sourceSets {
   main {
     java {
       srcDirs 'src'
     }
     resources {
-      srcDirs resdir
+      srcDirs 'resources'
       exclude 'jrxml'
     }
   }
+}
+
+task copyLibs(type: Copy) {
+  doFirst {
+    println "Copying JAR libraries..."
+  }
+  eachFile {
+    println it.name
+  }
+  from configurations.runtimeClasspath
+  into "${jar.destinationDirectory.get()}/lib"
 }
 
 ant.taskdef(name: 'compileJrxml',
             classname: 'net.sf.jasperreports.ant.JRAntCompileTask',
             classpath: configurations.runtimeClasspath.asPath)
 
-task copyLibs(type: Copy) {
-  from configurations.runtimeClasspath
-  into "${jar.destinationDirectory.get()}/lib"
-}
-
 jar {
+  dependsOn copyLibs
   doFirst {
-    def srcdir = "$resdir/jrxml"
-    def destdir = mkdir("$resdir/jasper").path
+    def srcdir = "resources/jrxml"
+    def destdir = mkdir("resources/jasper").path
     ant.compileJrxml(srcdir: srcdir,
                      destdir: destdir)
-  }
-  doLast {
-    copyLibs
   }
   manifest {
     attributes 'Main-Class': 'GUI.Main',
