@@ -90,6 +90,7 @@ public class Main extends Application {
         signUpBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                signUpStage = new SignUpStage();
                 signUpStage.setEnterBtn("sign up");
                 signUpStage.setStageTitle("sign up");
                 setSignUpStageActions();
