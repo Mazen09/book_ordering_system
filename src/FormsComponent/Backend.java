@@ -339,6 +339,7 @@ public class Backend {
 
         while(rset.next())
         {
+            order = new Order();
             order.id = Integer.parseInt(rset.getString("ID"));
             order.ISBN = rset.getString("ISBN");
             order.date = rset.getString("ORDER_DATE");
