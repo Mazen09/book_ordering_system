@@ -1,0 +1,51 @@
+plugins {
+  id 'java'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'jasperreports:jasperreports:+'
+}
+
+def resdir = 'resources'
+
+sourceSets {
+  main {
+    java {
+      srcDirs 'src'
+    }
+    resources {
+      srcDirs resdir
+      exclude 'jrxml'
+    }
+  }
+}
+
+ant.taskdef(name: 'compileJrxml',
+            classname: 'net.sf.jasperreports.ant.JRAntCompileTask',
+            classpath: configurations.runtimeClasspath.asPath)
+
+task copyLibs(type: Copy) {
+  from configurations.runtimeClasspath
+  into "${jar.destinationDirectory.get()}/lib"
+}
+
+jar {
+  doFirst {
+    def srcdir = "$resdir/jrxml"
+    def destdir = mkdir("$resdir/jasper").path
+    ant.compileJrxml(srcdir: srcdir,
+                     destdir: destdir)
+  }
+  doLast {
+    copyLibs
+  }
+  manifest {
+    attributes 'Main-Class': 'GUI.Main',
+               'Class-Path':configurations.runtimeClasspath
+                              .collect { "lib/$it.name" }.join(' ')
+  }
+}
