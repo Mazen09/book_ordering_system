@@ -256,7 +256,7 @@ public class Main extends Application {
                 author.name = newAuthorStage.nameField.getText();
                 //check for phone
                 author.phone = newAuthorStage.phoneField.getText();
-                if(author.name.compareTo("") != 0 && author.phone.compareTo("") != 0){
+                if(author.name.compareTo("") != 0){
                     try {
                         backEnd.insetAuthor(author);
                         newAuthorStage.hide();
@@ -326,8 +326,7 @@ public class Main extends Application {
                 publisher.phone = newPublisherStage.phoneField.getText();
                 publisher.address = newPublisherStage.addressField.getText();
 
-                if(publisher.name.compareTo("") != 0 && publisher.phone.compareTo("") != 0 &&
-                        publisher.address.compareTo("") != 0){
+                if(publisher.name.compareTo("") != 0 && publisher.address.compareTo("") != 0){
                     try {
                         backEnd.insertPublisher(publisher);
                         newPublisherStage.hide();
