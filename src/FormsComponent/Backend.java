@@ -302,7 +302,7 @@ public class Backend {
         ArrayList<User> users = new ArrayList<>();
         User user = new User();
         ResultSet rset;
-        query = "select * from USER where USER_NAME like '%"+userName+"%';";
+        query = "select * from USER where USER_TYPE='customer' AND USER_NAME like '%"+userName+"%';";
         stmt = conn.createStatement();
         rset = stmt.executeQuery(query);
 
@@ -453,41 +453,10 @@ public class Backend {
     }
 
     public void confirmOrder(int id, String ISBN) throws SQLException {
-      //try {
-        PreparedStatement pstmtGetOrders =
-          db.prepareStatement(
-              "SELECT `ID`, `QUANTITY` FROM `ORDERS` WHERE `ID` = ?",
-              new ArrayList<DBController.Parameter>(Arrays.asList(
-                  new DBController.Parameter("Int", id))));
-
-        PreparedStatement pstmtUpdateBook = conn.prepareStatement(
-            "UPDATE `BOOK` " +
-            "SET `AMOUNT_IN_STOCK` = AMOUNT_IN_STOCK + ? " +
-            "WHERE `ISBN` = ?");
-        pstmtUpdateBook.setString(2, ISBN);
-
-        PreparedStatement pstmtDeleteOrders =
-          db.prepareStatement(
-              "DELETE FROM `ORDERS` WHERE `ID` = ?",
-              new ArrayList<DBController.Parameter>(Arrays.asList(
-                  new DBController.Parameter("Int", id))));
-
-        conn.setAutoCommit(false);
-
-        if (pstmtGetOrders.execute()) {
-          ResultSet rsOrders = pstmtGetOrders.getResultSet();
-          if (rsOrders.next()) {
-            pstmtUpdateBook.setInt(1, rsOrders.getInt("QUANTITY"));
-            pstmtUpdateBook.execute();
-          }
-        }
-        pstmtDeleteOrders.execute();
-
-        conn.commit();
-        conn.setAutoCommit(true);
-      /*} catch (Exception ex) {
-        ex.printStackTrace();
-      }*/
+      db.prepareStatement(
+          "DELETE FROM `ORDERS` WHERE `ID` = ?",
+          new ArrayList<DBController.Parameter>(Arrays.asList(
+              new DBController.Parameter("Int", id)))).execute();
     }
 
     // DISCLAIMER: CODE-REVIEWER DISCRETION IS ADVISED. WE ARE ABOUT TO
