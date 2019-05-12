@@ -285,32 +285,47 @@ public class Main extends Application {
         newBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Book newBooK = new Book();
-                newBooK.publishingYear = newBookStage.yearField.getText();
-                newBooK.title = newBookStage.titleField.getText();
-                newBooK.ISBN = newBookStage.ISBNField.getText();
-                newBooK.publisher = newBookStage.publisherField.getText();
+                if(newBookStage.authorsField.getText().compareTo("") != 0 &&
+                        newBookStage.priceField.getText().compareTo("") != 0 &&
+                        newBookStage.thresholdField.getText().compareTo("") != 0 &&
+                        newBookStage.quantityField.getText().compareTo("") != 0 &&
+                        newBookStage.titleField.getText().compareTo("") != 0 &&
+                        newBookStage.publisherField.getText().compareTo("") != 0 &&
+                        newBookStage.quantityField.getText().compareTo("") != 0 &&
+                        newBookStage.yearField.getText().compareTo("") != 0) {
+                    Book newBooK = new Book();
+                    newBooK.publishingYear = newBookStage.yearField.getText();
+                    newBooK.title = newBookStage.titleField.getText();
+                    newBooK.ISBN = newBookStage.ISBNField.getText();
+                    newBooK.publisher = newBookStage.publisherField.getText();
 
-                String authorsString = newBookStage.authorsField.getText();
-                String [] authors = authorsString.split(",");
-                ArrayList<String> bookAuthors = new ArrayList<>();
-                for (int j = 0; j <authors.length; j++){
-                    bookAuthors.add(authors[j]);
-                }
-                newBooK.authors = bookAuthors;
-                newBooK.price = Float.parseFloat(newBookStage.priceField.getText());
-                newBooK.category = newBookStage.categoryBox.getValue();
-                newBooK.threshold  = Integer.parseInt(newBookStage.thresholdField.getText());
-                newBooK.currentAmount = Integer.parseInt(newBookStage.quantityField.getText());
+                    String authorsString = newBookStage.authorsField.getText();
+                    String[] authors = authorsString.split(",");
+                    ArrayList<String> bookAuthors = new ArrayList<>();
+                    for (int j = 0; j < authors.length; j++) {
+                        bookAuthors.add(authors[j]);
+                    }
+                    newBooK.authors = bookAuthors;
+                    newBooK.price = Float.parseFloat(newBookStage.priceField.getText());
+                    newBooK.category = newBookStage.categoryBox.getValue();
+                    newBooK.threshold = Integer.parseInt(newBookStage.thresholdField.getText());
+                    newBooK.currentAmount = Integer.parseInt(newBookStage.quantityField.getText());
 
-                try {
-                    backEnd.insertBook(newBooK);
-                    newBookStage.hide();
-                } catch (Exception e) {
+                    try {
+                        backEnd.insertBook(newBooK);
+                        newBookStage.hide();
+                    } catch (Exception e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("repeated ISBN or not exist author or publisher ");
+                        alert.showAndWait();
+                    }
+                } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("repeated ISBN or not exist author or publisher ");
+                    alert.setContentText("empty cell");
                     alert.showAndWait();
                 }
             }
@@ -370,31 +385,45 @@ public class Main extends Application {
         updateBookStage.enterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Book newBooK = new Book();
-                newBooK.publishingYear = updateBookStage.yearField.getText();
-                newBooK.title = updateBookStage.titleField.getText();
-                newBooK.ISBN = updateBookStage.ISBNField.getText();
-                newBooK.publisher = updateBookStage.publisherField.getText();
+                if(updateBookStage.authorsField.getText().compareTo("") != 0 &&
+                        updateBookStage.priceField.getText().compareTo("") != 0 &&
+                        updateBookStage.thresholdField.getText().compareTo("") != 0 &&
+                        updateBookStage.quantityField.getText().compareTo("") != 0 &&
+                        updateBookStage.titleField.getText().compareTo("") != 0 &&
+                        updateBookStage.publisherField.getText().compareTo("") != 0 &&
+                        updateBookStage.yearField.getText().compareTo("") != 0) {
+                    Book newBooK = new Book();
+                    newBooK.publishingYear = updateBookStage.yearField.getText();
+                    newBooK.title = updateBookStage.titleField.getText();
+                    newBooK.ISBN = updateBookStage.ISBNField.getText();
+                    newBooK.publisher = updateBookStage.publisherField.getText();
 
-                String authorsString = updateBookStage.authorsField.getText();
-                String [] authors = authorsString.split(",");
-                ArrayList<String> bookAuthors = new ArrayList<>();
-                for (int j = 0; j <authors.length; j++){
-                    bookAuthors.add(authors[j]);
-                }
-                newBooK.authors = bookAuthors;
-                newBooK.price = Float.parseFloat(updateBookStage.priceField.getText());
-                newBooK.category = updateBookStage.categoryBox.getValue();
-                newBooK.threshold  = Integer.parseInt(updateBookStage.thresholdField.getText());
+                    String authorsString = updateBookStage.authorsField.getText();
+                    String[] authors = authorsString.split(",");
+                    ArrayList<String> bookAuthors = new ArrayList<>();
+                    for (int j = 0; j < authors.length; j++) {
+                        bookAuthors.add(authors[j]);
+                    }
+                    newBooK.authors = bookAuthors;
+                    newBooK.price = Float.parseFloat(updateBookStage.priceField.getText());
+                    newBooK.category = updateBookStage.categoryBox.getValue();
+                    newBooK.threshold = Integer.parseInt(updateBookStage.thresholdField.getText());
 
-                try {
-                    backEnd.updateBook(book,newBooK);
-                    updateBookStage.hide();
-                } catch (Exception e) {
+                    try {
+                        backEnd.updateBook(book, newBooK);
+                        updateBookStage.hide();
+                    } catch (Exception e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("repeated ISBN or not exist author or publisher ");
+                        alert.showAndWait();
+                    }
+                } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("repeated ISBN or not exist author or publisher ");
+                    alert.setContentText("empty cell");
                     alert.showAndWait();
                 }
             }
