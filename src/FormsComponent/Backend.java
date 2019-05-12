@@ -227,6 +227,19 @@ public class Backend {
 
     } // checked
 
+    public void insetAuthor(Author author) throws SQLException {
+        ////try {
+        int countInserted;
+        stmt = conn.createStatement();
+        query = "INSERT INTO AUTHOR VALUES ( '" + author.name + "', '" + author.phone + "' );";
+        System.out.println(query);
+        countInserted = stmt.executeUpdate(query);
+        System.out.println(countInserted + " records inserted.\n");
+        //} catch (Exception ex) {
+        // ex.printStackTrace();
+        //}
+    } // checked
+
     public void insertPublisher(Publisher publisher) throws SQLException {
       ////try {
         int countInserted;
