@@ -288,7 +288,7 @@ public class Main extends Application {
                 if(newBookStage.authorsField.getText().compareTo("") != 0 &&
                         newBookStage.priceField.getText().compareTo("") != 0 &&
                         newBookStage.thresholdField.getText().compareTo("") != 0 &&
-                        newBookStage.quantityField.getText().compareTo("") != 0 &&
+                        newBookStage.ISBNField.getText().compareTo("") != 0 &&
                         newBookStage.titleField.getText().compareTo("") != 0 &&
                         newBookStage.publisherField.getText().compareTo("") != 0 &&
                         newBookStage.quantityField.getText().compareTo("") != 0 &&
@@ -388,7 +388,7 @@ public class Main extends Application {
                 if(updateBookStage.authorsField.getText().compareTo("") != 0 &&
                         updateBookStage.priceField.getText().compareTo("") != 0 &&
                         updateBookStage.thresholdField.getText().compareTo("") != 0 &&
-                        updateBookStage.quantityField.getText().compareTo("") != 0 &&
+                        updateBookStage.ISBNField.getText().compareTo("") != 0 &&
                         updateBookStage.titleField.getText().compareTo("") != 0 &&
                         updateBookStage.publisherField.getText().compareTo("") != 0 &&
                         updateBookStage.yearField.getText().compareTo("") != 0) {
