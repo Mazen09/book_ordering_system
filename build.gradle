@@ -1,4 +1,5 @@
 plugins {
+  id 'application'
   id 'java'
 }
 
@@ -7,7 +8,11 @@ repositories {
 }
 
 dependencies {
-  implementation 'jasperreports:jasperreports:+'
+  implementation 'jasperreports:jasperreports:1.2.8'
+}
+
+application {
+  mainClassName = 'GUI.Main'
 }
 
 sourceSets {
@@ -22,32 +27,20 @@ sourceSets {
   }
 }
 
-task copyLibs(type: Copy) {
+task compileJrxml {
+  outputs.dir 'resources/jasper'
+  ant.taskdef(name: 'compileJrxml',
+              classname: 'net.sf.jasperreports.ant.JRAntCompileTask',
+              classpath: configurations.runtimeClasspath.asPath)
   doFirst {
-    println "Copying JAR libraries..."
+    println 'Compiling JRXML reports...'
   }
-  eachFile {
-    println it.name
+  doLast {
+    ant.compileJrxml(srcdir: 'resources/jrxml',
+                     destdir: mkdir('resources/jasper').path)
   }
-  from configurations.runtimeClasspath
-  into "${jar.destinationDirectory.get()}/lib"
 }
 
-ant.taskdef(name: 'compileJrxml',
-            classname: 'net.sf.jasperreports.ant.JRAntCompileTask',
-            classpath: configurations.runtimeClasspath.asPath)
-
-jar {
-  dependsOn copyLibs
-  doFirst {
-    def srcdir = "resources/jrxml"
-    def destdir = mkdir("resources/jasper").path
-    ant.compileJrxml(srcdir: srcdir,
-                     destdir: destdir)
-  }
-  manifest {
-    attributes 'Main-Class': 'GUI.Main',
-               'Class-Path':configurations.runtimeClasspath
-                              .collect { "lib/$it.name" }.join(' ')
-  }
+processResources {
+  dependsOn compileJrxml
 }
