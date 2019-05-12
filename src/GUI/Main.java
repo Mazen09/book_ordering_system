@@ -80,7 +80,7 @@ public class Main extends Application {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("invalid user or password");
+                    alert.setContentText("invalid user or password" + e.getMessage());
                     alert.showAndWait();
                 }
             }
@@ -157,9 +157,11 @@ public class Main extends Application {
         cartStage.checkOutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                creditCardStage = new CreditCardStage();
-                setCreditCardStageActions();
-                creditCardStage.showAndWait();
+                if(cartStage.itemsPane.getChildren().size() != 0) {
+                    creditCardStage = new CreditCardStage();
+                    setCreditCardStageActions();
+                    creditCardStage.showAndWait();
+                }
             }
         });
     }
@@ -176,7 +178,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("get order");
+                        alert.setContentText("get order" + e.getMessage());
                         alert.showAndWait();
                     }
                     for (int i = 0; i < orders.size(); i++) {
@@ -201,7 +203,7 @@ public class Main extends Application {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
-                                    alert.setContentText("confirm order");
+                                    alert.setContentText("confirm order" + e.getMessage());
                                     alert.showAndWait();
                                 }
                                 //update positions in orders
@@ -226,7 +228,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("add sale");
+                        alert.setContentText("add sale" + e.getMessage());
                         alert.showAndWait();
                     }
                     userMainStage.searchPane.getChildren().clear();
@@ -264,7 +266,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("repeated author");
+                        alert.setContentText("repeated author" + e.getMessage());
                         alert.showAndWait();
                     }
                 }else {
@@ -318,7 +320,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("repeated ISBN or not exist author or publisher ");
+                        alert.setContentText("repeated ISBN or not exist author or publisher "+ e.getMessage());
                         alert.showAndWait();
                     }
                 } else {
@@ -349,7 +351,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("repeated publisher");
+                        alert.setContentText("repeated publisher" + e.getMessage());
                         alert.showAndWait();}
                 }else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -416,7 +418,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("repeated ISBN or not exist author or publisher ");
+                        alert.setContentText("repeated ISBN or not exist author or publisher " + e.getMessage());
                         alert.showAndWait();
                     }
                 } else {
@@ -444,7 +446,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("not exist ISBN");
+                        alert.setContentText("not exist ISBN" + e.getMessage());
                         alert.showAndWait();
                     }
                 }else {
@@ -480,7 +482,7 @@ public class Main extends Application {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("repeated userName");
+                    alert.setContentText("repeated userName" + e.getMessage());
                     alert.showAndWait();
                 }
             }
@@ -511,7 +513,7 @@ public class Main extends Application {
                      Alert alert = new Alert(Alert.AlertType.INFORMATION);
                      alert.setTitle("error");
                      alert.setHeaderText(null);
-                     alert.setContentText("repeated userName");
+                     alert.setContentText("repeated userName"+ e.getMessage());
                      alert.showAndWait();
                  }
             }
@@ -530,7 +532,7 @@ public class Main extends Application {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
-                        alert.setContentText("get user");
+                        alert.setContentText("get user" + e.getMessage());
                         alert.showAndWait();
                     }
                     for (int i = 0; i < users.size(); i++) {
@@ -552,7 +554,7 @@ public class Main extends Application {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
-                                    alert.setContentText("promote user");
+                                    alert.setContentText("promote user"+ e.getMessage());
                                     alert.showAndWait();
                                 }
                                 usersPromotionStage.usersPane.getChildren().remove(userView);
@@ -590,7 +592,7 @@ public class Main extends Application {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("get Cart");
+                    alert.setContentText("get Cart" + e.getMessage());
                     alert.showAndWait();
                 }
                 //add all items view and set their actions (inc dec remove ...)
@@ -628,7 +630,7 @@ public class Main extends Application {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("error");
                                 alert.setHeaderText(null);
-                                alert.setContentText("remove cart");
+                                alert.setContentText("remove cart"+e.getMessage());
                                 alert.showAndWait();
                             }
                             cartStage.itemsPane.getChildren().remove(itemView);
@@ -649,7 +651,7 @@ public class Main extends Application {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
-                                    alert.setContentText("update cart");
+                                    alert.setContentText("update cart"+e.getMessage());
                                     alert.showAndWait();
                                 }
                                 itemView.setQuantityLabel(cartItem.quantity);
@@ -672,7 +674,7 @@ public class Main extends Application {
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
-                                    alert.setContentText("update cart");
+                                    alert.setContentText("update cart"+e.getMessage());
                                     alert.showAndWait();
                                 }
                                 itemView.setQuantityLabel(cartItem.quantity);
@@ -699,7 +701,7 @@ public class Main extends Application {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("log out");
+                    alert.setContentText("log out"+e.getMessage());
                     alert.showAndWait();
                 }
                 primaryStage.show();
@@ -787,7 +789,7 @@ public class Main extends Application {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("error");
             alert.setHeaderText(null);
-            alert.setContentText("get book ");
+            alert.setContentText("get book "+ e.getMessage());
             alert.showAndWait();
         }
         if(books.isEmpty() &&userMainStage.isIncrease){
@@ -830,7 +832,7 @@ public class Main extends Application {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("error");
                             alert.setHeaderText(null);
-                            alert.setContentText("already in the cart");
+                            alert.setContentText("already in the cart"+e.getMessage());
                             alert.showAndWait();
                         }
                     }
