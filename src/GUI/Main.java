@@ -830,7 +830,7 @@ public class Main extends Application {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("error");
                             alert.setHeaderText(null);
-                            alert.setContentText("add to cart");
+                            alert.setContentText("already in the cart");
                             alert.showAndWait();
                         }
                     }
