@@ -154,6 +154,7 @@ public class Main extends Application {
         cartStage.checkOutBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                creditCardStage = new CreditCardStage();
                 setCreditCardStageActions();
                 creditCardStage.showAndWait();
             }
@@ -548,6 +549,7 @@ public class Main extends Application {
         userMainStage.cartBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                cartStage = new CartStage();
                 setCartStageActions();
                 cartStage.itemsPane.getChildren().clear();
                 ArrayList<CartItem> cartItems = null;
@@ -676,6 +678,7 @@ public class Main extends Application {
         userMainStage.profileBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                profileStage  = new SignUpStage();
                 profileStage.setEnterBtn("update");
                 profileStage.setStageTitle("profile");
                 setProfileStageActions();
@@ -805,6 +808,7 @@ public class Main extends Application {
                     ((ManagerBookView) bookView).modifyBtn.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+                            updateBookStage = new NewBookStage();
                             setUpdateBookStageActions(book);
                             updateBookStage.showAndWait();
                             //update the book view with new edit
@@ -865,6 +869,7 @@ public class Main extends Application {
         mangerStage.newAuthorBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                newAuthorStage = new NewAuthorStage();
                 setNewAuthorStageActions();
                 newAuthorStage.show();
             }
@@ -872,6 +877,7 @@ public class Main extends Application {
         mangerStage.newPublisherBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                newPublisherStage = new NewPublisherStage();
                 setNewPublisherStageActions();
                 newPublisherStage.show();
             }
@@ -879,6 +885,7 @@ public class Main extends Application {
         mangerStage.placeOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                placeOrderStage = new PlaceOrderStage();
                 setPlaceOrderStageActions();
                 placeOrderStage.show();
             }
@@ -886,6 +893,7 @@ public class Main extends Application {
         mangerStage.confirmOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                confirmOrderStage = new ConfirmOrderStage();
                 setConfirmOrderStageActions();
                 confirmOrderStage.show();
             }
@@ -893,6 +901,7 @@ public class Main extends Application {
         mangerStage.promoteBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                usersPromotionStage = new UsersPromotionStage();
                 setUsersPromotionStageActions();
                 usersPromotionStage.show();
             }
@@ -900,6 +909,7 @@ public class Main extends Application {
         mangerStage.newBookBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                newBookStage = new NewBookStage();
                 setNewBookStageActions();
                 newBookStage.show();
             }
