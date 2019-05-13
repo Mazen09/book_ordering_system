@@ -419,7 +419,7 @@ public class Backend {
               "SET `AMOUNT_IN_STOCK` = AMOUNT_IN_STOCK - " + citem.quantity + " " +
               "WHERE `ISBN` = '" + citem.book.ISBN + "'");
           PreparedStatement pstmt =conn.prepareStatement(
-              "INSERT INTO `CONFIRMED_OPERATION` VALUES(?, ?, ?, ?, ?)");
+              "INSERT INTO `CONFIRMED_OPERATION` (USER_NAME, ISBN, QUANTITY,CONFIRM_DATE,TOTAL_PRICE) VALUES(?, ?, ?, ?, ?)");
           pstmt.setString(1, userName);
           pstmt.setString(2, citem.book.ISBN);
           pstmt.setInt(3, citem.quantity);
@@ -442,7 +442,7 @@ public class Backend {
       //try {
         java.sql.Date now = new java.sql.Date(new java.util.Date().getTime());
         db.prepareStatement(
-            "INSERT INTO `ORDERS` VALUES (?, ?, ?)",
+            "INSERT INTO `ORDERS` (ISBN, QUANTITY, ORDER_DATE) VALUES (?, ?, ?)",
             new ArrayList<DBController.Parameter>(Arrays.asList(
                 new DBController.Parameter("String", ISBN),
                 new DBController.Parameter("Int", quantity),
