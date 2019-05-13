@@ -410,7 +410,7 @@ public class Backend {
     }
 
     public void addSale(String userName) throws SQLException {
-      //try {
+      try {
         conn.setAutoCommit(false);
         ArrayList<CartItem> cart = getCartContent(userName);
         for (CartItem citem : cart) {
@@ -433,9 +433,10 @@ public class Backend {
         }
         conn.commit();
         conn.setAutoCommit(true);
-      /*} catch (Exception ex) {
-        ex.printStackTrace();
-      }*/
+      } catch (SQLException ex) {
+        conn.rollback();
+        throw ex;
+      }
     }
 
     public void insertOrder(String ISBN, int quantity) throws SQLException {

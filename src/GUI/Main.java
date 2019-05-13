@@ -77,10 +77,11 @@ public class Main extends Application {
                         alert.showAndWait();
                     }
                 } catch (Exception e){
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
-                    alert.setContentText("invalid user or password" + e.getMessage());
+                    alert.setContentText("invalid user or password");
                     alert.showAndWait();
                 }
             }
@@ -175,6 +176,7 @@ public class Main extends Application {
                     try {
                         orders = backEnd.getOrders(confirmOrderStage.ISBNField.getText());
                     } catch (SQLException e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -200,6 +202,7 @@ public class Main extends Application {
                                 try {
                                     backEnd.confirmOrder(order.id,order.ISBN);
                                 } catch (SQLException e) {
+e.printStackTrace();
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
@@ -225,6 +228,7 @@ public class Main extends Application {
                     try {
                         backEnd.addSale(user.userName);
                     } catch (SQLException e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -263,6 +267,7 @@ public class Main extends Application {
                         backEnd.insetAuthor(author);
                         newAuthorStage.hide();
                     } catch (Exception e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -317,6 +322,7 @@ public class Main extends Application {
                         backEnd.insertBook(newBooK);
                         newBookStage.hide();
                     } catch (Exception e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -348,6 +354,7 @@ public class Main extends Application {
                         backEnd.insertPublisher(publisher);
                         newPublisherStage.hide();
                     } catch (Exception e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -415,6 +422,7 @@ public class Main extends Application {
                         backEnd.updateBook(book, newBooK);
                         updateBookStage.hide();
                     } catch (Exception e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -443,6 +451,7 @@ public class Main extends Application {
                                 Integer.parseInt(placeOrderStage.quantityField.getText()));
                         placeOrderStage.hide();
                     } catch (Exception e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -479,6 +488,7 @@ public class Main extends Application {
                     user = newUser;
                     profileStage.hide();
                 } catch (Exception e) {
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
@@ -510,6 +520,7 @@ public class Main extends Application {
                      signUpStage.hide();
                      primaryStage.hide();
                  } catch (Exception e) {
+e.printStackTrace();
                      Alert alert = new Alert(Alert.AlertType.INFORMATION);
                      alert.setTitle("error");
                      alert.setHeaderText(null);
@@ -529,6 +540,7 @@ public class Main extends Application {
                     try {
                         users = backEnd.getUsers(usersPromotionStage.userNameField.getText());
                     } catch (SQLException e) {
+e.printStackTrace();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("error");
                         alert.setHeaderText(null);
@@ -551,6 +563,7 @@ public class Main extends Application {
                                 try {
                                     backEnd.promoteUser(searchUser);
                                 } catch (SQLException e) {
+e.printStackTrace();
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
@@ -589,6 +602,7 @@ public class Main extends Application {
                 try {
                     cartItems = backEnd.getCartContent(user.userName);
                 } catch (SQLException e) {
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
@@ -627,6 +641,7 @@ public class Main extends Application {
                             try {
                                 backEnd.removeCartItem(user.userName, book.ISBN);
                             } catch (SQLException e) {
+e.printStackTrace();
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("error");
                                 alert.setHeaderText(null);
@@ -648,6 +663,7 @@ public class Main extends Application {
                                 try {
                                     backEnd.updateCartItem(user.userName, book.ISBN, cartItem.quantity);
                                 } catch (SQLException e) {
+e.printStackTrace();
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
@@ -671,6 +687,7 @@ public class Main extends Application {
                                 try {
                                     backEnd.updateCartItem(user.userName, book.ISBN, cartItem.quantity);
                                 } catch (SQLException e) {
+e.printStackTrace();
                                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                     alert.setTitle("error");
                                     alert.setHeaderText(null);
@@ -698,6 +715,7 @@ public class Main extends Application {
                 try {
                     backEnd.logOut(user.userName);
                 } catch (SQLException e) {
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
@@ -786,6 +804,7 @@ public class Main extends Application {
                     userMainStage.searchValue, userMainStage.currentSearchPage
             );
         } catch (SQLException e) {
+e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("error");
             alert.setHeaderText(null);
@@ -829,6 +848,7 @@ public class Main extends Application {
                         try {
                             backEnd.addToCart(user.userName, book.ISBN);
                         } catch (SQLException e) {
+e.printStackTrace();
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("error");
                             alert.setHeaderText(null);
@@ -863,6 +883,7 @@ public class Main extends Application {
                 try {
                     backEnd.reportTopSellingBooks();
                 } catch (SQLException e) {
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
@@ -877,6 +898,7 @@ public class Main extends Application {
                 try {
                     backEnd.reportTopCustomers();
                 } catch (SQLException e) {
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
@@ -891,6 +913,7 @@ public class Main extends Application {
                 try {
                     backEnd.reportTotalSales();
                 } catch (SQLException e) {
+e.printStackTrace();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("error");
                     alert.setHeaderText(null);
